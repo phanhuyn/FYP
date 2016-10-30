@@ -1,0 +1,11 @@
+Read and see how to use the code:
+https://github.com/jcjohnson/torch-rnn
+
+# Activate virtual env: 
+source .env/bin/activate 
+
+# To use torch
+export PATH=$PATH:/home/phanhuy1502/torch/install/bin
+
+
+# To not use GPU: -gpu -1
