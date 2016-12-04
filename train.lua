@@ -86,6 +86,7 @@ opt_clone.idx_to_token = idx_to_token
 local model = nil
 local start_i = 0
 if opt.init_from ~= '' then
+  -- Picking up a pre-trained model and continued training from there
   print('Initializing from ', opt.init_from)
   local checkpoint = torch.load(opt.init_from)
   model = checkpoint.model:type(dtype)

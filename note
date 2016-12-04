@@ -9,3 +9,21 @@ export PATH=$PATH:/home/phanhuy1502/torch/install/bin
 
 
 # To not use GPU: -gpu -1
+
+
+
+
+
+
+
+
+
+
+# Checkpoint:
+.json: in readable format --> still not sure why we need this
+.t7: for torch to load/store pretrained model. Apparenly, torch can read this file and create a model (see sample.lua, line 19,20)
+
+# Model used in the project:
+model = nn.LanguageModel(opt_clone):type(dtype)
+(train.lua, line 97)
+--> Checkout nn.LanguageModel

@@ -172,6 +172,9 @@ function LM:sample(kwargs)
       print('Seeding with: "' .. start_text .. '"')
     end
     local x = self:encode_string(start_text):view(1, -1)
+    -- Note:
+    -- self:encode_string(start_text): a column vector
+    -- x: a row vector (view (1, -1) is like tranpose operation)
     local T0 = x:size(2)
     sampled[{{}, {1, T0}}]:copy(x)
     scores = self:forward(x)[{{}, {T0, T0}}]

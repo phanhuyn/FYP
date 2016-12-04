@@ -15,7 +15,7 @@ cmd:option('-gpu_backend', 'cuda')
 cmd:option('-verbose', 0)
 local opt = cmd:parse(arg)
 
-
+-- Loading pre-trained model
 local checkpoint = torch.load(opt.checkpoint)
 local model = checkpoint.model
 
