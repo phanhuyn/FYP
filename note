@@ -1,5 +1,16 @@
+
+#########################################################################################
 Read and see how to use the code:
 https://github.com/jcjohnson/torch-rnn
+
+# 1. Preprocess data
+# 2. Train the model
+--> will read when I need to build new model from other types of data
+
+# 3. Sample from the model
+- Using sample.lua 
+- e.g. th sample.lua -checkpoint cv/checkpoint_10000.t7 -length 2000 -gpu -1
+
 
 # Activate virtual env: 
 source .env/bin/activate 
@@ -27,3 +38,6 @@ export PATH=$PATH:/home/phanhuy1502/torch/install/bin
 model = nn.LanguageModel(opt_clone):type(dtype)
 (train.lua, line 97)
 --> Checkout nn.LanguageModel
+
+
+# 

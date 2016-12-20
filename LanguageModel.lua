@@ -8,7 +8,8 @@ local utils = require 'util.utils'
 
 
 local LM, parent = torch.class('nn.LanguageModel', 'nn.Module')
-
+-- This means we are defining class nn.LanguageModel, inheritting nn.Module
+-- More details on nn.Module: https://github.com/torch/nn/blob/master/doc/module.md#nn.Module
 
 function LM:__init(kwargs)
   self.idx_to_token = utils.get_kwarg(kwargs, 'idx_to_token')
@@ -167,36 +168,62 @@ function LM:sample(kwargs)
   self:resetStates()
 
   local scores, first_t
+
+  -- start_text in from the input, to seed the initial word
   if #start_text > 0 then
     if verbose > 0 then
       print('Seeding with: "' .. start_text .. '"')
     end
     local x = self:encode_string(start_text):view(1, -1)
+    -- x is a tensor representing the start_text
     -- Note:
     -- self:encode_string(start_text): a column vector
-    -- x: a row vector (view (1, -1) is like tranpose operation)
-    local T0 = x:size(2)
+    -- x: a row vector (view (1, -1) is like 'flattening' operation)
+    local T0 = x:size(2) -- length of x e.i. start_text
     sampled[{{}, {1, T0}}]:copy(x)
+    -- print(sampled)
     scores = self:forward(x)[{{}, {T0, T0}}]
+    -- print(self:forward(x))
+    -- forward is a method in nn.Module. This will not be override, but it will call
+    -- updateOutput
     first_t = T0 + 1
   else
     if verbose > 0 then
       print('Seeding with uniform probabilities')
     end
     local w = self.net:get(1).weight
+    -- seft.net: a local set in LM:init (nn.Sequential())
     scores = w.new(1, 1, self.vocab_size):fill(1)
     first_t = 1
   end
   
+  -- score: !!! not the score of the next possible character
+  -- first_t: the position to start generating text
+
   local _, next_char = nil, nil
+
   for t = first_t, T do
+    -- by default, sample ~= 0
     if sample == 0 then
       _, next_char = scores:max(3)
       next_char = next_char[{{}, {}, 1}]
     else
        local probs = torch.div(scores, temperature):double():exp():squeeze()
        probs:div(torch.sum(probs))
+       -- print(scores)
+
+       -- using max instead of multinomial
+       -- value, next_char = torch.max(probs,1)
+       -- next_char = next_char:view(1, 1)
+
        next_char = torch.multinomial(probs, 1):view(1, 1)
+       -- multinominal:
+       -- multinominal(probs, 1):
+       -- probs: a probability vector, not necessarily sum up to 1
+       -- return a position in the probability vector, the likelihood of being selected 
+       -- is proportional to the values in the vector
+       -- e.g. torchmultinomial(torch.Tensor({0.5, 0.5, 1, 0})) --> 50% is 3, 25% is 1, 25% is 2
+       -- print (next_char)
     end
     sampled[{{}, {t, t}}]:copy(next_char)
     scores = self:forward(next_char)
@@ -206,6 +233,30 @@ function LM:sample(kwargs)
   return self:decode_string(sampled[1])
 end
 
+
+--[[
+Sample from the language model. And return the next position probability.
+--]]
+function LM:probs(kwargs)
+  local T = utils.get_kwarg(kwargs, 'length', 100)
+  local start_text = utils.get_kwarg(kwargs, 'start_text', '')
+  local temperature = utils.get_kwarg(kwargs, 'temperature', 1)
+
+  local sampled = torch.LongTensor(1, T)
+  self:resetStates()
+
+  local scores, first_t
+
+  local x = self:encode_string(start_text):view(1, -1)
+  local T0 = x:size(2) -- length of x e.i. start_text
+
+  scores = self:forward(x)[{{}, {T0, T0}}]
+
+  local probs = torch.div(scores, temperature):double():exp():squeeze()
+  probs:div(torch.sum(probs))
+  self:resetStates()
+  return probs
+end
 
 function LM:clearState()
   self.net:clearState()
