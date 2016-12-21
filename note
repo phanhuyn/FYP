@@ -1,6 +1,6 @@
 
 #########################################################################################
-Read and see how to use the code:
+USAGE
 https://github.com/jcjohnson/torch-rnn
 
 # 1. Preprocess data
@@ -9,8 +9,13 @@ https://github.com/jcjohnson/torch-rnn
 
 # 3. Sample from the model
 - Using sample.lua 
-- e.g. th sample.lua -checkpoint cv/checkpoint_10000.t7 -length 2000 -gpu -1
+- e.g. th sample.lua -checkpoint cv/checkpoint_100000.t7 -length 2000 -gpu -1
 
+th sample.lua -checkpoint cv/checkpoint_100000.t7 -length 2 -gpu -1 -start_text 'Indeed i'
+
+
+#########################################################################################
+TO RUN SOURCE CODE
 
 # Activate virtual env: 
 source .env/bin/activate 
@@ -18,11 +23,7 @@ source .env/bin/activate
 # To use torch
 export PATH=$PATH:/home/phanhuy1502/torch/install/bin
 
-
-# To not use GPU: -gpu -1
-
-
-
+# To not use GPU OPTION: -gpu -1
 
 
 
@@ -38,6 +39,4 @@ export PATH=$PATH:/home/phanhuy1502/torch/install/bin
 model = nn.LanguageModel(opt_clone):type(dtype)
 (train.lua, line 97)
 --> Checkout nn.LanguageModel
-
-
-# 
+ 

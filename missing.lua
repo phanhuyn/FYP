@@ -109,7 +109,7 @@ end
 
 local all_words = {}
 
-fill_gap('Indeed i', 2 ,'was submerged in it', model, 1, all_words)
+fill_gap('Indeed i', 2 ,'was submerged in the water', model, 1, all_words)
 
 print(max(all_words, function(a,b) return a[2] < b[2] end))
 
@@ -117,7 +117,7 @@ all_words = {}
 
 
 
-fill_gap('Indeed it was submerged ', 2 ,' it', model, 1, all_words)
+fill_gap('Indeed it was submerged ', 2 ,' the water', model, 1, all_words)
 
 print(max(all_words, function(a,b) return a[2] < b[2] end))
 
@@ -134,6 +134,13 @@ all_words = {}
 
 
 fill_gap('There are two peop', 3, 'in this room.', model, 1, all_words)
+
+print(max(all_words, function(a,b) return a[2] < b[2] end))
+
+all_words = {}
+
+
+fill_gap('There are two people ', 2 ,' this room.', model, 1, all_words)
 
 print(max(all_words, function(a,b) return a[2] < b[2] end))
 
