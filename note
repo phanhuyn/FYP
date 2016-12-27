@@ -29,6 +29,15 @@ export PATH=$PATH:/home/phanhuy1502/torch/install/bin
 
 
 
+#########################################################################################
+PROJECT STRUCTURE
+
+/gap: filling gap function
+
+/collectData: script to get data for training
+
+/models: storing trained model
+
 
 
 # Checkpoint:

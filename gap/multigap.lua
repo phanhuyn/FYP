@@ -1,24 +1,38 @@
 require 'torch'
 require 'nn'
 require 'LanguageModel'
-require 'gap/util'
-require 'gap/singlegap'
+require 'gap/utils'
+-- require 'gap/singlegap'
 
-local cmd = torch.CmdLine()
+CHECKPOINT_PATH = 'cv/checkpoint_17000.t7' 
 
--- Which model to use 
-cmd:option('-checkpoint', 'cv/checkpoint_17000.t7')
+-- model for sampling
+local model = get_model_by_path(CHECKPOINT_PATH)
 
-cmd:option('-start_text', 'hell')
-cmd:option('-sample', 1)
-cmd:option('-temperature', 1)
-cmd:option('-gpu', -1)
-cmd:option('-verbose', 0)
-cmd:option('-threshold', 0.01)
 
-local opt = cmd:parse(arg)
+-- return a string containing all the characters in a model
+function get_all_chars_in_model(model)
+	-- geting a sample
+	local opt = {}
+	opt.gpu = -1
+	opt.start_text = 'a'
+	local sample = model:probs(opt)
 
--- Loading pre-trained model
-local checkpoint = torch.load(opt.checkpoint)
-local model = checkpoint.model
-model:evaluate()
+	-- decoding a string of all char, sorted by its decoded index
+	local encoded = torch.Tensor(sample:size()[1])
+	for i=1, sample:size()[1] do 
+		encoded[i] = i
+	end
+
+	all_chars_in_model = model:decode_string(encoded)
+
+	return all_chars_in_model
+end
+
+
+all_chars_in_model = get_all_chars_in_model(model)
+
+print (all_chars_in_model)
+
+print (string.find(all_chars_in_model,"a"))
+
