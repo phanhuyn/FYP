@@ -58,7 +58,10 @@ end
 function fill_single_gap (prefix, gap_size, postfix, model) 
 	local all_words = {} -- to store result
 	inner_fill_single_gap (prefix, gap_size, postfix, model, 0, all_words)
-	return max(all_words, function(a,b) return a[2] < b[2] end)[1]
+	local full_sen = max(all_words, function(a,b) return a[2] < b[2] end)[1]
+  local filled_gap = full_sen:sub(#prefix + 1, #prefix + gap_size)
+
+  return {full_sen, filled_gap}
 end
 
 
@@ -93,15 +96,17 @@ end
 -- TESTING
 
  -- Which model to use
-CHECKPOINT_PATH = 'cv/checkpoint_17000.t7' 
+CHECKPOINT_PATH = 'models/cv/checkpoint_17000.t7' 
 
 -- model for sampling
---local model = get_model_by_path(CHECKPOINT_PATH)
+-- local model = get_model_by_path(CHECKPOINT_PATH)
 
 --local full_sen = fill_single_gap('Indeed i', 2 ,'was submerged in the water', model)
 
 
--- print(fill_single_gap('Indeed it was submerged ', 2 ,' the water', model))
+-- print(fill_single_gap('Indeed it was submerged ', 2 ,' the water', model)[1])
+
+-- print(fill_single_gap('Indeed it was submerged ', 2 ,' the water', model)[2])
 
 -- print(fill_single_gap('He ', 3, ' a singer.', model))
 

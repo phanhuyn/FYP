@@ -1,20 +1,5 @@
 
 #########################################################################################
-USAGE
-https://github.com/jcjohnson/torch-rnn
-
-# 1. Preprocess data
-# 2. Train the model
---> will read when I need to build new model from other types of data
-
-# 3. Sample from the model
-- Using sample.lua 
-- e.g. th sample.lua -checkpoint cv/checkpoint_100000.t7 -length 2000 -gpu -1
-
-th sample.lua -checkpoint cv/checkpoint_100000.t7 -length 2 -gpu -1 -start_text 'Indeed i'
-
-
-#########################################################################################
 TO RUN SOURCE CODE
 
 # Activate virtual env: 
@@ -26,6 +11,29 @@ export PATH=$PATH:/home/phanhuy1502/torch/install/bin
 # To not use GPU OPTION: -gpu -1
 
 
+#########################################################################################
+USAGE
+https://github.com/jcjohnson/torch-rnn
+
+# 1. Preprocess data
+
+python scripts/preprocess.py \
+  --input_txt data/my_data.txt \
+  --output_h5 models/model_name/my_data.h5 \
+  --output_json models/model_name/my_data.json
+
+
+# 2. Train the model
+
+th train.lua -input_h5 models/model_name/my_data.h5 -input_json models/model_name/my_data.json
+
+
+# 3. Sample from the model
+(included in filling gaps)
+- Using sample.lua 
+- e.g. th sample.lua -checkpoint cv/checkpoint_100000.t7 -length 2000 -gpu -1
+
+th sample.lua -checkpoint cv/checkpoint_100000.t7 -length 2 -gpu -1 -start_text 'Indeed i'
 
 
 
@@ -36,9 +44,11 @@ PROJECT STRUCTURE
 
 /collectData: script to get data for training
 
+/data: training data. Each training set include a .txt file, a .json file and a .h5 file
+
 /models: storing trained model
 
-
+/accuracy: scripts to measure accuracy of models
 
 # Checkpoint:
 .json: in readable format --> still not sure why we need this
@@ -49,3 +59,18 @@ model = nn.LanguageModel(opt_clone):type(dtype)
 (train.lua, line 97)
 --> Checkout nn.LanguageModel
  
+
+#########################################################################################
+MODELS 
+
+- models/cv: big.txt
+- models/cv0: 
+
+
+#########################################################################################
+TO IMPROVE
+
+1) optimization:
+right now, in singlegap.lua, everytime a new char is obtained, we 'sample' the model again,
+repeating the feedforward process.
+Improve: incorporate the change into LanguageModel itself --> don't repeat the feedforward process

@@ -4,23 +4,19 @@ require 'LanguageModel'
 require 'gap/utils'
 require 'gap/singlegap'
 
-CHECKPOINT_PATH = 'cv/checkpoint_17000.t7' 
-
--- model for sampling
-local model = get_model_by_path(CHECKPOINT_PATH)
-
-
 -- fill in a string with multiple gaps
 -- string_with_gap: the string to fill in
 -- gap_char: the character which denoting the 'gap' (e.g. string.char(127))
 -- model: loaded sequence model
 function fill_multi_gaps(string_with_gap, gap_char, model)
 	
+	local gaps = {}
+
 	local gap_pos = string.find(string_with_gap, gap_char)
 	local prev_gap_pos = 0
 
 	if (gap_pos == nil) then
-		return string_with_gap
+		return {gaps, string_with_gap}
 	end
 
 	local prefix = string_with_gap:sub(0, gap_pos - 1)
@@ -44,13 +40,21 @@ function fill_multi_gaps(string_with_gap, gap_char, model)
 			postfix = string_with_gap:sub(prev_gap_pos, gap_pos - 1)
 		end
 
-		prefix = fill_single_gap(prefix, gap_size, postfix, model)
+		local single_gap = fill_single_gap(prefix, gap_size, postfix, model)
+
+		prefix = single_gap[1]
+		table.insert(gaps, single_gap[2])
 	end
 
-	return prefix
+	return {gaps, prefix}
 end
 
-local gap_char = find_char_to_represent_gap(model)
-local string_with_gap = "Indeed i" .. gap_char .. gap_char .. "was submerged" .. gap_char .. gap_char .. gap_char .. " the water"
+-- CHECKPOINT_PATH = 'models/cv/checkpoint_17000.t7' 
 
-print(fill_multi_gaps(string_with_gap, gap_char, model))
+-- model for sampling
+-- local model = get_model_by_path(CHECKPOINT_PATH)
+
+-- local gap_char = find_char_to_represent_gap(model)
+-- local string_with_gap = "Indeed i" .. gap_char .. gap_char .. "was submerged" .. gap_char .. gap_char .. gap_char .. " the water"
+
+-- print(fill_multi_gaps(string_with_gap, gap_char, model))

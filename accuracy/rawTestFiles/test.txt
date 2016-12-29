@@ -1,0 +1,1 @@
+The power of a raw Lua interpreter to manipulate strings is quite limited. A program can create string literals and concatenate them. But it cannot extract a substring, check its size, or examine its contents. The full power to manipulate strings in Lua comes from its string library. 
