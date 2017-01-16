@@ -9,6 +9,8 @@ require 'gap/singlegap'
 -- gap_char: the character which denoting the 'gap' (e.g. string.char(127))
 -- model: loaded sequence model
 function fill_multi_gaps(string_with_gap, gap_char, model)
+
+	print ("calling fill_multi_gaps... ")
 	
 	local gaps = {}
 
@@ -49,9 +51,9 @@ function fill_multi_gaps(string_with_gap, gap_char, model)
 	return {gaps, prefix}
 end
 
--- CHECKPOINT_PATH = 'models/cv/checkpoint_17000.t7' 
+-- TESTING
 
--- model for sampling
+-- CHECKPOINT_PATH = 'models/cv/checkpoint_17000.t7' 
 -- local model = get_model_by_path(CHECKPOINT_PATH)
 
 -- local gap_char = find_char_to_represent_gap(model)

@@ -1,3 +1,5 @@
+require 'gap/multigap'
+require 'gap/utils'
 
 -- Generate a test set from a text file
 
@@ -11,7 +13,7 @@
 MIN_PREFIX = 5
 MAX_PREFIX = 30
 MIN_GAP = 1
-MAX_GAP = 3
+MAX_GAP = 2
 
 MIN_TAIL = 10
 
@@ -50,6 +52,21 @@ function generateTestSet(path_to_file, test_set_name, gap_char)
     return test_set
 end
 
-testCase = generateTestSet('accuracy/rawTestFiles/test.txt', 'testset', '_')
 
 
+CHECKPOINT_PATH = 'models/cv/checkpoint_17000.t7' 
+
+-- model for sampling
+local model = get_model_by_path(CHECKPOINT_PATH)
+
+local gap_char = find_char_to_represent_gap(model)
+
+print (gap_char)
+
+testCase = generateTestSet('accuracy/rawTestFiles/test.txt', 'testset', gap_char)
+
+print (testCase)
+
+local string_with_gap = testCase.string_with_gap
+
+print(fill_multi_gaps(string_with_gap, gap_char, model))

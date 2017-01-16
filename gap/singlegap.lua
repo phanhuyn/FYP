@@ -56,10 +56,19 @@ end
 -- with refer with the model
 -- return: the filled in sentence, and the max value
 function fill_single_gap (prefix, gap_size, postfix, model) 
+
+  print ("calling fill_single_gap: ")
+  print (prefix)
+  print (postfix)
+  print (gap_size)
+
 	local all_words = {} -- to store result
 	inner_fill_single_gap (prefix, gap_size, postfix, model, 0, all_words)
 	local full_sen = max(all_words, function(a,b) return a[2] < b[2] end)[1]
   local filled_gap = full_sen:sub(#prefix + 1, #prefix + gap_size)
+
+  print (prefix .. "<gap>" .. postfix)
+  print ("answer: " .. filled_gap)
 
   return {full_sen, filled_gap}
 end
