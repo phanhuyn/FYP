@@ -1,0 +1,114 @@
+Passage with missing characters: 
+Rescuers have removed thr€€ bodies from a hotel€€ngulfed€€y an avalanch€€in central Italy€€s a des€erate search for up to 35 othe€€people co€€inues.
+Heavy€snow and disrupti€€ caused by multiple€€arthquakes have €indered rescue efforts€in the rubble of the€Rigopiano hotel, in the Ab€€zzo r€€ion.
+R€€cuers say they have h€€rd nothin€ in the rubble while sniffer€dogs ar€ reportedly unable to locate€victims.
+Two people wh€€were outside the ho€el at th€ time of the aval€€che survived.
+Four€€arthquak€s above magnitude five rock€€ central Italy on Wedne€€ay, with tremors continuin€ into €€e night.
+
+
+Original passage: 
+Rescuers have removed three bodies from a hotel engulfed by an avalanche in central Italy as a desperate search for up to 35 other people continues.
+Heavy snow and disruption caused by multiple earthquakes have hindered rescue efforts in the rubble of the Rigopiano hotel, in the Abruzzo region.
+Rescuers say they have heard nothing in the rubble while sniffer dogs are reportedly unable to locate victims.
+Two people who were outside the hotel at the time of the avalanche survived.
+Four earthquakes above magnitude five rocked central Italy on Wednesday, with tremors continuing into the night.
+
+
+Gap no. 1
+Answer by model: ee
+Correct answer: ee
+Gap no. 2
+Answer by model: 's
+Correct answer:  e
+Gap no. 3
+Answer by model:  b
+Correct answer:  b
+Gap no. 4
+Answer by model: ia
+Correct answer: e 
+Gap no. 5
+Answer by model: si
+Correct answer:  a
+Gap no. 6
+Answer by model: t
+Correct answer: p
+Gap no. 7
+Answer by model: r 
+Correct answer: r 
+Gap no. 8
+Answer by model: ul
+Correct answer: nt
+Gap no. 9
+Answer by model:  
+Correct answer:  
+Gap no. 10
+Answer by model: on
+Correct answer: on
+Gap no. 11
+Answer by model: , 
+Correct answer:  e
+Gap no. 12
+Answer by model: b
+Correct answer: h
+Gap no. 13
+Answer by model:  
+Correct answer:  
+Gap no. 14
+Answer by model:  
+Correct answer:  
+Gap no. 15
+Answer by model: le
+Correct answer: ru
+Gap no. 16
+Answer by model: es
+Correct answer: eg
+Gap no. 17
+Answer by model: os
+Correct answer: es
+Gap no. 18
+Answer by model: ea
+Correct answer: ea
+Gap no. 19
+Answer by model: g
+Correct answer: g
+Gap no. 20
+Answer by model: e
+Correct answer:  
+Gap no. 21
+Answer by model: e
+Correct answer: e
+Gap no. 22
+Answer by model: d
+Correct answer:  
+Gap no. 23
+Answer by model: o 
+Correct answer: o 
+Gap no. 24
+Answer by model: t
+Correct answer: t
+Gap no. 25
+Answer by model: e
+Correct answer: e
+Gap no. 26
+Answer by model: le
+Correct answer: an
+Gap no. 27
+Answer by model: , 
+Correct answer:  e
+Gap no. 28
+Answer by model: e
+Correct answer: e
+Gap no. 29
+Answer by model: in
+Correct answer: ed
+Gap no. 30
+Answer by model: 's
+Correct answer: sd
+Gap no. 31
+Answer by model: g
+Correct answer: g
+Gap no. 32
+Answer by model: th
+Correct answer: th
+
+Accuracy: 50

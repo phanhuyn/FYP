@@ -34,7 +34,7 @@ if __name__ == '__main__':
   val_size = int(args.val_frac * total_size)
   test_size = int(args.test_frac * total_size)
   train_size = total_size - val_size - test_size
- 
+
   if not args.quiet:
     print 'Total vocabulary size: %d' % len(token_to_idx)
     print 'Total tokens in file: %d' % total_size

@@ -1,0 +1,103 @@
+Passage with missing characters: 
+Mary Anne was one of tens€€f thousands of Scots€€ho trav€€led to the US€€nd Canada in the€€arly ye€rs of the last century looking€€o escape €€onomic hards€ip at home.
+She f€€st left Lewis for N€€ York in 1930, a€ the age of 18, to see€ work as a domestic €ervant.
+Six years later sh€€was m€€ried t€€successful property d€€eloper Fr€derick Trump, the son of Ger€an migr€nts and one of the most elig€ble men in New York.
+T€€ fourth of their fi€e childr€n, Donald John, a€€he is referred to €€ the isl€nds, is about to become US €€esident.
+
+
+Original passage: 
+Mary Anne was one of tens of thousands of Scots who travelled to the US and Canada in the early years of the last century looking to escape economic hardship at home.
+She first left Lewis for New York in 1930, at the age of 18, to seek work as a domestic servant.
+Six years later she was married to successful property developer Frederick Trump, the son of German migrants and one of the most eligible men in New York.
+The fourth of their five children, Donald John, as he is referred to on the islands, is about to become US president.
+
+
+Gap no. 1
+Answer by model: er
+Correct answer:  o
+Gap no. 2
+Answer by model:  w
+Correct answer:  w
+Gap no. 3
+Answer by model: el
+Correct answer: el
+Gap no. 4
+Answer by model: lu
+Correct answer:  a
+Gap no. 5
+Answer by model: ir
+Correct answer:  e
+Gap no. 6
+Answer by model: a
+Correct answer: a
+Gap no. 7
+Answer by model:  t
+Correct answer:  t
+Gap no. 8
+Answer by model: pr
+Correct answer: ec
+Gap no. 9
+Answer by model: h
+Correct answer: h
+Gap no. 10
+Answer by model: or
+Correct answer: ir
+Gap no. 11
+Answer by model: ew
+Correct answer: ew
+Gap no. 12
+Answer by model: n
+Correct answer: t
+Gap no. 13
+Answer by model: ,
+Correct answer: k
+Gap no. 14
+Answer by model: s
+Correct answer: s
+Gap no. 15
+Answer by model: e 
+Correct answer: e 
+Gap no. 16
+Answer by model: ar
+Correct answer: ar
+Gap no. 17
+Answer by model: o 
+Correct answer: o 
+Gap no. 18
+Answer by model: is
+Correct answer: ev
+Gap no. 19
+Answer by model: a
+Correct answer: e
+Gap no. 20
+Answer by model: m
+Correct answer: m
+Gap no. 21
+Answer by model: a
+Correct answer: a
+Gap no. 22
+Answer by model: h
+Correct answer: i
+Gap no. 23
+Answer by model: he
+Correct answer: he
+Gap no. 24
+Answer by model: v
+Correct answer: v
+Gap no. 25
+Answer by model: e
+Correct answer: e
+Gap no. 26
+Answer by model: s 
+Correct answer: s 
+Gap no. 27
+Answer by model: by
+Correct answer: on
+Gap no. 28
+Answer by model: a
+Correct answer: a
+Gap no. 29
+Answer by model: Pr
+Correct answer: pr
+
+Accuracy: 58.620689655172

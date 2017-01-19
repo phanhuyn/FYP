@@ -4,7 +4,7 @@ require 'LanguageModel'
 require 'gap/utils'
 
 -- threshold, for customizing the algo,
--- if (prob (a char following a prefix) < threhold) --> won't put the character into the tree 
+-- if (prob (a char following a prefix) < threhold) --> won't put the character into the tree
 THRESHOLD = 0.01
 
 -- NOTE ON getting sample
@@ -33,7 +33,7 @@ end
 
 
 -- check likelihood of the sequence created by concaternating prefix and postfix
-function check_likelihood(prefix, postfix, model)  
+function check_likelihood(prefix, postfix, model)
   local likelihood = 0
   local opt = {}
   opt.gpu = -1
@@ -49,26 +49,26 @@ function check_likelihood(prefix, postfix, model)
   end
 
   return likelihood
-end 
+end
 
 
 -- fill a single gap with the specified 'gap_size' to complete the sequence: prefix_____postfix
 -- with refer with the model
 -- return: the filled in sentence, and the max value
-function fill_single_gap (prefix, gap_size, postfix, model) 
+function fill_single_gap (prefix, gap_size, postfix, model)
 
-  print ("calling fill_single_gap: ")
-  print (prefix)
-  print (postfix)
-  print (gap_size)
+  -- print ("calling fill_single_gap: ")
+  -- print (prefix)
+  -- print (postfix)
+  -- print (gap_size)
 
 	local all_words = {} -- to store result
 	inner_fill_single_gap (prefix, gap_size, postfix, model, 0, all_words)
 	local full_sen = max(all_words, function(a,b) return a[2] < b[2] end)[1]
   local filled_gap = full_sen:sub(#prefix + 1, #prefix + gap_size)
 
-  print (prefix .. "<gap>" .. postfix)
-  print ("answer: " .. filled_gap)
+  -- print (prefix .. "<gap>" .. postfix)
+  -- print ("answer: " .. filled_gap)
 
   return {full_sen, filled_gap}
 end
@@ -81,21 +81,21 @@ function inner_fill_single_gap (prefix, size, postfix, model, current_likelihood
   if (size == 0) then
     local sequence = prefix .. postfix
     local likelihood = check_likelihood(prefix, postfix, model) + current_likelihood
-    if (likelihood > 0) then     
+    if (likelihood > 0) then
       table.insert(all_words, {sequence, likelihood})
     end
-    return 
-  end 
+    return
+  end
 
   local opt = {}
   opt.gpu = -1
   opt.start_text = prefix
   local sample = model:probs(opt)
-  
+
   local value, index = get_sample_by_threshold(sample, THRESHOLD)
 
-  for i=1, value:size()[1] 
-  do 
+  for i=1, value:size()[1]
+  do
     inner_fill_single_gap(prefix .. model:decode_string(index[i]), size - 1, postfix, model, value[i] + current_likelihood, all_words)
   end
 
@@ -105,7 +105,7 @@ end
 -- TESTING
 
  -- Which model to use
-CHECKPOINT_PATH = 'models/cv/checkpoint_17000.t7' 
+CHECKPOINT_PATH = 'models/cv/checkpoint_17000.t7'
 
 -- model for sampling
 -- local model = get_model_by_path(CHECKPOINT_PATH)
@@ -122,6 +122,3 @@ CHECKPOINT_PATH = 'models/cv/checkpoint_17000.t7'
 -- print(fill_single_gap('There are two peop', 3, 'in this room.', model))
 
 -- print(fill_single_gap('There are two people ', 2 ,' this room.', model, 1, all_words))
-
-
-
