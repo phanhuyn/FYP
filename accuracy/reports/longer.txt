@@ -1,9 +1,9 @@
 Passage with missing characters: 
-Rescuers have removed thr€€ bodies from a hotel€€ngulfed€€y an avalanch€€in central Italy€€s a des€erate search for up to 35 othe€€people co€€inues.
-Heavy€snow and disrupti€€ caused by multiple€€arthquakes have €indered rescue efforts€in the rubble of the€Rigopiano hotel, in the Ab€€zzo r€€ion.
-R€€cuers say they have h€€rd nothin€ in the rubble while sniffer€dogs ar€ reportedly unable to locate€victims.
-Two people wh€€were outside the ho€el at th€ time of the aval€€che survived.
-Four€€arthquak€s above magnitude five rock€€ central Italy on Wedne€€ay, with tremors continuin€ into €€e night.
+Rescuers have removed thr€€(1) bodies from a hotel€€(2)ngulfed€€(3)y an avalanch€€(4)in central Italy€€(5)s a des€(6)erate search for up to 35 othe€€(7)people co€€(8)inues.
+Heavy€(9)snow and disrupti€€(10) caused by multiple€€(11)arthquakes have €(12)indered rescue efforts€(13)in the rubble of the€(14)Rigopiano hotel, in the Ab€€(15)zzo r€€(16)ion.
+R€€(17)cuers say they have h€€(18)rd nothin€(19) in the rubble while sniffer€(20)dogs ar€(21) reportedly unable to locate€(22)victims.
+Two people wh€€(23)were outside the ho€(24)el at th€(25) time of the aval€€(26)che survived.
+Four€€(27)arthquak€(28)s above magnitude five rock€€(29) central Italy on Wedne€€(30)ay, with tremors continuin€(31) into €€(32)e night.
 
 
 Original passage: 

@@ -1,8 +1,8 @@
 Passage with missing characters: 
-Mary Anne was one of tens€€f thousands of Scots€€ho trav€€led to the US€€nd Canada in the€€arly ye€rs of the last century looking€€o escape €€onomic hards€ip at home.
-She f€€st left Lewis for N€€ York in 1930, a€ the age of 18, to see€ work as a domestic €ervant.
-Six years later sh€€was m€€ried t€€successful property d€€eloper Fr€derick Trump, the son of Ger€an migr€nts and one of the most elig€ble men in New York.
-T€€ fourth of their fi€e childr€n, Donald John, a€€he is referred to €€ the isl€nds, is about to become US €€esident.
+Mary Anne was one of tens€€(1)f thousands of Scots€€(2)ho trav€€(3)led to the US€€(4)nd Canada in the€€(5)arly ye€(6)rs of the last century looking€€(7)o escape €€(8)onomic hards€(9)ip at home.
+She f€€(10)st left Lewis for N€€(11) York in 1930, a€(12) the age of 18, to see€(13) work as a domestic €(14)ervant.
+Six years later sh€€(15)was m€€(16)ried t€€(17)successful property d€€(18)eloper Fr€(19)derick Trump, the son of Ger€(20)an migr€(21)nts and one of the most elig€(22)ble men in New York.
+T€€(23) fourth of their fi€(24)e childr€(25)n, Donald John, a€€(26)he is referred to €€(27) the isl€(28)nds, is about to become US €€(29)esident.
 
 
 Original passage: 

@@ -30,14 +30,17 @@ function generateTestSet(path_to_file, test_set_name, gap_char)
 
     local content = f:read("*all")
     local string_with_gap = ''
-    local pos = 0
+		local numbered_string_with_gap = ''
+		local pos = 0
     local test_set = {}
     local gap = {}
 
+		local gap_count = 1
     while (pos < #content) do
     	local string_len = math.random(MIN_PREFIX, MAX_PREFIX)
     	string_with_gap = string_with_gap .. content:sub(pos+1, pos + string_len)
-    	pos = pos + string_len
+    	numbered_string_with_gap = numbered_string_with_gap .. content:sub(pos+1, pos + string_len)
+			pos = pos + string_len
 
     	if pos > #content - MIN_TAIL then
     		break
@@ -45,16 +48,21 @@ function generateTestSet(path_to_file, test_set_name, gap_char)
 
     	local gap_len = math.random(MIN_GAP, MAX_GAP)
     	string_with_gap = string_with_gap .. string.rep(gap_char, gap_len)
+			numbered_string_with_gap = numbered_string_with_gap .. string.rep(gap_char, gap_len)
+			numbered_string_with_gap = numbered_string_with_gap .. '(' ..  gap_count .. ')'
+			gap_count = gap_count + 1
     	table.insert(gap, content:sub(pos+1, pos + gap_len))
     	pos = pos + gap_len
     end
 
 		string_with_gap = string_with_gap .. content:sub(pos+1, #content)
+		numbered_string_with_gap = numbered_string_with_gap .. content:sub(pos+1, #content)
 
     test_set.string_with_gap = string_with_gap
 		test_set.original_string = content
     test_set.answer = gap
 		test_set.gap_char = gap_char
+		test_set.numbered_string_with_gap = numbered_string_with_gap
 
     f:close()
     return test_set
@@ -98,7 +106,7 @@ function generateReport(test_set, path_to_report, model)
 	-- print (answer)
 
 	report:write('Passage with missing characters: \n')
-	report:write(string_with_gap)
+	report:write(test_set.numbered_string_with_gap	)
 
 	report:write('\n\nOriginal passage: \n')
 	report:write(test_set.original_string	)
@@ -133,13 +141,7 @@ function generateReport(test_set, path_to_report, model)
 	return result
 end
 
--- read all the txt files in a test_set_group folder and generating reports
-function generateReportGroup(path_to_test_set_group, model, path_to_report_group)
-	-- local gap_char = find_char_to_represent_gap(model)
-	-- testCase = generateTestSet('accuracy/rawTestFiles/testset1/short.txt', 'testset', gap_char)
-	-- generateReport(testCase, 'accuracy/reports/test.txt', model)
 
-end
 
 CHECKPOINT_PATH = 'models/cv/checkpoint_17000.t7'
 
@@ -150,7 +152,7 @@ local gap_char = find_char_to_represent_gap(model)
 
 -- print (gap_char)
 
-local testCase = generateTestSet('accuracy/rawTestFiles/testsetgroup1/newspolitics.txt', 'testset', gap_char)
+local testCase = generateTestSet('accuracy/rawTestFiles/testsetgroup1/prof.txt', 'testset', gap_char)
 --
 -- print (testCase)
 --
@@ -158,4 +160,4 @@ local testCase = generateTestSet('accuracy/rawTestFiles/testsetgroup1/newspoliti
 --
 -- print(fill_multi_gaps(string_with_gap, gap_char, model)[1])
 
-generateReport(testCase, 'accuracy/reports/newspolitics.txt', model)
+generateReport(testCase, 'accuracy/reports/prof.txt', model)

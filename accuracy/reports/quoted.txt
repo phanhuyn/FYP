@@ -1,0 +1,46 @@
+Passage with missing characters: 
+"Why, indeed? You seem mo€€(1) fortunate in having€€(2)n emplo€€(3) who comes un€€(4)r the full marke€€(5)price. €(6)t is not a common experience a€€(7)ng employ€€(8)s in this ag€(9). I don't know th€€(10) your assistant is €€(11)t as remarkable €(12)s your advertisement."
+
+
+Original passage: 
+"Why, indeed? You seem most fortunate in having an employe who comes under the full market price. It is not a common experience among employers in this age. I don't know that your assistant is not as remarkable as your advertisement."
+
+
+Gap no. 1
+Answer by model: re
+Correct answer: st
+Gap no. 2
+Answer by model:  i
+Correct answer:  a
+Gap no. 3
+Answer by model: y,
+Correct answer: ye
+Gap no. 4
+Answer by model: de
+Correct answer: de
+Gap no. 5
+Answer by model: t 
+Correct answer: t 
+Gap no. 6
+Answer by model: I
+Correct answer: I
+Gap no. 7
+Answer by model: lo
+Correct answer: mo
+Gap no. 8
+Answer by model: er
+Correct answer: er
+Gap no. 9
+Answer by model: e
+Correct answer: e
+Gap no. 10
+Answer by model: at
+Correct answer: at
+Gap no. 11
+Answer by model: me
+Correct answer: no
+Gap no. 12
+Answer by model: t
+Correct answer: a
+
+Accuracy: 50

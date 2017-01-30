@@ -1,0 +1,2 @@
+Thanks for the update Huy. We will aim to meet up next week when I get back to school.
+Do you have any observations where the prediction failure normally occurs? In my opinion, improving accuracy is more important than improving the speed. But no harm trying to improve the speed. Do keep copies of your old implementation so you can do experiments and collect results (for your report) to show improvement with different changes you make to your algorithm. You will probably find improving one aspect will compromise another.
