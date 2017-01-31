@@ -1,0 +1,61 @@
+Passage with missing characters: 
+Some ten or twelve, but n€€(1)e which present any €€(2)ature o€€(3)interest. The€€(4)are important, y€€(5) unders€(6)and, without being interesting€€(7)Indeed, I€€(8)ave found th€(9)t it is usually i€€(10)unimportant matters€€(11)hat there is a f€(12)eld for the observatio€(13), and for the quick €(14)nalysis of cause and effec€€(15)which€€(16)ives t€€(17) charm to an investigation.
+
+
+Original passage: 
+Some ten or twelve, but none which present any feature of interest. They are important, you understand, without being interesting. Indeed, I have found that it is usually in unimportant matters that there is a field for the observation, and for the quick analysis of cause and effect which gives the charm to an investigation.
+
+
+Gap no. 1
+Answer by model: on
+Correct answer: on
+Gap no. 2
+Answer by model: fe
+Correct answer: fe
+Gap no. 3
+Answer by model: f 
+Correct answer: f 
+Gap no. 4
+Answer by model: re
+Correct answer: y 
+Gap no. 5
+Answer by model: et
+Correct answer: ou
+Gap no. 6
+Answer by model: t
+Correct answer: t
+Gap no. 7
+Answer by model:  t
+Correct answer: . 
+Gap no. 8
+Answer by model:  h
+Correct answer:  h
+Gap no. 9
+Answer by model: a
+Correct answer: a
+Gap no. 10
+Answer by model: n 
+Correct answer: n 
+Gap no. 11
+Answer by model:  t
+Correct answer:  t
+Gap no. 12
+Answer by model: i
+Correct answer: i
+Gap no. 13
+Answer by model: n
+Correct answer: n
+Gap no. 14
+Answer by model: a
+Correct answer: a
+Gap no. 15
+Answer by model: t 
+Correct answer: t 
+Gap no. 16
+Answer by model:  g
+Correct answer:  g
+Gap no. 17
+Answer by model: he
+Correct answer: he
+
+Accuracy: 82.352941176471

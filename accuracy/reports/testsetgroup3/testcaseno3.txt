@@ -1,0 +1,57 @@
+Passage with missing characters: 
+It is possible,€€(1)owever, that I may have someth€(2)ng better be€(3)ore very many minutes are ov€€(4), for this is one of€€(5)y clie€(6)ts, or I am much mist€€(7)en.
+He had risen from hi€(8) chair an€(9) was stand€(10)ng between the p€€(11)ted blinds g€€(12)ing down int€(13) the dul€€(14)neutra€€(15)tinted London street.
+
+
+Original passage: 
+It is possible, however, that I may have something better before very many minutes are over, for this is one of my clients, or I am much mistaken.
+He had risen from his chair and was standing between the parted blinds gazing down into the dull neutral-tinted London street.
+
+
+Gap no. 1
+Answer by model:  h
+Correct answer:  h
+Gap no. 2
+Answer by model: i
+Correct answer: i
+Gap no. 3
+Answer by model: h
+Correct answer: f
+Gap no. 4
+Answer by model: er
+Correct answer: er
+Gap no. 5
+Answer by model:  m
+Correct answer:  m
+Gap no. 6
+Answer by model: n
+Correct answer: n
+Gap no. 7
+Answer by model:  t
+Correct answer: ak
+Gap no. 8
+Answer by model: s
+Correct answer: s
+Gap no. 9
+Answer by model: d
+Correct answer: d
+Gap no. 10
+Answer by model: i
+Correct answer: i
+Gap no. 11
+Answer by model: ri
+Correct answer: ar
+Gap no. 12
+Answer by model: iv
+Correct answer: az
+Gap no. 13
+Answer by model: o
+Correct answer: o
+Gap no. 14
+Answer by model: l-
+Correct answer: l 
+Gap no. 15
+Answer by model: ti
+Correct answer: l-
+
+Accuracy: 60

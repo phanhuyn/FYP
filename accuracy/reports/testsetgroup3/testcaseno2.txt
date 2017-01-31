@@ -1,0 +1,50 @@
+Passage with missing characters: 
+The larger crimes are apt €(1)o be the si€€(2)ler, for the €(3)igger the crim€€(4)the m€€(5)e obvious, as a rule, is€€(6)he motiv€(7). In €(8)hese cases, save for o€€(9) rather intricate matter wh€(10)ch has been €€(11)ferred to me from Marsei€€(12)es, there is nothing €€(13)ich p€(14)esents any features of interest.
+
+Original passage: 
+The larger crimes are apt to be the simpler, for the bigger the crime the more obvious, as a rule, is the motive. In these cases, save for one rather intricate matter which has been referred to me from Marseilles, there is nothing which presents any features of interest.
+
+Gap no. 1
+Answer by model: t
+Correct answer: t
+Gap no. 2
+Answer by model: mb
+Correct answer: mp
+Gap no. 3
+Answer by model: t
+Correct answer: b
+Gap no. 4
+Answer by model: , 
+Correct answer: e 
+Gap no. 5
+Answer by model: or
+Correct answer: or
+Gap no. 6
+Answer by model:  t
+Correct answer:  t
+Gap no. 7
+Answer by model: e
+Correct answer: e
+Gap no. 8
+Answer by model: p
+Correct answer: t
+Gap no. 9
+Answer by model: ne
+Correct answer: ne
+Gap no. 10
+Answer by model: i
+Correct answer: i
+Gap no. 11
+Answer by model: in
+Correct answer: re
+Gap no. 12
+Answer by model: ni
+Correct answer: ll
+Gap no. 13
+Answer by model: wh
+Correct answer: wh
+Gap no. 14
+Answer by model: r
+Correct answer: r
+
+Accuracy: 57.142857142857

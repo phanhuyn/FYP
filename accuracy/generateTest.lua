@@ -93,18 +93,6 @@ function generateReport(test_set, path_to_report, model)
 	-- writing to txt file
 	local report = io.open(path_to_report, "w")
 
-	-- print ('Passage with missing characters: ')
-	-- print (string_with_gap)
-	--
-	-- print ('Original passage: ')
-	-- print (test_set.original_string)
-	--
-	-- print ('Correct answers:')
-	-- print (solution)
-	--
-	-- print ('Answers by model:')
-	-- print (answer)
-
 	report:write('Passage with missing characters: \n')
 	report:write(test_set.numbered_string_with_gap	)
 
@@ -131,7 +119,6 @@ function generateReport(test_set, path_to_report, model)
 	local accuracy = trueCount/(#answer)*100
 
 	-- print ('Accuracy: ')
-	print (accuracy)
 	report:write('\n\nAccuracy: ' .. accuracy)
 	report:close()
 
@@ -141,23 +128,16 @@ function generateReport(test_set, path_to_report, model)
 	return result
 end
 
-
-
-CHECKPOINT_PATH = 'models/cv/checkpoint_17000.t7'
-
--- model for sampling
-local model = get_model_by_path(CHECKPOINT_PATH)
-
-local gap_char = find_char_to_represent_gap(model)
-
--- print (gap_char)
-
-local testCase = generateTestSet('accuracy/rawTestFiles/testsetgroup1/prof.txt', 'testset', gap_char)
 --
--- print (testCase)
+-- CHECKPOINT_PATH = 'models/cv/checkpoint_17000.t7'
 --
--- local string_with_gap = testCase.string_with_gap
+-- -- model for sampling
+-- local model = get_model_by_path(CHECKPOINT_PATH)
 --
--- print(fill_multi_gaps(string_with_gap, gap_char, model)[1])
-
-generateReport(testCase, 'accuracy/reports/prof.txt', model)
+-- local gap_char = find_char_to_represent_gap(model)
+--
+-- -- print (gap_char)
+--
+-- local testCase = generateTestSet('accuracy/rawTestFiles/testsetgroup1/prof.txt', 'testset', gap_char)
+--
+-- generateReport(testCase, 'accuracy/reports/prof.txt', model)

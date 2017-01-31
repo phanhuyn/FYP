@@ -45,6 +45,7 @@ th sample.lua -checkpoint cv/checkpoint_100000.t7 -length 2 -gpu -1 -start_text 
 PROJECT STRUCTURE
 
 /gap: filling gap function
+- multigap.lua: fill in a sequence with multiple gaps
 
 /collectData: script to get data for training
 
@@ -53,10 +54,13 @@ PROJECT STRUCTURE
 /models: storing trained model
 
 /accuracy: scripts to measure accuracy of models
+- generateTest.lua: functions to randomly put gaps in sequence + function to generate report
+- runTestGroup.lua: function to run test and generate report on a test group
+- /generateTestGroup: scripts to break a big sequence into smaller one (sequence-type-dependent)
 
 # Checkpoint:
 .json: in readable format --> still not sure why we need this
-.t7: for torch to load/store pretrained model. Apparenly, torch can read this file and create a model (see sample.lua, line 19,20)
+.t7: for torch to load/store pre-trained model. Apparently, torch can read this file and create a model (see sample.lua, line 19,20)
 
 # Model used in the project:
 model = nn.LanguageModel(opt_clone):type(dtype)

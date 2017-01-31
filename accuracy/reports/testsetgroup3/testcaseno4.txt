@@ -1,0 +1,41 @@
+Passage with missing characters: 
+Looking €€(1)er his shoulder, I saw tha€(2) on the pavement opposite€(3)there stood a large wo€€(4)n with a heavy fur boa ro€(5)nd her neck, and a€€(6)arge curling red fe€(7)ther in a broad-brimm€(8)d hat whic€€(9)was tilted in a coquet€€(10)sh Duchess of Devonshi€€(11) fashion over her ear.
+
+Original passage: 
+Looking over his shoulder, I saw that on the pavement opposite there stood a large woman with a heavy fur boa round her neck, and a large curling red feather in a broad-brimmed hat which was tilted in a coquettish Duchess of Devonshire fashion over her ear.
+
+Gap no. 1
+Answer by model: of
+Correct answer: ov
+Gap no. 2
+Answer by model: t
+Correct answer: t
+Gap no. 3
+Answer by model:  
+Correct answer:  
+Gap no. 4
+Answer by model: rd
+Correct answer: ma
+Gap no. 5
+Answer by model: u
+Correct answer: u
+Gap no. 6
+Answer by model:  l
+Correct answer:  l
+Gap no. 7
+Answer by model: e
+Correct answer: a
+Gap no. 8
+Answer by model: e
+Correct answer: e
+Gap no. 9
+Answer by model: h 
+Correct answer: h 
+Gap no. 10
+Answer by model: , 
+Correct answer: ti
+Gap no. 11
+Answer by model: ng
+Correct answer: re
+
+Accuracy: 54.545454545455

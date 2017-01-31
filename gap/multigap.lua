@@ -56,10 +56,10 @@ end
 
 -- TESTING
 
-CHECKPOINT_PATH = 'models/cv/checkpoint_17000.t7'
-local model = get_model_by_path(CHECKPOINT_PATH)
-
-local gap_char = find_char_to_represent_gap(model)
-local string_with_gap = "Indeed i" .. gap_char .. gap_char .. gap_char .. "as submerge" .. gap_char .. gap_char .. gap_char .. "y the water"
-
-print(fill_multi_gaps(string_with_gap, gap_char, model))
+-- CHECKPOINT_PATH = 'models/cv/checkpoint_17000.t7'
+-- local model = get_model_by_path(CHECKPOINT_PATH)
+--
+-- local gap_char = find_char_to_represent_gap(model)
+-- local string_with_gap = "Indeed i" .. gap_char .. gap_char .. gap_char .. "as submerge" .. gap_char .. gap_char .. gap_char .. "y the water"
+--
+-- print(fill_multi_gaps(string_with_gap, gap_char, model))
