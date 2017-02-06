@@ -1,3 +1,5 @@
+-- DEPRECATED 
+
 -- break a big test file into smaller test cases for testing
 -- path_to_file: path to the txt file for testing
 -- test_file_size: number of character in a test file we want to generate (recommend: from 100 - 200)
@@ -30,4 +32,4 @@ function generateTestGroup(path_to_file, path_to_test_group, test_file_size)
   end
 end
 
-generateTestGroup('accuracy/rawTestFiles/test1.txt', 'accuracy/rawTestFiles/testsetgroup2', 200)
+-- generateTestGroup('accuracy/rawTestFiles/test1.txt', 'accuracy/rawTestFiles/testsetgroup2', 200)
