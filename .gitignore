@@ -1,6 +1,4 @@
 *.swp
 .ipynb_checkpoints/
 .env/
-cv/
-cv0/
 .DS_Store
