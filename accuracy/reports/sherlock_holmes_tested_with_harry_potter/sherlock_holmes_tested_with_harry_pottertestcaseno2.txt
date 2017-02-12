@@ -1,0 +1,29 @@
+Passage with missing characters: 
+Exactly €€(1)y Dudley wanted a ra€(2)ing bike was a mystery to €(3)arry, as Dudley was very f€€(4) and hated exercise - unle€(5)s of course€€(6)t involved pu€(7)ching somebody.
+
+Original passage: 
+Exactly why Dudley wanted a racing bike was a mystery to Harry, as Dudley was very fat and hated exercise - unless of course it involved punching somebody.
+
+Gap no. 1
+Answer by model: of
+Correct answer: wh
+Gap no. 2
+Answer by model: n
+Correct answer: c
+Gap no. 3
+Answer by model: t
+Correct answer: H
+Gap no. 4
+Answer by model: or
+Correct answer: at
+Gap no. 5
+Answer by model: s
+Correct answer: s
+Gap no. 6
+Answer by model:  a
+Correct answer:  i
+Gap no. 7
+Answer by model: r
+Correct answer: n
+
+Accuracy: 14.285714285714

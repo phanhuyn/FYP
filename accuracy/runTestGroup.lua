@@ -64,4 +64,6 @@ end
 
 CHECKPOINT_PATH = 'models/cv/checkpoint_17000.t7'
 local model = get_model_by_path(CHECKPOINT_PATH)
-runTestGroup('accuracy/rawTestFiles/testsetgroup3/', model, 100, 'accuracy/reports/testsetgroup3.csv')
+runTestGroup('accuracy/rawTestFiles/harrypotter/', model, 100, 'accuracy/reports/sherlock_holmes_tested_with_harry_potter2.csv')
+
+--runTestGroup2('accuracy/rawTestFiles/harrypotter/', model, 'accuracy/reports/sherlock_holmes_tested_with_harry_potter/')

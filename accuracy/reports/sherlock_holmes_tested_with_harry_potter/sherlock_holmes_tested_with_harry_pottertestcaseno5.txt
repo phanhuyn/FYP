@@ -1,0 +1,41 @@
+Passage with missing characters: 
+Harry had a thin face, k€(1)obbly kne€(2)s, black h€(3)ir, and bright g€€(4)en eyes. He €€(5)re round gla€(6)ses held€€(7)ogethe€€(8)with a lot of Scotch t€(9)pe because of all the times D€€(10)ley had punched€€(11)im on the nose.
+
+Original passage: 
+Harry had a thin face, knobbly knees, black hair, and bright green eyes. He wore round glasses held together with a lot of Scotch tape because of all the times Dudley had punched him on the nose.
+
+Gap no. 1
+Answer by model: n
+Correct answer: n
+Gap no. 2
+Answer by model: w
+Correct answer: e
+Gap no. 3
+Answer by model: e
+Correct answer: a
+Gap no. 4
+Answer by model: re
+Correct answer: re
+Gap no. 5
+Answer by model: ha
+Correct answer: wo
+Gap no. 6
+Answer by model: s
+Correct answer: s
+Gap no. 7
+Answer by model:  t
+Correct answer:  t
+Gap no. 8
+Answer by model: r 
+Correct answer: r 
+Gap no. 9
+Answer by model: o
+Correct answer: a
+Gap no. 10
+Answer by model: ac
+Correct answer: ud
+Gap no. 11
+Answer by model:  h
+Correct answer:  h
+
+Accuracy: 54.545454545455

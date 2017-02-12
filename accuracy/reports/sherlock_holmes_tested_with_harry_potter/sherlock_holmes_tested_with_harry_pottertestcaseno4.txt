@@ -1,0 +1,26 @@
+Passage with missing characters: 
+He looked even smaller and sk€€(1)nier than he re€(2)lly was beca€€(3)e all he had to wear were old€€(4)lothes of Dudley's, and €(5)udley was abou€€(6)four times bigger than he was.
+
+Original passage: 
+He looked even smaller and skinnier than he really was because all he had to wear were old clothes of Dudley's, and Dudley was about four times bigger than he was.
+
+Gap no. 1
+Answer by model: il
+Correct answer: in
+Gap no. 2
+Answer by model: a
+Correct answer: a
+Gap no. 3
+Answer by model: us
+Correct answer: us
+Gap no. 4
+Answer by model:  a
+Correct answer:  c
+Gap no. 5
+Answer by model: n
+Correct answer: D
+Gap no. 6
+Answer by model: t 
+Correct answer: t 
+
+Accuracy: 50

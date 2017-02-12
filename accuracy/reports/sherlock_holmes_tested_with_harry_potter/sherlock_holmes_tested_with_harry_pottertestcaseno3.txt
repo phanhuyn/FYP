@@ -1,0 +1,41 @@
+Passage with missing characters: 
+Dudley's favorite punching b€(1)g was Harry, but he co€€(2)dn't often catch hi€(3). Harry €(4)idn't look it, bu€€(5)he was very fast. €€(6)rhaps it€(7)had something to do with li€€(8)ng in a dark cupboard, €€(9)t Harry had always been sm€(10)ll and€€(11)kinny for his age.
+
+Original passage: 
+Dudley's favorite punching bag was Harry, but he couldn't often catch him. Harry didn't look it, but he was very fast. Perhaps it had something to do with living in a dark cupboard, but Harry had always been small and skinny for his age.
+
+Gap no. 1
+Answer by model: e
+Correct answer: a
+Gap no. 2
+Answer by model: ul
+Correct answer: ul
+Gap no. 3
+Answer by model: s
+Correct answer: m
+Gap no. 4
+Answer by model: d
+Correct answer: d
+Gap no. 5
+Answer by model: t 
+Correct answer: t 
+Gap no. 6
+Answer by model: Pe
+Correct answer: Pe
+Gap no. 7
+Answer by model:  
+Correct answer:  
+Gap no. 8
+Answer by model: vi
+Correct answer: vi
+Gap no. 9
+Answer by model: an
+Correct answer: bu
+Gap no. 10
+Answer by model: a
+Correct answer: a
+Gap no. 11
+Answer by model:  s
+Correct answer:  s
+
+Accuracy: 72.727272727273

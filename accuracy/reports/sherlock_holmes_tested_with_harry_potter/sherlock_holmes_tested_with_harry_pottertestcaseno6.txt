@@ -1,0 +1,41 @@
+Passage with missing characters: 
+The only thing Harry l€€(1)ed about his own appearan€(2)e was a very thin €€(3)ar on his forehead €(4)hat was shaped like a€(5)bolt of li€€(6)tning. He had had it a€€(7)long as he could remem€€(8)r, and the first question he c€(9)uld ever remem€€(10)r asking his Aunt Petunia was€€(11)ow he had gotten it.
+
+Original passage: 
+The only thing Harry liked about his own appearance was a very thin scar on his forehead that was shaped like a bolt of lightning. He had had it as long as he could remember, and the first question he could ever remember asking his Aunt Petunia was how he had gotten it.
+
+Gap no. 1
+Answer by model: iv
+Correct answer: ik
+Gap no. 2
+Answer by model: c
+Correct answer: c
+Gap no. 3
+Answer by model: he
+Correct answer: sc
+Gap no. 4
+Answer by model: t
+Correct answer: t
+Gap no. 5
+Answer by model:  
+Correct answer:  
+Gap no. 6
+Answer by model: fe
+Correct answer: gh
+Gap no. 7
+Answer by model: s 
+Correct answer: s 
+Gap no. 8
+Answer by model: be
+Correct answer: be
+Gap no. 9
+Answer by model: o
+Correct answer: o
+Gap no. 10
+Answer by model: be
+Correct answer: be
+Gap no. 11
+Answer by model:  t
+Correct answer:  h
+
+Accuracy: 63.636363636364

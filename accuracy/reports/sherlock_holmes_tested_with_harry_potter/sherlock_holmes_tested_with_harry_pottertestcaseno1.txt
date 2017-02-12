@@ -1,0 +1,47 @@
+Passage with missing characters: 
+When he was dressed he we€€(1) down the hall into €€(2)e kitch€€(3). The table w€€(4) almost hidden b€€(5)eath al€(6) Dudley's birthday presents. I€€(7)looked as€€(8)hough Dudley€(9)had gotten the ne€€(10)computer he wanted,€€(11)ot to mention th€(12) second television and€(13)the racing bike.
+
+Original passage: 
+When he was dressed he went down the hall into the kitchen. The table was almost hidden beneath all Dudley's birthday presents. It looked as though Dudley had gotten the new computer he wanted, not to mention the second television and the racing bike.
+
+Gap no. 1
+Answer by model: nt
+Correct answer: nt
+Gap no. 2
+Answer by model: th
+Correct answer: th
+Gap no. 3
+Answer by model: es
+Correct answer: en
+Gap no. 4
+Answer by model: it
+Correct answer: as
+Gap no. 5
+Answer by model: en
+Correct answer: en
+Gap no. 6
+Answer by model: l
+Correct answer: l
+Gap no. 7
+Answer by model: n 
+Correct answer: t 
+Gap no. 8
+Answer by model:  t
+Correct answer:  t
+Gap no. 9
+Answer by model:  
+Correct answer:  
+Gap no. 10
+Answer by model: w 
+Correct answer: w 
+Gap no. 11
+Answer by model:  n
+Correct answer:  n
+Gap no. 12
+Answer by model: e
+Correct answer: e
+Gap no. 13
+Answer by model:  
+Correct answer:  
+
+Accuracy: 76.923076923077

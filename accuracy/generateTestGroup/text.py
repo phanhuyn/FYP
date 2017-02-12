@@ -1,6 +1,9 @@
 # python script to read a text file, break them into sentences and write them into multiple text files
 # Using ntlk tokenizer http://www.nltk.org/api/nltk.tokenize.html
 
+
+# usage
+# python accuracy/generateTestGroup/text.py accuracy/rawTestFiles/harrypotter.txt accuracy/rawTestFiles/harrypotter
 import sys, os
 import nltk.data
 
