@@ -1,0 +1,3 @@
+to connect to SSH
+
+ssh -i "phanhuy1502.pem" ec2-user@ec2-54-254-233-136.ap-southeast-1.compute.amazonaws.com
