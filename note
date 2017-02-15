@@ -31,6 +31,7 @@ python scripts/preprocess.py \
 
 th train.lua -input_h5 models/model_name/my_data.h5 -input_json models/model_name/my_data.json
 
+th train.lua -input_h5 data/big.h5 -input_json data/big.json -model_type lstm -num_layers 3 -rnn_size 128 -checkpoint_name models/sherlock_holmes_3_128
 
 # 3. Sample from the model
 (included in filling gaps)
