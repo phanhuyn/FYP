@@ -43,6 +43,9 @@ function layer:__init(input_dim, hidden_dim)
   self.grad_h0 = torch.Tensor()
   self.grad_x = torch.Tensor()
   self.gradInput = {self.grad_c0, self.grad_h0, self.grad_x}
+
+  self.set_c0 = torch.Tensor()
+  self.set_h0 = torch.Tensor()
 end
 
 
@@ -116,13 +119,19 @@ Output:
 
 
 function layer:updateOutput(input)
+
+  -- print (input)
   self.recompute_backward = true
+  -- important step to init c0 and h0
   local c0, h0, x = self:_unpack_input(input)
   local N, T, D, H = self:_get_sizes(input)
 
   self._return_grad_c0 = (c0 ~= nil)
   self._return_grad_h0 = (h0 ~= nil)
+
   if not c0 then
+    -- called when c (cell state) is not passed into the LSTM
+    -- to init c0
     c0 = self.c0
     if c0:nElement() == 0 or not self.remember_states then
       c0:resize(N, H):zero()
@@ -151,7 +160,16 @@ function layer:updateOutput(input)
   h:resize(N, T, H):zero()
   c:resize(N, T, H):zero()
   local prev_h, prev_c = h0, c0
-  self.gates:resize(N, T, 4 * H):zero()
+
+  if (self.set_h0 ~= nil and self.set_c0 ~= nil) then
+    prev_h = self.set_h0
+    prev_c = self.set_c0
+    self.set_h0 = nil
+    self.set_c0 = nil
+  else
+    self.gates:resize(N, T, 4 * H):zero()
+  end
+
   for t = 1, T do
     local cur_x = x[{{}, t}]
     local next_h = h[{{}, t}]
@@ -159,6 +177,10 @@ function layer:updateOutput(input)
     local cur_gates = self.gates[{{}, t}]
     cur_gates:addmm(bias_expand, cur_x, Wx)
     cur_gates:addmm(prev_h, Wh)
+
+    -- print ('t = ' .. t)
+    -- print ('sum  gates: ' .. cur_gates:sum())
+
     cur_gates[{{}, {1, 3 * H}}]:sigmoid()
     cur_gates[{{}, {3 * H + 1, 4 * H}}]:tanh()
     local i = cur_gates[{{}, {1, H}}]
@@ -168,8 +190,25 @@ function layer:updateOutput(input)
     next_h:cmul(i, g)
     next_c:cmul(f, prev_c):add(next_h)
     next_h:tanh(next_c):cmul(o)
+
+    -- print ('t = ' .. t)
+    -- print ('sum prev_h: ' .. prev_h:sum())
+    -- print ('sum prev_c: ' .. prev_c:sum())
+    -- print ('sum next_h: ' .. next_h:sum())
+    -- print ('sum next_c: ' .. next_c:sum())
+
     prev_h, prev_c = next_h, next_c
+
   end
+
+  -- for storing state
+  -- print (self.gates[{{}, T}]:size())
+  -- print (self.gates:size())
+  self.gates = self.gates[{{},{T},{}}]
+
+  -- both return true
+  -- print (torch.equal(prev_h,self.output[{{}, self.output:size(2)}]))
+  -- print (torch.equal(prev_c,self.cell[{{}, self.cell:size(2)}]))
 
   return self.output
 end
@@ -213,13 +252,13 @@ function layer:backward(input, gradOutput, scale)
     local f = self.gates[{{}, t, {H + 1, 2 * H}}]
     local o = self.gates[{{}, t, {2 * H + 1, 3 * H}}]
     local g = self.gates[{{}, t, {3 * H + 1, 4 * H}}]
-    
+
     local grad_a = self.grad_a_buffer:resize(N, 4 * H):zero()
     local grad_ai = grad_a[{{}, {1, H}}]
     local grad_af = grad_a[{{}, {H + 1, 2 * H}}]
     local grad_ao = grad_a[{{}, {2 * H + 1, 3 * H}}]
     local grad_ag = grad_a[{{}, {3 * H + 1, 4 * H}}]
-    
+
     -- We will use grad_ai, grad_af, and grad_ao as temporary buffers
     -- to to compute grad_next_c. We will need tanh_next_c (stored in grad_ai)
     -- to compute grad_ao; the other values can be overwritten after we compute
@@ -229,7 +268,7 @@ function layer:backward(input, gradOutput, scale)
     local my_grad_next_c = grad_ao
     my_grad_next_c:fill(1):add(-1, tanh_next_c2):cmul(o):cmul(grad_next_h)
     grad_next_c:add(my_grad_next_c)
-    
+
     -- We need tanh_next_c (currently in grad_ai) to compute grad_ao; after
     -- that we can overwrite it.
     grad_ao:fill(1):add(-1, o):cmul(o):cmul(tanh_next_c):cmul(grad_next_h)
@@ -241,7 +280,7 @@ function layer:backward(input, gradOutput, scale)
     -- We don't need any temporary storage for these so do them last
     grad_ai:fill(1):add(-1, i):cmul(i):cmul(g):cmul(grad_next_c)
     grad_af:fill(1):add(-1, f):cmul(f):cmul(prev_c):cmul(grad_next_c)
-    
+
     grad_x[{{}, t}]:mm(grad_a, Wx:t())
     grad_Wx:addmm(scale, x[{{}, t}]:t(), grad_a)
     grad_Wh:addmm(scale, prev_h:t(), grad_a)
@@ -302,3 +341,8 @@ function layer:__tostring__()
   return string.format('%s(%d -> %d)', name, din, dout)
 end
 
+function layer:setState(h0, c0, gates)
+  self.set_h0 = h0
+  self.set_c0 = c0
+  self.gates = gates
+end

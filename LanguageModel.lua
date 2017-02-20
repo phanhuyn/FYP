@@ -196,7 +196,7 @@ function LM:sample(kwargs)
     scores = w.new(1, 1, self.vocab_size):fill(1)
     first_t = 1
   end
-  
+
   -- score: !!! not the score of the next possible character
   -- first_t: the position to start generating text
 
@@ -220,7 +220,7 @@ function LM:sample(kwargs)
        -- multinominal:
        -- multinominal(probs, 1):
        -- probs: a probability vector, not necessarily sum up to 1
-       -- return a position in the probability vector, the likelihood of being selected 
+       -- return a position in the probability vector, the likelihood of being selected
        -- is proportional to the values in the vector
        -- e.g. torchmultinomial(torch.Tensor({0.5, 0.5, 1, 0})) --> 50% is 3, 25% is 1, 25% is 2
        -- print (next_char)
@@ -238,14 +238,13 @@ end
 Sample from the language model. And return the next position probability.
 --]]
 function LM:probs(kwargs)
-  local T = utils.get_kwarg(kwargs, 'length', 100)
+  --local T = utils.get_kwarg(kwargs, 'length', 100)
   local start_text = utils.get_kwarg(kwargs, 'start_text', '')
   local temperature = utils.get_kwarg(kwargs, 'temperature', 1)
-
-  local sampled = torch.LongTensor(1, T)
+  --local sampled = torch.LongTensor(1, T)
   self:resetStates()
 
-  local scores, first_t
+  local scores --, first_t
 
   local x = self:encode_string(start_text):view(1, -1)
   local T0 = x:size(2) -- length of x e.i. start_text
@@ -254,10 +253,66 @@ function LM:probs(kwargs)
 
   local probs = torch.div(scores, temperature):double():exp():squeeze()
   probs:div(torch.sum(probs))
+  --self:resetStates()
+
+  return probs
+end
+
+--[[
+  get next output probs with init state
+--]]
+function LM:probs2(kwargs)
+
+  local start_text = utils.get_kwarg(kwargs, 'start_text', '')
+  local LSTM_init_states = utils.get_kwarg(kwargs, 'init_states', nil)
+  local temperature = 1
+
   self:resetStates()
+  self:setLSTMStates(LSTM_init_states)
+
+  local scores
+  local x = self:encode_string(start_text):view(1, -1)
+
+  local T0 = x:size(2) -- length of x e.i. start_text
+  scores = self:forward(x)[{{}, {T0, T0}}]
+
+  local probs = torch.div(scores, temperature):double():exp():squeeze()
+  probs:div(torch.sum(probs))
+  self:resetStates()
+
   return probs
 end
 
 function LM:clearState()
   self.net:clearState()
+end
+
+--[[
+  Getting last state of all the LSTM layers
+  return: an array index from 1 to num_layers, each element is a table with h (hidden state)
+  and c (cell state)
+]]
+function LM:getLSTMStates()
+  local LSTM_states = {}
+  for layer = 1,self.num_layers do
+    LSTM_states[layer] = {}
+    local LSTM = self.net.modules[layer+1]
+    LSTM_states[layer].h = LSTM.output[{{}, LSTM.output:size(2)}]
+    LSTM_states[layer].c = LSTM.cell[{{}, LSTM.cell:size(2)}]
+    LSTM_states[layer].gates = LSTM.gates
+  end
+  return LSTM_states
+end
+
+
+--[[
+  setting state of all the LSTM layers
+]]
+function LM:setLSTMStates(LSTM_states)
+  assert(#LSTM_states == self.num_layers, 'setting states for LSTM must match the number of LSTM layers')
+  for layer = 1,self.num_layers do
+    local LSTM = self.net.modules[layer+1]
+    LSTM:setState(LSTM_states[layer].h, LSTM_states[layer].c, LSTM_states[layer].gates)
+  end
+  return LSTM_states
 end
