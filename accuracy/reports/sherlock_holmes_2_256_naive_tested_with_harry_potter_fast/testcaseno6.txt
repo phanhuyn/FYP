@@ -1,0 +1,64 @@
+Passage with missing characters: 
+Dudley's birthday - h€(1)w could€(2)he ha€€(3) forgotten€(4) Harry€€(5)ot slowly out €€(6) bed and started look€(7)ng for socks. He found€€(8) pair €€(9)der hi€€(10)bed and, after pulling a spid€(11)r off one of them, €(12)ut them on. Harry wa€€(13)used to spid€(14)rs, because t€€(15) cupboard under the st€(16)irs was full of t€€(17)m, and €(18)hat was where he slept.
+
+
+Original passage: 
+Dudley's birthday - how could he have forgotten? Harry got slowly out of bed and started looking for socks. He found a pair under his bed and, after pulling a spider off one of them, put them on. Harry was used to spiders, because the cupboard under the stairs was full of them, and that was where he slept.
+
+
+Gap no. 1
+Answer by model: e
+Correct answer: o
+Gap no. 2
+Answer by model:  
+Correct answer:  
+Gap no. 3
+Answer by model: d 
+Correct answer: ve
+Gap no. 4
+Answer by model:  
+Correct answer: ?
+Gap no. 5
+Answer by model:  w
+Correct answer:  g
+Gap no. 6
+Answer by model: of
+Correct answer: of
+Gap no. 7
+Answer by model: e
+Correct answer: i
+Gap no. 8
+Answer by model:  t
+Correct answer:  a
+Gap no. 9
+Answer by model: of
+Correct answer: un
+Gap no. 10
+Answer by model: m 
+Correct answer: s 
+Gap no. 11
+Answer by model: e
+Correct answer: e
+Gap no. 12
+Answer by model: a
+Correct answer: p
+Gap no. 13
+Answer by model: s 
+Correct answer: s 
+Gap no. 14
+Answer by model: e
+Correct answer: e
+Gap no. 15
+Answer by model: he
+Correct answer: he
+Gap no. 16
+Answer by model: a
+Correct answer: a
+Gap no. 17
+Answer by model: he
+Correct answer: he
+Gap no. 18
+Answer by model: t
+Correct answer: t
+
+Accuracy: 50

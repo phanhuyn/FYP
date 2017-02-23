@@ -1,0 +1,80 @@
+Passage with missing characters: 
+Only t€(1)e photographs on the €€(2)ntelpiece really showed €(3)ow much t€(4)me had pas€(5)ed. Ten years ag€€(6) there had b€€(7)n lots of pi€(8)tures of€€(9)hat lo€€(10)ed like a large pink b€(11)ach ball wearing different-co€€(12)red bonnets - b€€(13) Dudle€€(14)Dursley was no lon€€(15)r a ba€€(16), and now the photograp€€(17) showed€€(18) large€(19)blond boy riding his firs€€(20)bicycle, on a carousel at the €€(21)ir, playing a computer gam€€(22)with his fathe€(23), being hugged and kissed by €€(24)s mother.
+
+Original passage: 
+Only the photographs on the mantelpiece really showed how much time had passed. Ten years ago, there had been lots of pictures of what looked like a large pink beach ball wearing different-colored bonnets - but Dudley Dursley was no longer a baby, and now the photographs showed a large blond boy riding his first bicycle, on a carousel at the fair, playing a computer game with his father, being hugged and kissed by his mother.
+
+Gap no. 1
+Answer by model: h
+Correct answer: h
+Gap no. 2
+Answer by model: st
+Correct answer: ma
+Gap no. 3
+Answer by model: t
+Correct answer: h
+Gap no. 4
+Answer by model: h
+Correct answer: i
+Gap no. 5
+Answer by model: s
+Correct answer: s
+Gap no. 6
+Answer by model: ai
+Correct answer: o,
+Gap no. 7
+Answer by model: ee
+Correct answer: ee
+Gap no. 8
+Answer by model: n
+Correct answer: c
+Gap no. 9
+Answer by model:  t
+Correct answer:  w
+Gap no. 10
+Answer by model: ca
+Correct answer: ok
+Gap no. 11
+Answer by model: e
+Correct answer: e
+Gap no. 12
+Answer by model: ns
+Correct answer: lo
+Gap no. 13
+Answer by model: lo
+Correct answer: ut
+Gap no. 14
+Answer by model:  B
+Correct answer: y 
+Gap no. 15
+Answer by model: ge
+Correct answer: ge
+Gap no. 16
+Answer by model: nk
+Correct answer: by
+Gap no. 17
+Answer by model: h 
+Correct answer: hs
+Gap no. 18
+Answer by model:  t
+Correct answer:  a
+Gap no. 19
+Answer by model:  
+Correct answer:  
+Gap no. 20
+Answer by model: t 
+Correct answer: t 
+Gap no. 21
+Answer by model: st
+Correct answer: fa
+Gap no. 22
+Answer by model: e 
+Correct answer: e 
+Gap no. 23
+Answer by model: r
+Correct answer: r
+Gap no. 24
+Answer by model: th
+Correct answer: hi
+
+Accuracy: 37.5

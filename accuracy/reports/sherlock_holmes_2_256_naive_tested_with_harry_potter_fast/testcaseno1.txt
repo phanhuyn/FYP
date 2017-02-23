@@ -1,0 +1,76 @@
+Passage with missing characters: 
+Nearly ten years had pass€€(1) since the Dursleys €€(2)d woken€€(3)p to find the€€(4) nephew on the f€€(5)nt step€(6) but Privet Drive had hardly c€€(7)nged at a€€(8). The sun ro€(9)e on the same tid€€(10)front gardens and l€€(11) up the brass nu€(12)ber four on the Dursle€(13)s' front door; it cr€(14)pt into their living room,€€(15)hich €€(16)s almo€€(17) exactly the same as €€(18) had been€(19)on the night when Mr. Dursle€(20) had se€(21)n that fateful news report a€(22)out the owls.
+
+
+Original passage: 
+Nearly ten years had passed since the Dursleys had woken up to find their nephew on the front step, but Privet Drive had hardly changed at all. The sun rose on the same tidy front gardens and lit up the brass number four on the Dursleys' front door; it crept into their living room, which was almost exactly the same as it had been on the night when Mr. Dursley had seen that fateful news report about the owls.
+
+
+Gap no. 1
+Answer by model: ed
+Correct answer: ed
+Gap no. 2
+Answer by model: an
+Correct answer: ha
+Gap no. 3
+Answer by model:  t
+Correct answer:  u
+Gap no. 4
+Answer by model:  s
+Correct answer: ir
+Gap no. 5
+Answer by model: ir
+Correct answer: ro
+Gap no. 6
+Answer by model: s
+Correct answer: ,
+Gap no. 7
+Answer by model: on
+Correct answer: ha
+Gap no. 8
+Answer by model:  s
+Correct answer: ll
+Gap no. 9
+Answer by model: o
+Correct answer: s
+Gap no. 10
+Answer by model: e 
+Correct answer: y 
+Gap no. 11
+Answer by model: oo
+Correct answer: it
+Gap no. 12
+Answer by model: m
+Correct answer: m
+Gap no. 13
+Answer by model: y
+Correct answer: y
+Gap no. 14
+Answer by model: i
+Correct answer: e
+Gap no. 15
+Answer by model:  a
+Correct answer:  w
+Gap no. 16
+Answer by model: an
+Correct answer: wa
+Gap no. 17
+Answer by model: st
+Correct answer: st
+Gap no. 18
+Answer by model: th
+Correct answer: it
+Gap no. 19
+Answer by model:  
+Correct answer:  
+Gap no. 20
+Answer by model: y
+Correct answer: y
+Gap no. 21
+Answer by model: e
+Correct answer: e
+Gap no. 22
+Answer by model: n
+Correct answer: b
+
+Accuracy: 31.818181818182

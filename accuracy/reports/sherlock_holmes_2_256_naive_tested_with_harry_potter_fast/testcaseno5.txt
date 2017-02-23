@@ -1,0 +1,61 @@
+Passage with missing characters: 
+His au€(1)t was back outside th€€(2)door. "Are you up yet?" she €€(3)manded. "Nearly," s€€(4)d Harry. "Well, get a move on,€€(5) want you t€(6) look after the€(7)bacon. And d€(8)n't you da€€(9) let €(10)t burn, I want ev€(11)rything perfect on€(12)Duddy's bi€€(13)hday.€€(14)Harry€€(15)roaned. "What did €€(16)u say?" h€€(17) aunt snapped through the door.
+
+
+Original passage: 
+His aunt was back outside the door. "Are you up yet?" she demanded. "Nearly," said Harry. "Well, get a move on, I want you to look after the bacon. And don't you dare let it burn, I want everything perfect on Duddy's birthday." Harry groaned. "What did you say?" his aunt snapped through the door.
+
+
+Gap no. 1
+Answer by model: t
+Correct answer: n
+Gap no. 2
+Answer by model: e 
+Correct answer: e 
+Gap no. 3
+Answer by model: sa
+Correct answer: de
+Gap no. 4
+Answer by model: ai
+Correct answer: ai
+Gap no. 5
+Answer by model:  a
+Correct answer:  I
+Gap no. 6
+Answer by model: h
+Correct answer: o
+Gap no. 7
+Answer by model:  
+Correct answer:  
+Gap no. 8
+Answer by model: o
+Correct answer: o
+Gap no. 9
+Answer by model: y 
+Correct answer: re
+Gap no. 10
+Answer by model: t
+Correct answer: i
+Gap no. 11
+Answer by model: e
+Correct answer: e
+Gap no. 12
+Answer by model:  
+Correct answer:  
+Gap no. 13
+Answer by model: g 
+Correct answer: rt
+Gap no. 14
+Answer by model:  I
+Correct answer: " 
+Gap no. 15
+Answer by model:  a
+Correct answer:  g
+Gap no. 16
+Answer by model: no
+Correct answer: yo
+Gap no. 17
+Answer by model: e 
+Correct answer: is
+
+Accuracy: 35.294117647059

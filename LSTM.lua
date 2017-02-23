@@ -144,8 +144,10 @@ function layer:updateOutput(input)
   if not h0 then
     h0 = self.h0
     if h0:nElement() == 0 or not self.remember_states then
+      -- print ('state is set to 0')
       h0:resize(N, H):zero()
     elseif self.remember_states then
+      -- print ('state is remembered')
       local prev_N, prev_T = self.output:size(1), self.output:size(2)
       assert(prev_N == N, 'batch sizes must be the same to remember states')
       h0:copy(self.output[{{}, prev_T}])

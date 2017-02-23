@@ -1,0 +1,68 @@
+Passage with missing characters: 
+Dudley's favorite punching €€(1)g was Har€€(2), but he couldn't €€(3)ten catch hi€(4). Harry didn't look it, but he€€(5)as very fast. Perhap€€(6)it had some€(7)hing to do w€€(8)h livi€€(9) in a dark cupboard, but Har€€(10) had €(11)lways been smal€(12) and skinny for his ag€€(13) He looked even smaller and€€(14)kinnier than he re€€(15)ly was because all he ha€€(16)to wear were old clothe€(17) of Dudl€(18)y's, and D€€(19)ley was about four times bi€(20)ger than he was.
+
+Original passage: 
+Dudley's favorite punching bag was Harry, but he couldn't often catch him. Harry didn't look it, but he was very fast. Perhaps it had something to do with living in a dark cupboard, but Harry had always been small and skinny for his age. He looked even smaller and skinnier than he really was because all he had to wear were old clothes of Dudley's, and Dudley was about four times bigger than he was.
+
+Gap no. 1
+Answer by model: th
+Correct answer: ba
+Gap no. 2
+Answer by model: ri
+Correct answer: ry
+Gap no. 3
+Answer by model: al
+Correct answer: of
+Gap no. 4
+Answer by model: s
+Correct answer: m
+Gap no. 5
+Answer by model:  w
+Correct answer:  w
+Gap no. 6
+Answer by model: s 
+Correct answer: s 
+Gap no. 7
+Answer by model: t
+Correct answer: t
+Gap no. 8
+Answer by model: it
+Correct answer: it
+Gap no. 9
+Answer by model: ng
+Correct answer: ng
+Gap no. 10
+Answer by model: ra
+Correct answer: ry
+Gap no. 11
+Answer by model: n
+Correct answer: a
+Gap no. 12
+Answer by model: l
+Correct answer: l
+Gap no. 13
+Answer by model: e 
+Correct answer: e.
+Gap no. 14
+Answer by model:  s
+Correct answer:  s
+Gap no. 15
+Answer by model: ma
+Correct answer: al
+Gap no. 16
+Answer by model: d 
+Correct answer: d 
+Gap no. 17
+Answer by model: d
+Correct answer: s
+Gap no. 18
+Answer by model: e
+Correct answer: e
+Gap no. 19
+Answer by model: en
+Correct answer: ud
+Gap no. 20
+Answer by model: t
+Correct answer: g
+
+Accuracy: 45

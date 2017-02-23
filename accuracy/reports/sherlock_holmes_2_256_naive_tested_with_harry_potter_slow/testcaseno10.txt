@@ -1,0 +1,50 @@
+Passage with missing characters: 
+He had had it as long as€€(1)e could €(2)ememb€(3)r, and the first quest€€(4)n he could ever remember as€(5)ing his Aunt€€(6)etunia was how he had go€€(7)en it. "In the car cr€€(8)h whe€(9) your parents died," she€(10)had said. "And don't ask ques€€(11)ons." Don't ask€(12)questions - €€(13)at was the first rule for a q€€(14)et life with the Dursleys.
+
+Original passage: 
+He had had it as long as he could remember, and the first question he could ever remember asking his Aunt Petunia was how he had gotten it. "In the car crash when your parents died," she had said. "And don't ask questions." Don't ask questions - that was the first rule for a quiet life with the Dursleys.
+
+Gap no. 1
+Answer by model:  t
+Correct answer:  h
+Gap no. 2
+Answer by model: n
+Correct answer: r
+Gap no. 3
+Answer by model: e
+Correct answer: e
+Gap no. 4
+Answer by model: io
+Correct answer: io
+Gap no. 5
+Answer by model:  
+Correct answer: k
+Gap no. 6
+Answer by model: er
+Correct answer:  P
+Gap no. 7
+Answer by model: ne
+Correct answer: tt
+Gap no. 8
+Answer by model: ie
+Correct answer: as
+Gap no. 9
+Answer by model: r
+Correct answer: n
+Gap no. 10
+Answer by model:  
+Correct answer:  
+Gap no. 11
+Answer by model: ti
+Correct answer: ti
+Gap no. 12
+Answer by model:  
+Correct answer:  
+Gap no. 13
+Answer by model: st
+Correct answer: th
+Gap no. 14
+Answer by model: ua
+Correct answer: ui
+
+Accuracy: 35.714285714286

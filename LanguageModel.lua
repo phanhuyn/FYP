@@ -253,26 +253,23 @@ function LM:probs(kwargs)
 
   local probs = torch.div(scores, temperature):double():exp():squeeze()
   probs:div(torch.sum(probs))
-  --self:resetStates()
-
+  --self:clearStates()
   return probs
 end
 
 --[[
   get next output probs with init state
 --]]
-function LM:probs2(kwargs)
-
-  local start_text = utils.get_kwarg(kwargs, 'start_text', '')
-  local LSTM_init_states = utils.get_kwarg(kwargs, 'init_states', nil)
+function LM:probs2(start_text, LSTM_init_states)
   local temperature = 1
 
   self:resetStates()
-  self:setLSTMStates(LSTM_init_states)
+  if (LSTM_init_states ~= nil) then
+    self:setLSTMStates(LSTM_init_states)
+  end
 
   local scores
   local x = self:encode_string(start_text):view(1, -1)
-
   local T0 = x:size(2) -- length of x e.i. start_text
   scores = self:forward(x)[{{}, {T0, T0}}]
 
@@ -314,5 +311,43 @@ function LM:setLSTMStates(LSTM_states)
     local LSTM = self.net.modules[layer+1]
     LSTM:setState(LSTM_states[layer].h, LSTM_states[layer].c, LSTM_states[layer].gates)
   end
-  return LSTM_states
+end
+
+--[[
+  Naive method (getting max base on prefix only) to fill single gap
+]]
+function LM:naiveFillSingleGap(prefix, gap_size, postfix, LSTM_states)
+
+  local temperature = 1
+  if (LSTM_states ~= nil) then
+    self:setLSTMStates(LSTM_states)
+  end
+
+  local x = self:encode_string(prefix):view(1, -1)
+  local T0 = x:size(2)
+
+  local filled_in = torch.LongTensor(1, #prefix + gap_size)
+  filled_in[{{}, {1, T0}}]:copy(x)
+  local scores = self:forward(x)[{{}, {T0, T0}}]
+
+  local _, next_char = nil, nil
+
+  for t = #prefix + 1, #prefix + gap_size do
+    local probs = torch.div(scores, temperature):double():exp():squeeze()
+    probs:div(torch.sum(probs))
+    _, next_char = torch.max(probs, 1)
+    next_char = next_char:view(1,1)
+    filled_in[{{}, {t, t}}]:copy(next_char)
+    scores = self:forward(next_char)
+  end
+
+  -- local LSTM_state = self:getLSTMStates()
+  -- print ('Printing LSTM state after filling gaps')
+  -- for layer = 1,#LSTM_state do
+  --   print ('layer ' .. layer)
+  --   print (LSTM_state[layer].h:sum())
+  --   print (LSTM_state[layer].c:sum())
+  -- end
+
+  return self:decode_string(filled_in[1]) .. postfix
 end

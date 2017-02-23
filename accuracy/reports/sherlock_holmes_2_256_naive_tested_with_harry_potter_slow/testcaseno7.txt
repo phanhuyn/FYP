@@ -1,0 +1,74 @@
+Passage with missing characters: 
+When €(1)e was dressed h€€(2)went down the hall i€€(3)o the kitchen€(4) The table was €(5)lmost hidden ben€€(6)th all€(7)Dudley's birthday pres€€(8)ts. It lo€€(9)ed as though Dudley had gotte€(10) the new compute€(11) he wanted, no€€(12)to mention the second televis€(13)on and the racing bike. Exact€€(14) why Dudley wan€(15)ed a racing bike €€(16)s a mystery to Harry, €(17)s Dudley was ver€(18) fat and hate€(19) exercise€(20)- unless of co€€(21)se it involved €(22)unching somebody.
+
+Original passage: 
+When he was dressed he went down the hall into the kitchen. The table was almost hidden beneath all Dudley's birthday presents. It looked as though Dudley had gotten the new computer he wanted, not to mention the second television and the racing bike. Exactly why Dudley wanted a racing bike was a mystery to Harry, as Dudley was very fat and hated exercise - unless of course it involved punching somebody.
+
+Gap no. 1
+Answer by model: a
+Correct answer: h
+Gap no. 2
+Answer by model: im
+Correct answer: e 
+Gap no. 3
+Answer by model: n 
+Correct answer: nt
+Gap no. 4
+Answer by model:  
+Correct answer: .
+Gap no. 5
+Answer by model: t
+Correct answer: a
+Gap no. 6
+Answer by model: t 
+Correct answer: ea
+Gap no. 7
+Answer by model:  
+Correct answer:  
+Gap no. 8
+Answer by model: en
+Correct answer: en
+Gap no. 9
+Answer by model: ok
+Correct answer: ok
+Gap no. 10
+Answer by model: e
+Correct answer: n
+Gap no. 11
+Answer by model: d
+Correct answer: r
+Gap no. 12
+Answer by model: t 
+Correct answer: t 
+Gap no. 13
+Answer by model: h
+Correct answer: i
+Gap no. 14
+Answer by model:  t
+Correct answer: ly
+Gap no. 15
+Answer by model: t
+Correct answer: t
+Gap no. 16
+Answer by model: an
+Correct answer: wa
+Gap no. 17
+Answer by model: a
+Correct answer: a
+Gap no. 18
+Answer by model: y
+Correct answer: y
+Gap no. 19
+Answer by model:  
+Correct answer: d
+Gap no. 20
+Answer by model:  
+Correct answer:  
+Gap no. 21
+Answer by model: mm
+Correct answer: ur
+Gap no. 22
+Answer by model: t
+Correct answer: p
+
+Accuracy: 36.363636363636

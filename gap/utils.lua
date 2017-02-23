@@ -28,10 +28,10 @@ function get_all_chars_in_model(model)
     opt.gpu = -1
     opt.start_text = 'a'
     local sample = model:probs(opt)
-
+    model:resetStates()
     -- decoding a string of all char, sorted by its decoded index
     local encoded = torch.Tensor(sample:size()[1])
-    for i=1, sample:size()[1] do 
+    for i=1, sample:size()[1] do
         encoded[i] = i
     end
 
@@ -48,6 +48,6 @@ function find_char_to_represent_gap(model)
         if not string.find(all_chars_in_model, string.char(i)) then
             return string.char(i)
         end
-    end 
+    end
     return false
-end 
+end

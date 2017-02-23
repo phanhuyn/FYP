@@ -1,0 +1,47 @@
+Passage with missing characters: 
+Harry had a thin face, kno€(1)bly knees,€€(2)lack hair, a€€(3) bright green eyes. He wore ro€€(4)d glasses held together with a€€(5)ot of Scotch €€(6)pe because of all the times D€€(7)ley had punched him on €(8)he nose. The only thing €€(9)rry liked about his o€(10)n appearance was a very thi€(11) scar on his forehead that w€€(12) shaped like a bolt€€(13)f lightning.
+
+Original passage: 
+Harry had a thin face, knobbly knees, black hair, and bright green eyes. He wore round glasses held together with a lot of Scotch tape because of all the times Dudley had punched him on the nose. The only thing Harry liked about his own appearance was a very thin scar on his forehead that was shaped like a bolt of lightning.
+
+Gap no. 1
+Answer by model: w
+Correct answer: b
+Gap no. 2
+Answer by model:  a
+Correct answer:  b
+Gap no. 3
+Answer by model: nd
+Correct answer: nd
+Gap no. 4
+Answer by model: om
+Correct answer: un
+Gap no. 5
+Answer by model:  s
+Correct answer:  l
+Gap no. 6
+Answer by model: ha
+Correct answer: ta
+Gap no. 7
+Answer by model: en
+Correct answer: ud
+Gap no. 8
+Answer by model: t
+Correct answer: t
+Gap no. 9
+Answer by model: an
+Correct answer: Ha
+Gap no. 10
+Answer by model: w
+Correct answer: w
+Gap no. 11
+Answer by model: n
+Correct answer: n
+Gap no. 12
+Answer by model: as
+Correct answer: as
+Gap no. 13
+Answer by model: s 
+Correct answer:  o
+
+Accuracy: 38.461538461538

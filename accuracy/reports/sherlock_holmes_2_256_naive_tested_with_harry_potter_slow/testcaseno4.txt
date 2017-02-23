@@ -1,0 +1,50 @@
+Passage with missing characters: 
+"Up!" she screeched. €(1)arry heard her walking tow€€(2)d the kitchen €€(3)d then the sound of the f€€(4)ing pan being put on the €(5)tove. He rolled ont€€(6)his back and€€(7)ried to remember the€(8)dream he had be€€(9) having. It had been a good €(10)ne. There h€(11)d been a flying€€(12)otorcycle in it. He had a fun€(13)y feeling he'd had the same d€(14)eam before.
+
+Original passage: 
+"Up!" she screeched. Harry heard her walking toward the kitchen and then the sound of the frying pan being put on the stove. He rolled onto his back and tried to remember the dream he had been having. It had been a good one. There had been a flying motorcycle in it. He had a funny feeling he'd had the same dream before.
+
+Gap no. 1
+Answer by model: T
+Correct answer: H
+Gap no. 2
+Answer by model: ar
+Correct answer: ar
+Gap no. 3
+Answer by model: th
+Correct answer: an
+Gap no. 4
+Answer by model: or
+Correct answer: ry
+Gap no. 5
+Answer by model: s
+Correct answer: s
+Gap no. 6
+Answer by model: o 
+Correct answer: o 
+Gap no. 7
+Answer by model:  s
+Correct answer:  t
+Gap no. 8
+Answer by model:  
+Correct answer:  
+Gap no. 9
+Answer by model: en
+Correct answer: en
+Gap no. 10
+Answer by model: a
+Correct answer: o
+Gap no. 11
+Answer by model: a
+Correct answer: a
+Gap no. 12
+Answer by model:  a
+Correct answer:  m
+Gap no. 13
+Answer by model: d
+Correct answer: n
+Gap no. 14
+Answer by model: o
+Correct answer: r
+
+Accuracy: 42.857142857143
