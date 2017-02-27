@@ -2,10 +2,7 @@ require 'torch'
 require 'nn'
 require 'LanguageModel'
 require 'gap/utils'
-
--- threshold, for customizing the algo,
--- if (prob (a char following a prefix) < threhold) --> won't put the character into the tree
-THRESHOLD = 0.01
+require 'gap/constants'
 
 -- NOTE ON getting sample
 -- model:probs(opt) returns the probs vector of the next position in the sequence

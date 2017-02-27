@@ -4,9 +4,9 @@ require 'nn'
 require 'VanillaRNN'
 require 'LSTM'
 
+require 'gap/constants'
+
 local utils = require 'util.utils'
-
-
 local LM, parent = torch.class('nn.LanguageModel', 'nn.Module')
 -- This means we are defining class nn.LanguageModel, inheritting nn.Module
 -- More details on nn.Module: https://github.com/torch/nn/blob/master/doc/module.md#nn.Module
@@ -270,12 +270,13 @@ function LM:probs2(start_text, LSTM_init_states)
 
   local scores
   local x = self:encode_string(start_text):view(1, -1)
+
   local T0 = x:size(2) -- length of x e.i. start_text
   scores = self:forward(x)[{{}, {T0, T0}}]
 
   local probs = torch.div(scores, temperature):double():exp():squeeze()
   probs:div(torch.sum(probs))
-  self:resetStates()
+  --self:resetStates()
 
   return probs
 end
@@ -294,9 +295,9 @@ function LM:getLSTMStates()
   for layer = 1,self.num_layers do
     LSTM_states[layer] = {}
     local LSTM = self.net.modules[layer+1]
-    LSTM_states[layer].h = LSTM.output[{{}, LSTM.output:size(2)}]
-    LSTM_states[layer].c = LSTM.cell[{{}, LSTM.cell:size(2)}]
-    LSTM_states[layer].gates = LSTM.gates
+    LSTM_states[layer].h = LSTM.output[{{}, LSTM.output:size(2)}]:clone()
+    LSTM_states[layer].c = LSTM.cell[{{}, LSTM.cell:size(2)}]:clone()
+    -- LSTM_states[layer].gates = LSTM.gates
   end
   return LSTM_states
 end
@@ -309,7 +310,8 @@ function LM:setLSTMStates(LSTM_states)
   assert(#LSTM_states == self.num_layers, 'setting states for LSTM must match the number of LSTM layers')
   for layer = 1,self.num_layers do
     local LSTM = self.net.modules[layer+1]
-    LSTM:setState(LSTM_states[layer].h, LSTM_states[layer].c, LSTM_states[layer].gates)
+    -- LSTM:setState(LSTM_states[layer].h, LSTM_states[layer].c, LSTM_states[layer].gates)
+    LSTM:setState(LSTM_states[layer].h, LSTM_states[layer].c)
   end
 end
 
@@ -350,4 +352,168 @@ function LM:naiveFillSingleGap(prefix, gap_size, postfix, LSTM_states)
   -- end
 
   return self:decode_string(filled_in[1]) .. postfix
+end
+
+--[[
+  Method to fill single gap
+]]
+function LM:fillSingleGap(LSTM_init_states, init_probs, gap_size, encoded_postfix)
+  self:resetStates()
+  self:setLSTMStates(LSTM_init_states)
+
+  --print ('calling fill single gap with size = ' .. gap_size)
+
+  local max_likelihood = -1
+  local max_gap
+
+  for next_char = 1,self.vocab_size do
+    if init_probs[next_char] > CUT_OFF_PROBS then
+
+      local next_char_likelihood, filled_in_gap
+      if gap_size == 1 then
+        next_char_likelihood = self:checkSequenceLikelihood(LSTM_init_states, init_probs, torch.cat(torch.LongTensor{next_char},encoded_postfix))
+      else
+        local new_init_probs = self:probs2(self:decode_string(torch.Tensor{next_char}), LSTM_init_states)
+        local new_LSTM_states = self:getLSTMStates()
+        filled_in_gap, next_char_likelihood = self:fillSingleGap(new_LSTM_states, new_init_probs, gap_size -1, encoded_postfix)
+        next_char_likelihood = next_char_likelihood*init_probs[next_char]
+        --local likelihood = self:fillSingleGap()
+        -- if (next_char_likelihood > 1) then
+        --   print ('With right char = ' .. self:decode_string(torch.Tensor{next_char}))
+        --   print ('and left char  = ' .. self:decode_string(filled_in_gap))
+        --   print ('prob = ' .. next_char_likelihood)
+        -- end
+      end
+      if next_char_likelihood > max_likelihood then
+        -- print ('--------------------------------------------------')
+        -- print (self:decode_string(torch.Tensor{next_char}))
+        -- self:checkSequenceLikelihood(LSTM_init_states, init_probs, torch.cat( torch.LongTensor{next_char}, encoded_postfix), true)
+        if (filled_in_gap) then
+          max_gap = torch.cat(torch.Tensor{next_char},filled_in_gap)
+        else
+          max_gap = torch.Tensor{next_char}
+        end
+        max_likelihood = next_char_likelihood
+      end
+    end
+  end
+
+  return max_gap, max_likelihood
+end
+
+--[[
+  Check likelihood of the sequence, returning the sum
+  args:
+  - init_probs: probs vector of first character
+  - encoded_sequence: the sequence to check, encoded to a LongTensor
+  - use_sum: True or False. True meaning it uses sum of probability, else it'd use the product
+]]
+function LM:checkSequenceLikelihood(LSTM_init_states, init_probs, encoded_sequence, verbose)
+
+  -- assume: size of encoded_sequence is larger than 0
+  -- if (#encoded_sequence == 0 ) then
+  --   return 0
+  -- end
+  local likelihood = init_probs[encoded_sequence[1]]
+  if (likelihood < CUT_OFF_PROBS) then
+    return 0
+  end
+
+  self:resetStates()
+
+  self:setLSTMStates(LSTM_init_states)
+
+  local scores = self:forward(encoded_sequence:view(1,-1))
+  local probs = scores:double():exp():squeeze()
+
+  if (verbose) then
+    print (self:decode_string(torch.Tensor{encoded_sequence[1]}))
+    print (likelihood)
+  end
+
+  -- only loop if the encoded_sequence is of length greater than 1
+  if (probs:dim() > 1) then
+    -- TODO can improve this, search for dividing pairwise?
+    for dim=1,probs:size(1)-1 do
+      local current_char = encoded_sequence[dim+1]
+      local next_char_prob = (probs[dim]:div(torch.sum(probs[dim])))[current_char]
+
+      if (next_char_prob < CUT_OFF_PROBS) then
+        return 0
+      end
+
+
+      if USE_SUM then
+        likelihood = likelihood + next_char_prob
+      else
+        likelihood = likelihood*next_char_prob*MAGNIFIY_FACTOR
+      end
+
+      if (verbose) then
+        print (self:decode_string(torch.Tensor{current_char}))
+        print (next_char_prob)
+      end
+    end
+  end
+
+  return likelihood
+end
+
+--[[
+  Method to fill multiple gaps
+]]
+function LM:fillMultiGap(string_with_gap, gap_char)
+
+  self:resetStates()
+
+  local gaps = {}
+
+  local gap_pos = string.find(string_with_gap, gap_char)
+  local prev_gap_pos = 0
+
+  if (gap_pos == nil) then
+    return {gaps, string_with_gap}
+  end
+
+  local full_sen = string_with_gap:sub(0, gap_pos - 1)
+  local prefix = full_sen
+  local LSTM_init_states = nil
+  while (gap_pos ~= nil)
+  do
+    local gap_size = 0
+    -- moving gap pos pass all the gap_char
+    while (string_with_gap:sub(gap_pos, gap_pos) == gap_char and gap_pos <= #string_with_gap) do
+      gap_pos = gap_pos + 1
+      gap_size = gap_size + 1
+    end
+
+    prev_gap_pos = gap_pos
+    gap_pos = string.find(string_with_gap, gap_char, prev_gap_pos)
+
+    local postfix
+    if (gap_pos == nil) then
+      postfix = string_with_gap:sub(prev_gap_pos, #string_with_gap)
+    else
+      postfix = string_with_gap:sub(prev_gap_pos, gap_pos - 1)
+    end
+
+    local init_probs = self:probs2(prefix, LSTM_init_states)
+    LSTM_init_states = self:getLSTMStates()
+
+    local encoded_gap, likelihood = self:fillSingleGap(LSTM_init_states, init_probs, gap_size, self:encode_string(postfix))
+
+    local gap = self:decode_string(encoded_gap)
+    full_sen = full_sen .. gap .. postfix
+    prefix = gap .. postfix
+    table.insert(gaps, gap)
+  end
+
+  self:resetStates()
+
+  return {gaps, full_sen}
+end
+
+
+function LM:callwithLSTMState(LSTM)
+  self:setLSTMStates(LSTM)
 end

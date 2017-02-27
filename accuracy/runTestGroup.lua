@@ -67,22 +67,22 @@ function runTestGroup2(path_to_test_set_group, model, path_to_report_group)
     end
 end
 
-function runTestGroup3(path_to_test_set_group, model, path_to_report_group1, path_to_report_group2)
-    local gap_char = find_char_to_represent_gap(model)
-    local test_files = scandir(path_to_test_set_group)
-    os.execute("mkdir " .. path_to_report_group1)
-    os.execute("mkdir " .. path_to_report_group2)
-    for i = 1,#test_files do
-      testCase = generateTestSet(path_to_test_set_group .. test_files[i], 'testset', gap_char)
-      generateSingleDetailReport(testCase, path_to_report_group1 .. test_files[i], model)
-      generateSingleDetailReport3(testCase, path_to_report_group2 .. test_files[i], model)
-      print ('report for ' .. path_to_test_set_group .. test_files[i] .. ' generated')
-    end
-end
+-- function runTestGroup3(path_to_test_set_group, model, path_to_report_group1, path_to_report_group2)
+--     local gap_char = find_char_to_represent_gap(model)
+--     local test_files = scandir(path_to_test_set_group)
+--     os.execute("mkdir " .. path_to_report_group1)
+--     os.execute("mkdir " .. path_to_report_group2)
+--     for i = 1,#test_files do
+--       testCase = generateTestSet(path_to_test_set_group .. test_files[i], 'testset', gap_char)
+--       generateSingleDetailReport(testCase, path_to_report_group1 .. test_files[i], model)
+--       generateSingleDetailReport3(testCase, path_to_report_group2 .. test_files[i], model)
+--       print ('report for ' .. path_to_test_set_group .. test_files[i] .. ' generated')
+--     end
+-- end
 
 CHECKPOINT_PATH = 'models/cv/checkpoint_17000.t7'
 local model = get_model_by_path(CHECKPOINT_PATH)
-runTestGroup('accuracy/rawTestFiles/harrypotter2/', model, 100, 'accuracy/reports/sherlock_holmes_2_256_naive_tested_with_harry_potter_fast.csv')
+runTestGroup('accuracy/rawTestFiles/harrypotter_onefile/', model, 100, 'accuracy/reports/sherlock_holmes_2_256_naive_tested_with_harry_potter_new_engine.csv')
 
 --runTestGroup2('accuracy/rawTestFiles/harrypotter2/', model, 'accuracy/reports/sherlock_holmes_2_256_naive_tested_with_harry_potter/')
 

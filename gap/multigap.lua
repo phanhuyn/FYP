@@ -45,6 +45,9 @@ function fill_multi_gaps(string_with_gap, gap_char, model)
 			postfix = string_with_gap:sub(prev_gap_pos, gap_pos - 1)
 		end
 
+		-- print ('calling single gap with:')
+		-- print ('prefix = ' .. prefix)
+		-- print ('postfix = ' .. postfix)
 		local single_gap = fill_single_gap(prefix, gap_size, postfix, model)
 
 		prefix = single_gap[1]
@@ -72,9 +75,7 @@ end
 -- return: an object with
 -- 	gaps: list of gaps
 --  full_sentence: at the final return it would be the full sentence
-function fill_multi_gaps2(string_with_gap, gap_char, model, naive)
-
-	naive = naive or false
+function fill_multi_gaps2(string_with_gap, gap_char, model)
 
 	local gaps = {}
 
@@ -174,6 +175,9 @@ end
 -- local gap_char = find_char_to_represent_gap(model)
 --
 -- local string_with_gap = "Indeed i" .. gap_char .. gap_char .. gap_char .. "as submerge" .. gap_char .. gap_char .. gap_char .. "y the water"
+--
+-- print(fill_multi_gaps(string_with_gap, gap_char, model))
+
 --
 -- local timebefore = os.time()
 -- print(fill_multi_gaps2(string_with_gap, gap_char, model))

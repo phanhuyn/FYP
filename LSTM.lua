@@ -120,6 +120,7 @@ Output:
 
 function layer:updateOutput(input)
 
+
   -- print (input)
   self.recompute_backward = true
   -- important step to init c0 and h0
@@ -154,13 +155,19 @@ function layer:updateOutput(input)
     end
   end
 
+
   local bias_expand = self.bias:view(1, 4 * H):expand(N, 4 * H)
   local Wx = self.weight[{{1, D}}]
   local Wh = self.weight[{{D + 1, D + H}}]
 
+
   local h, c = self.output, self.cell
+
   h:resize(N, T, H):zero()
   c:resize(N, T, H):zero()
+
+  -- print (h)
+
   local prev_h, prev_c = h0, c0
 
   if (self.set_h0 ~= nil and self.set_c0 ~= nil) then
@@ -168,6 +175,7 @@ function layer:updateOutput(input)
     prev_c = self.set_c0
     self.set_h0 = nil
     self.set_c0 = nil
+    self.gates:resize(N, T, 4 * H):zero()
   else
     self.gates:resize(N, T, 4 * H):zero()
   end
@@ -177,6 +185,7 @@ function layer:updateOutput(input)
     local next_h = h[{{}, t}]
     local next_c = c[{{}, t}]
     local cur_gates = self.gates[{{}, t}]
+
     cur_gates:addmm(bias_expand, cur_x, Wx)
     cur_gates:addmm(prev_h, Wh)
 
@@ -185,10 +194,12 @@ function layer:updateOutput(input)
 
     cur_gates[{{}, {1, 3 * H}}]:sigmoid()
     cur_gates[{{}, {3 * H + 1, 4 * H}}]:tanh()
+
     local i = cur_gates[{{}, {1, H}}]
     local f = cur_gates[{{}, {H + 1, 2 * H}}]
     local o = cur_gates[{{}, {2 * H + 1, 3 * H}}]
     local g = cur_gates[{{}, {3 * H + 1, 4 * H}}]
+
     next_h:cmul(i, g)
     next_c:cmul(f, prev_c):add(next_h)
     next_h:tanh(next_c):cmul(o)
@@ -204,14 +215,12 @@ function layer:updateOutput(input)
   end
 
   -- for storing state
-  -- print (self.gates[{{}, T}]:size())
-  -- print (self.gates:size())
-  self.gates = self.gates[{{},{T},{}}]
+  -- self.gates = self.gates[{{},{T},{}}]
 
   -- both return true
   -- print (torch.equal(prev_h,self.output[{{}, self.output:size(2)}]))
   -- print (torch.equal(prev_c,self.cell[{{}, self.cell:size(2)}]))
-
+  
   return self.output
 end
 
@@ -343,8 +352,11 @@ function layer:__tostring__()
   return string.format('%s(%d -> %d)', name, din, dout)
 end
 
-function layer:setState(h0, c0, gates)
-  self.set_h0 = h0
-  self.set_c0 = c0
-  self.gates = gates
+function layer:setState(h0, c0)
+  self.set_h0 = h0--:clone()
+  self.set_c0 = c0--:clone()
+  -- probably clean up memory here?
+  -- collectgarbage(); collectgarbage();
+
+  -- self.gates = gates
 end
