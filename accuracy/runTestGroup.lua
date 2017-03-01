@@ -82,8 +82,8 @@ end
 
 CHECKPOINT_PATH = 'models/cv/checkpoint_17000.t7'
 local model = get_model_by_path(CHECKPOINT_PATH)
-runTestGroup('accuracy/rawTestFiles/harrypotter_onefile/', model, 100, 'accuracy/reports/sherlock_holmes_2_256_naive_tested_with_harry_potter_new_engine.csv')
+runTestGroup('accuracy/rawTestFiles/harrypotter_onefile/', model, 100, 'accuracy/reports/sherlock_holmes_2_256_tested_with_harry_potter_new_engine.csv')
 
---runTestGroup2('accuracy/rawTestFiles/harrypotter2/', model, 'accuracy/reports/sherlock_holmes_2_256_naive_tested_with_harry_potter/')
+-- runTestGroup2('accuracy/rawTestFiles/harrypotter_onefile/', model, 'accuracy/reports/sherlock_holmes_2_256_tested_with_harry_potter_new_engine/')
 
 -- runTestGroup3('accuracy/rawTestFiles/harrypotter2/', model, 'accuracy/reports/sherlock_holmes_2_256_naive_tested_with_harry_potter_slow/', 'accuracy/reports/sherlock_holmes_2_256_naive_tested_with_harry_potter_fast/')

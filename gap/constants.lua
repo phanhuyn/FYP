@@ -6,7 +6,7 @@ THRESHOLD = 0.01
 USE_SUM = false
 
 -- for fill gap to multiply the prob with this factor so the prob won't get too small
-MAGNIFIY_FACTOR = 10
+MAGNIFIY_FACTOR = 20
 
 -- for filtering out character which is very unlikely to happen
 CUT_OFF_PROBS = 0.01

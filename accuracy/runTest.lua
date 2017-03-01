@@ -46,7 +46,9 @@ function generateSingleDetailReport(test_set, path_to_report, model)
 	local solution = test_set.answer
 
 	-- get the test result
-	local result = fill_multi_gaps2(string_with_gap, test_set.gap_char, model)
+	--local result = fill_multi_gaps2(string_with_gap, test_set.gap_char, model)
+	local result = model:fillMultiGap(string_with_gap, test_set.gap_char)
+
 	local answer = result[1]
 
 	local trueCount = 0

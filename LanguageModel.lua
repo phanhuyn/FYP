@@ -376,8 +376,11 @@ function LM:fillSingleGap(LSTM_init_states, init_probs, gap_size, encoded_postfi
         local new_init_probs = self:probs2(self:decode_string(torch.Tensor{next_char}), LSTM_init_states)
         local new_LSTM_states = self:getLSTMStates()
         filled_in_gap, next_char_likelihood = self:fillSingleGap(new_LSTM_states, new_init_probs, gap_size -1, encoded_postfix)
-        next_char_likelihood = next_char_likelihood*init_probs[next_char]
-        --local likelihood = self:fillSingleGap()
+        if USE_SUM then
+          next_char_likelihood = next_char_likelihood + init_probs[next_char]
+        else
+          next_char_likelihood = next_char_likelihood*init_probs[next_char]
+        end
         -- if (next_char_likelihood > 1) then
         --   print ('With right char = ' .. self:decode_string(torch.Tensor{next_char}))
         --   print ('and left char  = ' .. self:decode_string(filled_in_gap))
@@ -438,9 +441,9 @@ function LM:checkSequenceLikelihood(LSTM_init_states, init_probs, encoded_sequen
       local current_char = encoded_sequence[dim+1]
       local next_char_prob = (probs[dim]:div(torch.sum(probs[dim])))[current_char]
 
-      if (next_char_prob < CUT_OFF_PROBS) then
-        return 0
-      end
+      -- if (next_char_prob < CUT_OFF_PROBS) then
+      --   return 0
+      -- end
 
 
       if USE_SUM then
