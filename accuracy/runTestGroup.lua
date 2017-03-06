@@ -80,9 +80,30 @@ end
 --     end
 -- end
 
-CHECKPOINT_PATH = 'models/cv/checkpoint_17000.t7'
+-- 2_256
+CHECKPOINT_PATH = 'models/sherlock_holmes_2_256/sherlock_holmes_2_256_103800.t7'
 local model = get_model_by_path(CHECKPOINT_PATH)
-runTestGroup('accuracy/rawTestFiles/harrypotter_onefile/', model, 100, 'accuracy/reports/sherlock_holmes_2_256_tested_with_harry_potter_new_engine.csv')
+runTestGroup('accuracy/rawTestFiles/harrypotter_onefile/', model, 200, 'accuracy/reports/sherlock_holmes_2_256_tested_with_harry_potter_new_engine.csv')
+
+-- 2_512
+CHECKPOINT_PATH = 'models/sherlock_holmes_2_512/sherlock_holmes_2_512_103800.t7'
+local model = get_model_by_path(CHECKPOINT_PATH)
+runTestGroup('accuracy/rawTestFiles/harrypotter_onefile/', model, 200, 'accuracy/reports/sherlock_holmes_2_512_tested_with_harry_potter_new_engine.csv')
+
+-- 3_128
+CHECKPOINT_PATH = 'models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7'
+local model = get_model_by_path(CHECKPOINT_PATH)
+runTestGroup('accuracy/rawTestFiles/harrypotter_onefile/', model, 200, 'accuracy/reports/sherlock_holmes_3_128_tested_with_harry_potter_new_engine.csv')
+
+-- 3_256
+CHECKPOINT_PATH = 'models/sherlock_holmes_3_256/sherlock_holmes_3_256_103800.t7'
+local model = get_model_by_path(CHECKPOINT_PATH)
+runTestGroup('accuracy/rawTestFiles/harrypotter_onefile/', model, 200, 'accuracy/reports/sherlock_holmes_3_256_tested_with_harry_potter_new_engine.csv')
+
+-- 3_512
+CHECKPOINT_PATH = 'models/sherlock_holmes_3_512/sherlock_holmes_3_512_100000.t7'
+local model = get_model_by_path(CHECKPOINT_PATH)
+runTestGroup('accuracy/rawTestFiles/harrypotter_onefile/', model, 200, 'accuracy/reports/sherlock_holmes_3_512_tested_with_harry_potter_new_engine.csv')
 
 -- runTestGroup2('accuracy/rawTestFiles/harrypotter_onefile/', model, 'accuracy/reports/sherlock_holmes_2_256_tested_with_harry_potter_new_engine/')
 

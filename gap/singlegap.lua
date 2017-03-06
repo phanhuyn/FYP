@@ -102,10 +102,10 @@ end
 -- TESTING
 
  -- Which model to use
--- CHECKPOINT_PATH = 'models/cv/checkpoint_17000.t7'
+CHECKPOINT_PATH = 'models/cv/checkpoint_17000.t7'
 
 -- model for sampling
--- local model = get_model_by_path(CHECKPOINT_PATH)
+local model = get_model_by_path(CHECKPOINT_PATH)
 
 -- local full_sen = fill_single_gap('Indeed i', 2 ,'was submerged in the water', model)
 
@@ -119,3 +119,5 @@ end
 -- print(fill_single_gap('There are two peop', 3, 'in this room.', model))
 
 -- print(fill_single_gap('There are two people ', 2 ,' this room.', model, 1, all_words))
+
+-- Print sorted list of char
