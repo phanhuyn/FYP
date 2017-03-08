@@ -102,15 +102,15 @@ end
 -- TESTING
 
  -- Which model to use
-CHECKPOINT_PATH = 'models/cv/checkpoint_17000.t7'
+-- CHECKPOINT_PATH = 'models/cv/checkpoint_17000.t7'
 
 -- model for sampling
-local model = get_model_by_path(CHECKPOINT_PATH)
+-- local model = get_model_by_path(CHECKPOINT_PATH)
 
 -- local full_sen = fill_single_gap('Indeed i', 2 ,'was submerged in the water', model)
 
 
-print(fill_single_gap('Indeed it was submerged ', 2 ,' the water', model)[1])
+--print(fill_single_gap('Indeed it was submerged ', 2 ,' the water', model)[1])
 
 -- print(fill_single_gap('Indeed it was submerged ', 2 ,' the water', model)[2])
 

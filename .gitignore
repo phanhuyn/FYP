@@ -6,3 +6,4 @@
 *.pyc
 /UI/logs
 /UI/nginx.conf.compiled
+/accuracy/visualization/report-data

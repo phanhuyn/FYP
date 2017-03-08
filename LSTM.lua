@@ -44,8 +44,8 @@ function layer:__init(input_dim, hidden_dim)
   self.grad_x = torch.Tensor()
   self.gradInput = {self.grad_c0, self.grad_h0, self.grad_x}
 
-  self.set_c0 = torch.Tensor()
-  self.set_h0 = torch.Tensor()
+  self.set_c0 = nil --torch.Tensor()
+  self.set_h0 = nil --torch.Tensor()
 end
 
 
@@ -171,12 +171,14 @@ function layer:updateOutput(input)
   local prev_h, prev_c = h0, c0
 
   if (self.set_h0 ~= nil and self.set_c0 ~= nil) then
+    -- print ('loading state')
     prev_h = self.set_h0
     prev_c = self.set_c0
     self.set_h0 = nil
     self.set_c0 = nil
     self.gates:resize(N, T, 4 * H):zero()
   else
+    -- print ('not loading state')
     self.gates:resize(N, T, 4 * H):zero()
   end
 
@@ -220,7 +222,7 @@ function layer:updateOutput(input)
   -- both return true
   -- print (torch.equal(prev_h,self.output[{{}, self.output:size(2)}]))
   -- print (torch.equal(prev_c,self.cell[{{}, self.cell:size(2)}]))
-  
+
   return self.output
 end
 

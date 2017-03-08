@@ -26,12 +26,17 @@ python scripts/preprocess.py \
   --output_h5 models/model_name/my_data.h5 \
   --output_json models/model_name/my_data.json
 
+python scripts/preprocess.py --input_txt data/sherlock_holmes_cleaned.txt --output_h5 data/sherlock_holmes_cleaned.h5 --output_json data/sherlock_holmes_cleaned.json
 
 # 2. Train the model
 
 th train.lua -input_h5 models/model_name/my_data.h5 -input_json models/model_name/my_data.json
 
 th train.lua -input_h5 data/big.h5 -input_json data/big.json -model_type lstm -num_layers 3 -rnn_size 128 -checkpoint_name models/sherlock_holmes_3_128
+
+th train.lua -input_h5 data/big.h5 -input_json data/big.json -model_type lstm -num_layers 3 -rnn_size 128 -checkpoint_name models/sherlock_holmes_3_128
+
+th train.lua -input_h5 data/sherlock_holmes_cleaned.h5 -input_json data/sherlock_holmes_cleaned.json -model_type lstm -num_layers 3 -rnn_size 128 -checkpoint_name models/sherlock_holmes_cleaned_3_128/sherlock_holmes_cleaned_3_128 -max_epochs 5
 
 # 3. Sample from the model
 (included in filling gaps)
@@ -118,3 +123,6 @@ luarocks install lua-cjson
 git clone https://github.com/deepmind/torch-hdf5
 cd torch-hdf5
 luarocks make hdf5-0-0.rockspec
+
+# GPU
+# install CUDA
