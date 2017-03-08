@@ -20,6 +20,16 @@ function get_model_by_path(path)
 	return checkpoint.model
 end
 
+-- get model by path with GPU (path is the relative path to the checkpoint file)
+function get_model_by_path_with_GPU(path)
+    require 'cutorch'
+    require 'cunn'
+    cutorch.setDevice(1)
+    local checkpoint = torch.load(path)
+    local model = checkpoint.model
+    model:cuda()
+    return model
+end
 
 -- return a string containing all the characters in a model
 function get_all_chars_in_model(model)

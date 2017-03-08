@@ -149,5 +149,5 @@ end
 
 
 CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_10000.t7'
-local model = get_model_by_path(CHECKPOINT_PATH)
-runGeneratedTestGroup('accuracy/generatedTestCases/harrypotter/', model, 20, 'accuracyTestResult/sherlock_holmes_1_128_ITER_10000.csv')
+local model = get_model_by_path_with_GPU(CHECKPOINT_PATH)
+runGeneratedTestGroup('accuracy/generatedTestCases/harrypotter/', model, 10, 'accuracyTestResult/sherlock_holmes_1_128_ITER_10000.csv')
