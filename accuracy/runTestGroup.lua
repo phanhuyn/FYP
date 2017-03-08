@@ -22,7 +22,6 @@ end
 function runTestGroup(path_to_test_set_group, model, no_of_run_times, path_to_report_file)
 
     local timebefore = os.time()
-
     local gap_char = find_char_to_represent_gap(model)
     local test_files = scandir(path_to_test_set_group)
 
@@ -53,6 +52,54 @@ function runTestGroup(path_to_test_set_group, model, no_of_run_times, path_to_re
 end
 
 --[[
+ Run generated test set group on a model
+]]
+function runGeneratedTestGroup(path_to_test_set_group, model, no_of_run_times, path_to_report_file)
+
+    local timebefore = os.time()
+    local gap_char = find_char_to_represent_gap(model)
+    local test_files = scandir(path_to_test_set_group)
+
+    local report = io.open(path_to_report_file, "w")
+
+    report:write('test_id,correct,incorrect\n')
+    for i = 1, math.min(no_of_run_times,#test_files) do
+      print('Running test no. ' .. i)
+      test_set = table.load(path_to_test_set_group .. test_files[i])
+      test_result = runSingleTest(test_set, model)
+      report:write(i .. "," .. test_result.trueCount .. "," .. test_result.wrongCount .. "\n")
+    end
+    report:close()
+
+    local timeafter = os.time()
+    print ("Report for test group at: " .. path_to_test_set_group .. " generated.")
+    print ("Total running time: " .. (timeafter - timebefore)/60 .. " minutes")
+end
+
+
+function compareModel(path_to_test_file, paths_to_models, number_of_iteration, path_to_report_file)
+  local timebefore = os.time()
+
+  local model = get_model_by_path(paths_to_models[1])
+  local gap_char = find_char_to_represent_gap(model)
+  local test_set = generateTestSet(path_to_test_file, 'testset', gap_char)
+
+  for i = 1, #paths_to_models do
+    print ('----------------------------------')
+    print ('model: ' .. paths_to_models[i])
+    model = get_model_by_path(paths_to_models[i])
+    test_result = runSingleTest(test_set, model)
+    local trueCount = test_result.trueCount
+    local wrongCount = test_result.wrongCount
+    print ('true count: ' .. trueCount)
+    print ('wrong count: ' .. wrongCount)
+    print ('accuracy: ' .. trueCount/(trueCount+wrongCount))
+  end
+
+  local timeafter = os.time()
+  print ("Total running time: " .. (timeafter - timebefore)/60 .. " minutes")
+end
+--[[
   read all the txt files in a test_set_group folder, generate test based the text
   result is detail of each gap
 ]]
@@ -66,6 +113,13 @@ function runTestGroup2(path_to_test_set_group, model, path_to_report_group)
       print ('report for ' .. path_to_test_set_group .. test_files[i] .. ' generated')
     end
 end
+
+
+-- GENERATE TEST CASES
+-- CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_10000.t7'
+-- local model = get_model_by_path(CHECKPOINT_PATH)
+-- local gap_char = find_char_to_represent_gap(model)
+-- generateTestSetAndStore('accuracy/rawTestFiles/harrypotter_onefile/harrypotter2.txt', 'accuracy/generatedTestCases/harrypotter/', gap_char, 100)
 
 -- function runTestGroup3(path_to_test_set_group, model, path_to_report_group1, path_to_report_group2)
 --     local gap_char = find_char_to_represent_gap(model)
@@ -89,8 +143,11 @@ end
 
 -- runTestGroup3('accuracy/rawTestFiles/harrypotter2/', model, 'accuracy/reports/sherlock_holmes_2_256_naive_tested_with_harry_potter_slow/', 'accuracy/reports/sherlock_holmes_2_256_naive_tested_with_harry_potter_fast/')
 
+-- CHECKPOINT_PATH = 'models/sherlock_holmes_cleaned_3_128/sherlock_holmes_cleaned_3_128_9965.t7'
+-- local model = get_model_by_path(CHECKPOINT_PATH)
+-- runTestGroup('accuracy/rawTestFiles/harrypotter_onefile_cleaned/', model, 100, 'accuracy/reports/sherlock_holmes_cleaned_3_128_tested_with_harry_potter.csv')
 
--- 2_256
-CHECKPOINT_PATH = 'models/sherlock_holmes_cleaned_3_128/sherlock_holmes_cleaned_3_128_9965.t7'
+
+CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_10000.t7'
 local model = get_model_by_path(CHECKPOINT_PATH)
-runTestGroup('accuracy/rawTestFiles/harrypotter_onefile_cleaned/', model, 100, 'accuracy/reports/sherlock_holmes_cleaned_3_128_tested_with_harry_potter.csv')
+runGeneratedTestGroup('accuracy/generatedTestCases/harrypotter/', model, 20, 'accuracyTestResult/sherlock_holmes_1_128_ITER_10000.csv')

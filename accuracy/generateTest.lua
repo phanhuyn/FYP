@@ -1,5 +1,6 @@
 require 'gap/multigap'
 require 'gap/utils'
+require 'util/table-save.lua'
 
 -- Generate a test set from a text file
 
@@ -25,8 +26,11 @@ function generateTestSet(path_to_file, test_set_name, gap_char)
 	local f = io.open(path_to_file, "rb")
 
 	if f == nil then
+		print ('Cannot open file: ' .. path_to_file)
 		return nil
 	end
+
+	math.randomseed(os.clock()*100000000000)
 
     local content = f:read("*all")
     local string_with_gap = ''
@@ -58,6 +62,8 @@ function generateTestSet(path_to_file, test_set_name, gap_char)
 		string_with_gap = string_with_gap .. content:sub(pos+1, #content)
 		numbered_string_with_gap = numbered_string_with_gap .. content:sub(pos+1, #content)
 
+		-- print (string_with_gap)
+
     test_set.string_with_gap = string_with_gap
 		test_set.original_string = content
     test_set.answer = gap
@@ -66,4 +72,13 @@ function generateTestSet(path_to_file, test_set_name, gap_char)
 
     f:close()
     return test_set
+end
+
+function generateTestSetAndStore(path_to_file, path_to_test_case, gap_char, number_of_test)
+	for i = 1, number_of_test
+	do
+		local testcase = generateTestSet(path_to_file, 'no name', gap_char)
+		local testcasefile = path_to_test_case .. "testno" .. i .. '.lua'
+		table.save(testcase, testcasefile)
+	end
 end

@@ -41,6 +41,30 @@ def boxplot(path_to_file_list, output_file_name, x_axis_tick_labels,  x_label="L
 #x_axis_tick_labels = ['128', '256', '512']
 
 # 2-512 - DIFFERENT ITERATION IN TRAINING
-files_list = ['accuracy/visualization/changing-iteration/sherlock_holmes_2_512_tested_with_harry_potter_new_engine_ITER_10000.csv', 'accuracy/visualization/changing-iteration/sherlock_holmes_2_512_tested_with_harry_potter_new_engine_ITER_20000.csv','accuracy/visualization/changing-iteration/sherlock_holmes_2_512_tested_with_harry_potter_new_engine_ITER_30000.csv','accuracy/visualization/changing-iteration/sherlock_holmes_2_512_tested_with_harry_potter_new_engine_ITER_40000.csv','accuracy/visualization/changing-iteration/sherlock_holmes_2_512_tested_with_harry_potter_new_engine_ITER_50000.csv','accuracy/visualization/changing-iteration/sherlock_holmes_2_512_tested_with_harry_potter_new_engine_ITER_60000.csv']
-x_axis_tick_labels = ['10000', '20000', '30000', '40000', '50000', '60000']
-boxplot(files_list, 'accuracy/visualization/accuracy_vs_training_iteration_sherlock_holmes.png', x_axis_tick_labels, 'Number of training iterations', 'Accuracy vs. Training Iterations')
+# files_list = ['accuracy/visualization/report-data/changing-iteration-2-512/sherlock_holmes_2_512_tested_with_harry_potter_new_engine_ITER_10000.csv',\
+#  'accuracy/visualization/report-data/changing-iteration-2-512/sherlock_holmes_2_512_tested_with_harry_potter_new_engine_ITER_20000.csv',\
+#  'accuracy/visualization/report-data/changing-iteration-2-512/sherlock_holmes_2_512_tested_with_harry_potter_new_engine_ITER_30000.csv',\
+#  'accuracy/visualization/report-data/changing-iteration-2-512/sherlock_holmes_2_512_tested_with_harry_potter_new_engine_ITER_40000.csv',\
+#  'accuracy/visualization/report-data/changing-iteration-2-512/sherlock_holmes_2_512_tested_with_harry_potter_new_engine_ITER_50000.csv',\
+#  'accuracy/visualization/report-data/changing-iteration-2-512/sherlock_holmes_2_512_tested_with_harry_potter_new_engine_ITER_60000.csv',\
+#  'accuracy/visualization/report-data/changing-iteration-2-512/sherlock_holmes_2_512_tested_with_harry_potter_new_engine_ITER_70000.csv',\
+#  'accuracy/visualization/report-data/changing-iteration-2-512/sherlock_holmes_2_512_tested_with_harry_potter_new_engine_ITER_80000.csv',\
+# 'accuracy/visualization/report-data/changing-iteration-2-512/sherlock_holmes_2_512_tested_with_harry_potter_new_engine_ITER_90000.csv',\
+#  ]
+# x_axis_tick_labels = ['10000', '20000', '30000', '40000', '50000', '60000', '70000', '80000', '90000']
+# boxplot(files_list, 'accuracy/visualization/accuracy_vs_training_iteration_sherlock_holmes.png', x_axis_tick_labels, 'Number of training iterations', 'Accuracy vs. Training Iterations')
+
+# 1-128 changing iteration
+files_list = ['accuracy/visualization/report-data/changing-iteration-1-128/sherlock_holmes_1_128_ITER_10000.csv',\
+'accuracy/visualization/report-data/changing-iteration-1-128/sherlock_holmes_1_128_ITER_20000.csv',\
+'accuracy/visualization/report-data/changing-iteration-1-128/sherlock_holmes_1_128_ITER_30000.csv',\
+'accuracy/visualization/report-data/changing-iteration-1-128/sherlock_holmes_1_128_ITER_40000.csv',\
+'accuracy/visualization/report-data/changing-iteration-1-128/sherlock_holmes_1_128_ITER_50000.csv',\
+'accuracy/visualization/report-data/changing-iteration-1-128/sherlock_holmes_1_128_ITER_60000.csv',\
+'accuracy/visualization/report-data/changing-iteration-1-128/sherlock_holmes_1_128_ITER_70000.csv',\
+'accuracy/visualization/report-data/changing-iteration-1-128/sherlock_holmes_1_128_ITER_80000.csv',\
+'accuracy/visualization/report-data/changing-iteration-1-128/sherlock_holmes_1_128_ITER_90000.csv',\
+'accuracy/visualization/report-data/changing-iteration-1-128/sherlock_holmes_1_128_ITER_100000.csv',\
+ ]
+x_axis_tick_labels = ['10000', '20000', '30000', '40000', '50000', '60000', '70000', '80000', '90000','100000']
+boxplot(files_list, 'accuracy/visualization/accuracy_vs_training_iteration_sherlock_holmes_1_128.png', x_axis_tick_labels, 'Number of training iterations', 'Accuracy vs. Training Iterations')
