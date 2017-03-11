@@ -65,6 +65,7 @@ function runGeneratedTestGroup(path_to_test_set_group, model, no_of_run_times, p
     report:write('test_id,correct,incorrect\n')
     for i = 1, math.min(no_of_run_times,#test_files) do
       print('Running test no. ' .. i)
+      -- print (path_to_test_set_group .. test_files[i])
       test_set = table.load(path_to_test_set_group .. test_files[i])
       test_result = runSingleTest(test_set, model)
       report:write(i .. "," .. test_result.trueCount .. "," .. test_result.wrongCount .. "\n")
@@ -76,29 +77,6 @@ function runGeneratedTestGroup(path_to_test_set_group, model, no_of_run_times, p
     print ("Total running time: " .. (timeafter - timebefore)/60 .. " minutes")
 end
 
-
-function compareModel(path_to_test_file, paths_to_models, number_of_iteration, path_to_report_file)
-  local timebefore = os.time()
-
-  local model = get_model_by_path(paths_to_models[1])
-  local gap_char = find_char_to_represent_gap(model)
-  local test_set = generateTestSet(path_to_test_file, 'testset', gap_char)
-
-  for i = 1, #paths_to_models do
-    print ('----------------------------------')
-    print ('model: ' .. paths_to_models[i])
-    model = get_model_by_path(paths_to_models[i])
-    test_result = runSingleTest(test_set, model)
-    local trueCount = test_result.trueCount
-    local wrongCount = test_result.wrongCount
-    print ('true count: ' .. trueCount)
-    print ('wrong count: ' .. wrongCount)
-    print ('accuracy: ' .. trueCount/(trueCount+wrongCount))
-  end
-
-  local timeafter = os.time()
-  print ("Total running time: " .. (timeafter - timebefore)/60 .. " minutes")
-end
 --[[
   read all the txt files in a test_set_group folder, generate test based the text
   result is detail of each gap
@@ -118,8 +96,49 @@ end
 -- GENERATE TEST CASES
 -- CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_10000.t7'
 -- local model = get_model_by_path(CHECKPOINT_PATH)
--- local gap_char = find_char_to_represent_gap(model)
--- generateTestSetAndStore('accuracy/rawTestFiles/harrypotter_onefile/harrypotter2.txt', 'accuracy/generatedTestCases/harrypotter/', gap_char, 100)
+-- generateTestSetAndStore('accuracy/rawTestFiles/devil_foot_matched.txt', 'accuracy/generatedTestCases/devil_foot/', model, 100)
+
+function runGeneratedTestOnMultipleModels(model_paths, test_cases_path, test_run_no, report_paths)
+  for i=1, #model_paths  do
+    local model = get_model_by_path(model_paths[i])
+    runGeneratedTestGroup(test_cases_path, model, test_run_no, report_paths[i])
+  end
+end
+
+SHERLOCK_HOLMES__VARYING_SIZE_MODEL_PATHS = {
+  'models/sherlock_holmes_1_128/sherlock_holmes_1_128_100000.t7',
+  'models/sherlock_holmes_1_256/sherlock_holmes_1_256_103800.t7',
+  'models/sherlock_holmes_1_512/sherlock_holmes_1_512_103800.t7',
+  'models/sherlock_holmes_2_128/sherlock_holmes_2_128_103800.t7',
+  'models/sherlock_holmes_2_256/sherlock_holmes_2_256_103800.t7',
+  'models/sherlock_holmes_2_512/sherlock_holmes_2_512_103800.t7',
+  'models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7',
+  'models/sherlock_holmes_3_256/sherlock_holmes_3_256_103800.t7',
+  'models/sherlock_holmes_3_512/sherlock_holmes_3_512_100000.t7',
+}
+
+SHERLOCK_HOLMES_REPORT_PATHS = {
+  'accuracy/visualization/report-data/varying-size-iter-100000-devil-foot/sherlock_holmes_1_128.csv',
+  'accuracy/visualization/report-data/varying-size-iter-100000-devil-foot/sherlock_holmes_1_256.csv',
+  'accuracy/visualization/report-data/varying-size-iter-100000-devil-foot/sherlock_holmes_1_512.csv',
+  'accuracy/visualization/report-data/varying-size-iter-100000-devil-foot/sherlock_holmes_2_128.csv',
+  'accuracy/visualization/report-data/varying-size-iter-100000-devil-foot/sherlock_holmes_2_256.csv',
+  'accuracy/visualization/report-data/varying-size-iter-100000-devil-foot/sherlock_holmes_2_512.csv',
+  'accuracy/visualization/report-data/varying-size-iter-100000-devil-foot/sherlock_holmes_3_128.csv',
+  'accuracy/visualization/report-data/varying-size-iter-100000-devil-foot/sherlock_holmes_3_256.csv',
+  'accuracy/visualization/report-data/varying-size-iter-100000-devil-foot/sherlock_holmes_3_512.csv',
+}
+
+runGeneratedTestOnMultipleModels(SHERLOCK_HOLMES__VARYING_SIZE_MODEL_PATHS,'accuracy/generatedTestCases/devil_foot/', 2, SHERLOCK_HOLMES_REPORT_PATHS)
+
+-- CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_50000.t7'
+-- local model = get_model_by_path(CHECKPOINT_PATH)
+-- runGeneratedTestGroup('accuracy/generatedTestCases/harrypotter2/', model, 100, 'accuracy/visualization/report-data/changing-iteration-1-128-double-check/sherlock_holmes_1_128_ITER_50000.csv')
+--
+--
+--   CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_10000.t7'
+--   local model = get_model_by_path(CHECKPOINT_PATH)
+--   runGeneratedTestGroup('accuracy/generatedTestCases/harrypotter2/', model, 100, 'accuracy/visualization/report-data/changing-iteration-1-128-double-check/sherlock_holmes_1_128_ITER_10000.csv')
 
 -- function runTestGroup3(path_to_test_set_group, model, path_to_report_group1, path_to_report_group2)
 --     local gap_char = find_char_to_represent_gap(model)
@@ -148,6 +167,53 @@ end
 -- runTestGroup('accuracy/rawTestFiles/harrypotter_onefile_cleaned/', model, 100, 'accuracy/reports/sherlock_holmes_cleaned_3_128_tested_with_harry_potter.csv')
 
 
-CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_10000.t7'
-local model = get_model_by_path(CHECKPOINT_PATH)
-runGeneratedTestGroup('accuracy/generatedTestCases/harrypotter/', model, 20, 'accuracyTestResult/sherlock_holmes_1_128_ITER_10000.csv')
+-- CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_10000.t7'
+-- local model = get_model_by_path(CHECKPOINT_PATH)
+-- runGeneratedTestGroup('accuracy/generatedTestCases/harrypotter/', model, 20, 'accuracyTestResult/sherlock_holmes_1_128_ITER_10000.csv')
+
+
+function iteration_testing(testrunno)
+  testrunno = testrunno or 100
+
+  CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_10000.t7'
+  local model = get_model_by_path(CHECKPOINT_PATH)
+  runGeneratedTestGroup('accuracy/generatedTestCases/harrypotter2/', model, testrunno, 'accuracy/visualization/report-data/changing-iteration-1-128-double-check/sherlock_holmes_1_128_ITER_10000.csv')
+
+  CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_20000.t7'
+  local model = get_model_by_path(CHECKPOINT_PATH)
+  runGeneratedTestGroup('accuracy/generatedTestCases/harrypotter2/', model, testrunno, 'accuracy/visualization/report-data/changing-iteration-1-128-double-check/sherlock_holmes_1_128_ITER_20000.csv')
+
+  CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_30000.t7'
+  local model = get_model_by_path(CHECKPOINT_PATH)
+  runGeneratedTestGroup('accuracy/generatedTestCases/harrypotter2/', model, testrunno, 'accuracy/visualization/report-data/changing-iteration-1-128-double-check/sherlock_holmes_1_128_ITER_30000.csv')
+
+  CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_40000.t7'
+  local model = get_model_by_path(CHECKPOINT_PATH)
+  runGeneratedTestGroup('accuracy/generatedTestCases/harrypotter2/', model, testrunno, 'accuracy/visualization/report-data/changing-iteration-1-128-double-check/sherlock_holmes_1_128_ITER_40000.csv')
+
+  CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_50000.t7'
+  local model = get_model_by_path(CHECKPOINT_PATH)
+  runGeneratedTestGroup('accuracy/generatedTestCases/harrypotter2/', model, testrunno, 'accuracy/visualization/report-data/changing-iteration-1-128-double-check/sherlock_holmes_1_128_ITER_50000.csv')
+
+  CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_60000.t7'
+  local model = get_model_by_path(CHECKPOINT_PATH)
+  runGeneratedTestGroup('accuracy/generatedTestCases/harrypotter2/', model, testrunno, 'accuracy/visualization/report-data/changing-iteration-1-128-double-check/sherlock_holmes_1_128_ITER_60000.csv')
+
+  CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_70000.t7'
+  local model = get_model_by_path(CHECKPOINT_PATH)
+  runGeneratedTestGroup('accuracy/generatedTestCases/harrypotter2/', model, testrunno, 'accuracy/visualization/report-data/changing-iteration-1-128-double-check/sherlock_holmes_1_128_ITER_70000.csv')
+
+  CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_80000.t7'
+  local model = get_model_by_path(CHECKPOINT_PATH)
+  runGeneratedTestGroup('accuracy/generatedTestCases/harrypotter2/', model, testrunno, 'accuracy/visualization/report-data/changing-iteration-1-128-double-check/sherlock_holmes_1_128_ITER_80000.csv')
+
+  CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_90000.t7'
+  local model = get_model_by_path(CHECKPOINT_PATH)
+  runGeneratedTestGroup('accuracy/generatedTestCases/harrypotter2/', model, testrunno, 'accuracy/visualization/report-data/changing-iteration-1-128-double-check/sherlock_holmes_1_128_ITER_90000.csv')
+
+  CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_100000.t7'
+  local model = get_model_by_path(CHECKPOINT_PATH)
+  runGeneratedTestGroup('accuracy/generatedTestCases/harrypotter2/', model, testrunno, 'accuracy/visualization/report-data/changing-iteration-1-128-double-check/sherlock_holmes_1_128_ITER_100000.csv')
+end
+
+-- iteration_testing()

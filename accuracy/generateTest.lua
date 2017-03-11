@@ -62,8 +62,6 @@ function generateTestSet(path_to_file, test_set_name, gap_char)
 		string_with_gap = string_with_gap .. content:sub(pos+1, #content)
 		numbered_string_with_gap = numbered_string_with_gap .. content:sub(pos+1, #content)
 
-		-- print (string_with_gap)
-
     test_set.string_with_gap = string_with_gap
 		test_set.original_string = content
     test_set.answer = gap
@@ -74,7 +72,32 @@ function generateTestSet(path_to_file, test_set_name, gap_char)
     return test_set
 end
 
-function generateTestSetAndStore(path_to_file, path_to_test_case, gap_char, number_of_test)
+function cleanTestSetToMatchModel(path_to_file, model, path_to_output)
+	local f = io.open(path_to_file, "rb")
+
+	if f == nil then
+		print ('Cannot open file: ' .. path_to_file)
+		return nil
+	end
+
+  local content = f:read("*all")
+
+	cleaned_content = ''
+	local alphabet = get_all_chars_in_model(model)
+
+	for i=1,#content do
+		if string.match(alphabet,content:sub(i,i)) then
+			cleaned_content = cleaned_content .. content:sub(i,i)
+		end
+	end
+
+	local report = io.open(path_to_output, "w")
+		report:write(cleaned_content)
+	report:close()
+end
+
+function generateTestSetAndStore(path_to_file, path_to_test_case, model, number_of_test)
+	local gap_char = find_char_to_represent_gap(model)
 	for i = 1, number_of_test
 	do
 		local testcase = generateTestSet(path_to_file, 'no name', gap_char)
@@ -82,3 +105,7 @@ function generateTestSetAndStore(path_to_file, path_to_test_case, gap_char, numb
 		table.save(testcase, testcasefile)
 	end
 end
+
+-- CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_10000.t7'
+-- local model = get_model_by_path(CHECKPOINT_PATH)
+-- cleanTestSetToMatchModel('accuracy/rawTestFiles/devil_foot.txt', model, 'accuracy/rawTestFiles/devil_foot_matched.txt')

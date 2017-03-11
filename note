@@ -28,6 +28,8 @@ python scripts/preprocess.py \
 
 python scripts/preprocess.py --input_txt data/sherlock_holmes_cleaned.txt --output_h5 data/sherlock_holmes_cleaned.h5 --output_json data/sherlock_holmes_cleaned.json
 
+python scripts/preprocess.py --input_txt data/Vietnamese_GoneWithTheWind.txt --output_h5 data/Vietnamese_GoneWithTheWind.h5 --output_json data/Vietnamese_GoneWithTheWind.json
+
 # 2. Train the model
 
 th train.lua -input_h5 models/model_name/my_data.h5 -input_json models/model_name/my_data.json
@@ -37,6 +39,8 @@ th train.lua -input_h5 data/big.h5 -input_json data/big.json -model_type lstm -n
 th train.lua -input_h5 data/big.h5 -input_json data/big.json -model_type lstm -num_layers 3 -rnn_size 128 -checkpoint_name models/sherlock_holmes_3_128
 
 th train.lua -input_h5 data/sherlock_holmes_cleaned.h5 -input_json data/sherlock_holmes_cleaned.json -model_type lstm -num_layers 3 -rnn_size 128 -checkpoint_name models/sherlock_holmes_cleaned_3_128/sherlock_holmes_cleaned_3_128 -max_epochs 5
+
+th train.lua -input_h5 data/Vietnamese_GoneWithTheWind.h5 -input_json data/Vietnamese_GoneWithTheWind.json -model_type lstm -num_layers 1 -rnn_size 128 -checkpoint_name models/Vietnamese_GoneWithTheWind_1_128/Vietnamese_GoneWithTheWind_1_128 -max_epochs 1 -gpu -1
 
 # 3. Sample from the model
 (included in filling gaps)

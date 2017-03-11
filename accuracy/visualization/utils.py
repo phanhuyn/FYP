@@ -4,7 +4,7 @@ import numpy as np
 """
     Read a csv file of (correct, incorrect) and return a list of accuracy
 """
-def get_accuracy_list(path_to_file):
+def get_accuracy_list(path_to_file, limit=-1):
     with open(path_to_file) as csv_file:
 
         reader = csv.reader(csv_file)
@@ -18,6 +18,9 @@ def get_accuracy_list(path_to_file):
                 accuracy = correct_gap/(incorrect_gap+correct_gap)
                 accuracy_list.append(accuracy)
             header = False
+        if (limit != -1):
+            import random
+            return random.sample(accuracy_list, limit)
         return accuracy_list
 
 
