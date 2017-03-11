@@ -105,6 +105,13 @@ function runGeneratedTestOnMultipleModels(model_paths, test_cases_path, test_run
   end
 end
 
+function runGeneratedTestOnMultipleModelsWithGPU(model_paths, test_cases_path, test_run_no, report_paths)
+  for i=1, #model_paths  do
+    local model = get_model_by_path_with_GPU(model_paths[i])
+    runGeneratedTestGroup(test_cases_path, model, test_run_no, report_paths[i])
+  end
+end
+
 SHERLOCK_HOLMES__VARYING_SIZE_MODEL_PATHS = {
   'models/sherlock_holmes_1_128/sherlock_holmes_1_128_100000.t7',
   'models/sherlock_holmes_1_256/sherlock_holmes_1_256_103800.t7',
