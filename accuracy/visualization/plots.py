@@ -81,10 +81,19 @@ files_list = \
 'accuracy/visualization/report-data/varying-size-iter-100000/sherlock_holmes_3_512.csv'
 ]
 
-x_axis_tick_labels = ['1-128', '1-256', '1-512', '2-128', '2-256', '2-512', '3-128', '3-256', '3-512']
-for i in range(1,10):
-    boxplot(files_list, 'accuracy/visualization/accuracy_vs_size_sherlock_holmes_40_' + str(i), x_axis_tick_labels, 'Number of layer - Layer size', 'Accuracy vs. Size', 40)
+files_list_tails = \
+['sherlock_holmes_1_128.csv','sherlock_holmes_1_256.csv','sherlock_holmes_1_512.csv',
+'sherlock_holmes_2_128.csv','sherlock_holmes_2_256.csv','sherlock_holmes_2_512.csv',
+'sherlock_holmes_3_128.csv','sherlock_holmes_3_256.csv','sherlock_holmes_3_512.csv'
+]
 
+files_list_devil_foot = ['accuracy/visualization/report-data/varying-size-iter-100000-devil-foot/' + file_tail for file_tail in files_list_tails]
+
+x_axis_tick_labels = ['1-128', '1-256', '1-512', '2-128', '2-256', '2-512', '3-128', '3-256', '3-512']
+# for i in range(1,10):
+#     boxplot(files_list, 'accuracy/visualization/accuracy_vs_size_sherlock_holmes_devil_foot' + str(i), x_axis_tick_labels, 'Number of layer - Layer size', 'Accuracy vs. Size', 40)
+
+boxplot(files_list_devil_foot, 'accuracy/visualization/accuracy_vs_size_sherlock_holmes_devil_foot', x_axis_tick_labels, 'Number of layer - Layer size', 'Accuracy vs. Size')
 
 #############################
 # 2-512 CHANGING ITERATION

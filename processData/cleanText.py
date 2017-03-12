@@ -67,4 +67,4 @@ def text_stats(input_file_name):
 # text_stats("data/Vietnamese_GoneWithTheWind.txt")
 # cleantextLower("data/Vietnamese_GoneWithTheWind.txt", VIETNAMESE_ALPHABET_MINIMIZE)
 # text_stats("accuracy/rawTestFiles/harrypotter_onefile/harrypotter2.txt")
-# text_stats("accuracy/rawTestFiles/devil_foot_matched.txt")
+text_stats("accuracy/rawTestFiles/ntu_news_matched.txt")

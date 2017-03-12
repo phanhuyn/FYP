@@ -86,7 +86,8 @@ function cleanTestSetToMatchModel(path_to_file, model, path_to_output)
 	local alphabet = get_all_chars_in_model(model)
 
 	for i=1,#content do
-		if string.match(alphabet,content:sub(i,i)) then
+		if safeStringContent(alphabet,content:sub(i,i))
+		then
 			cleaned_content = cleaned_content .. content:sub(i,i)
 		end
 	end
@@ -94,6 +95,15 @@ function cleanTestSetToMatchModel(path_to_file, model, path_to_output)
 	local report = io.open(path_to_output, "w")
 		report:write(cleaned_content)
 	report:close()
+end
+
+function safeStringContent(string, char)
+	for i=1, #string do
+		if (string:sub(i,i) == char) then
+			return true
+		end
+	end
+	return false
 end
 
 function generateTestSetAndStore(path_to_file, path_to_test_case, model, number_of_test)
@@ -106,6 +116,6 @@ function generateTestSetAndStore(path_to_file, path_to_test_case, model, number_
 	end
 end
 
--- CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_10000.t7'
--- local model = get_model_by_path(CHECKPOINT_PATH)
--- cleanTestSetToMatchModel('accuracy/rawTestFiles/devil_foot.txt', model, 'accuracy/rawTestFiles/devil_foot_matched.txt')
+CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_10000.t7'
+local model = get_model_by_path(CHECKPOINT_PATH)
+cleanTestSetToMatchModel('accuracy/rawTestFiles/ntu_news.txt', model, 'accuracy/rawTestFiles/ntu_news_matched.txt')
