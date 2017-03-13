@@ -68,14 +68,14 @@ end
 -- print(fill_multi_gaps(string_with_gap, gap_char, model))
 
 
--- fill in a string with multiple gap, second version which is faster
+-- fill in a string with multiple gap in a naive manner (select the highest probability without looking forward), which is faster
 -- string_with_gap: the string to fill in
 -- gap_char: the character which denoting the 'gap' (e.g. string.char(127))
 -- model: loaded sequence model
 -- return: an object with
 -- 	gaps: list of gaps
 --  full_sentence: at the final return it would be the full sentence
-function fill_multi_gaps2(string_with_gap, gap_char, model)
+function naive_fill_multi_gaps(string_with_gap, gap_char, model)
 
 	local gaps = {}
 
@@ -175,12 +175,12 @@ end
 -- local gap_char = find_char_to_represent_gap(model)
 --
 -- local string_with_gap = "Indeed i" .. gap_char .. gap_char .. gap_char .. "as submerge" .. gap_char .. gap_char .. gap_char .. "y the water"
---
+
 -- print(fill_multi_gaps(string_with_gap, gap_char, model))
 
 --
 -- local timebefore = os.time()
--- print(fill_multi_gaps2(string_with_gap, gap_char, model))
+-- print(naive_fill_multi_gaps(string_with_gap, gap_char, model))
 -- local timeafter = os.time()
 --
 -- print ((timeafter - timebefore)/60)

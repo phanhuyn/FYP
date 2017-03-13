@@ -357,17 +357,58 @@ end
 --[[
   Method to fill single gap
 ]]
-function LM:fillSingleGap(LSTM_init_states, init_probs, gap_size, encoded_postfix)
+function LM:fillSingleGap(LSTM_init_states, init_probs, gap_size, encoded_postfix, opt)
   self:resetStates()
   self:setLSTMStates(LSTM_init_states)
 
   --print ('calling fill single gap with size = ' .. gap_size)
 
+  if opt == nil then
+    opt = {}
+    opt.threshold = THRESHOLD
+  end
+
   local max_likelihood = -1
   local max_gap
 
+  -- check if there is any value larger than threshold
+  local max_next_char_likelihood = torch.max(init_probs,1)
+  if (max_next_char_likelihood[1] <= opt.threshold) then
+    _, next_char_t = torch.max(init_probs, 1)
+
+    local next_char = next_char_t[1]
+    -- print ('oh uh, the threshold is too large for this case')
+    -- print (next_char)
+
+    local max_likelihood, filled_in_gap
+    if gap_size == 1 then
+      max_likelihood = self:checkSequenceLikelihood(LSTM_init_states, init_probs, torch.cat(torch.LongTensor{next_char},encoded_postfix))
+    else
+      local new_init_probs = self:probs2(self:decode_string(torch.Tensor{next_char}), LSTM_init_states)
+      local new_LSTM_states = self:getLSTMStates()
+      filled_in_gap, max_likelihood = self:fillSingleGap(new_LSTM_states, new_init_probs, gap_size -1, encoded_postfix)
+      if USE_SUM then
+        max_likelihood = max_likelihood + init_probs[next_char]
+      else
+        max_likelihood = max_likelihood*init_probs[next_char]
+      end
+    end
+
+    if (filled_in_gap) then
+      max_gap = torch.cat(torch.Tensor{next_char},filled_in_gap)
+    else
+      max_gap = torch.Tensor{next_char}
+    end
+
+    -- print (max_likelihood)
+    -- print (max_gap)
+    return max_gap, max_likelihood
+  end
+
   for next_char = 1,self.vocab_size do
-    if init_probs[next_char] > CUT_OFF_PROBS then
+    -- print ('in LA:fillSingleGap, opt.threshold = ')
+    -- print (opt.threshold)
+    if init_probs[next_char] > opt.threshold then
 
       local next_char_likelihood, filled_in_gap
       if gap_size == 1 then
@@ -445,7 +486,6 @@ function LM:checkSequenceLikelihood(LSTM_init_states, init_probs, encoded_sequen
       --   return 0
       -- end
 
-
       if USE_SUM then
         likelihood = likelihood + next_char_prob
       else
@@ -465,9 +505,15 @@ end
 --[[
   Method to fill multiple gaps
 ]]
-function LM:fillMultiGap(string_with_gap, gap_char)
+function LM:fillMultiGap(string_with_gap, gap_char, opt)
 
   self:resetStates()
+
+  if (opt == nil) then
+    opt = {}
+    opt.threshold = THRESHOLD
+    opt.cutoffprobs = CUT_OFF_PROBS
+  end
 
   local gaps = {}
 
@@ -503,7 +549,7 @@ function LM:fillMultiGap(string_with_gap, gap_char)
     local init_probs = self:probs2(prefix, LSTM_init_states)
     LSTM_init_states = self:getLSTMStates()
 
-    local encoded_gap, likelihood = self:fillSingleGap(LSTM_init_states, init_probs, gap_size, self:encode_string(postfix))
+    local encoded_gap, likelihood = self:fillSingleGap(LSTM_init_states, init_probs, gap_size, self:encode_string(postfix), opt)
 
     local gap = self:decode_string(encoded_gap)
     full_sen = full_sen .. gap .. postfix

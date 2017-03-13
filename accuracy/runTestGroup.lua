@@ -1,6 +1,7 @@
 require 'accuracy/generateTest'
 require 'accuracy/runTest'
 require 'gap/utils'
+require 'gap/constants'
 
 -- return a list of files/folder in a directory
 function scandir(directory)
@@ -54,7 +55,16 @@ end
 --[[
  Run generated test set group on a model
 ]]
-function runGeneratedTestGroup(path_to_test_set_group, model, no_of_run_times, path_to_report_file)
+function runGeneratedTestGroup(path_to_test_set_group, model, no_of_run_times, path_to_report_file, naive, opt)
+
+    if (opt == nil) then
+      opt = {}
+      opt.threshold = THRESHOLD
+      opt.cutoffprobs = CUT_OFF_PROBS
+    end
+
+    -- print ('in runGeneratedTestGroup')
+    -- print (opt)
 
     local timebefore = os.time()
     local gap_char = find_char_to_represent_gap(model)
@@ -67,12 +77,24 @@ function runGeneratedTestGroup(path_to_test_set_group, model, no_of_run_times, p
       print('Running test no. ' .. i)
       -- print (path_to_test_set_group .. test_files[i])
       test_set = table.load(path_to_test_set_group .. test_files[i])
-      test_result = runSingleTest(test_set, model)
+
+      local test_result
+      if naive ~= nil then
+        test_result = runSingleTest(test_set, model, naive, opt)
+      else
+        test_result = runSingleTest(test_set, model, false, opt)
+      end
+
       report:write(i .. "," .. test_result.trueCount .. "," .. test_result.wrongCount .. "\n")
     end
     report:close()
 
     local timeafter = os.time()
+    local time_report = io.open(path_to_report_file:sub(1, #path_to_report_file-4) .. 'run_time', "w")
+
+    time_report:write((timeafter - timebefore) .. " seconds")
+    time_report:close()
+
     print ("Report for test group at: " .. path_to_test_set_group .. " generated.")
     print ("Total running time: " .. (timeafter - timebefore)/60 .. " minutes")
 end
@@ -98,10 +120,10 @@ end
 -- local model = get_model_by_path(CHECKPOINT_PATH)
 -- generateTestSetAndStore('accuracy/rawTestFiles/devil_foot_matched.txt', 'accuracy/generatedTestCases/devil_foot/', model, 100)
 
-function runGeneratedTestOnMultipleModels(model_paths, test_cases_path, test_run_no, report_paths)
+function runGeneratedTestOnMultipleModels(model_paths, test_cases_path, test_run_no, report_paths, naive)
   for i=1, #model_paths  do
     local model = get_model_by_path(model_paths[i])
-    runGeneratedTestGroup(test_cases_path, model, test_run_no, report_paths[i])
+    runGeneratedTestGroup(test_cases_path, model, test_run_no, report_paths[i], naive)
   end
 end
 
@@ -111,6 +133,20 @@ function runGeneratedTestOnMultipleModelsWithGPU(model_paths, test_cases_path, t
     runGeneratedTestGroup(test_cases_path, model, test_run_no, report_paths[i])
   end
 end
+
+function testChangingThresholdWithGPU(model_path, test_cases_path, test_run_no, report_path, thresholds)
+  local model = get_model_by_path(model_path)
+  for i=1,#thresholds do
+    local report = report_path .. 'thresholds_' .. thresholds[i] .. '_.csv'
+    local opt = {}
+    opt.threshold = thresholds[i]
+    opt.cutoffprobs = CUT_OFF_PROBS
+    runGeneratedTestGroup(test_cases_path, model, test_run_no, report, false, opt)
+  end
+end
+
+thresholds = {0.1, 0.2, 0.3}
+testChangingThresholdWithGPU('models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7', 'accuracy/generatedTestCases/harrypotter/', 2, 'accuracy/visualization/report-data/changing-threshold/', thresholds)
 
 SHERLOCK_HOLMES__VARYING_SIZE_MODEL_PATHS = {
   'models/sherlock_holmes_1_128/sherlock_holmes_1_128_100000.t7',
@@ -135,47 +171,29 @@ SHERLOCK_HOLMES_REPORT_PATHS = {
   'accuracy/visualization/report-data/varying-size-iter-100000-devil-foot/sherlock_holmes_3_256.csv',
   'accuracy/visualization/report-data/varying-size-iter-100000-devil-foot/sherlock_holmes_3_512.csv',
 }
+-- runGeneratedTestOnMultipleModels(SHERLOCK_HOLMES__VARYING_SIZE_MODEL_PATHS,'accuracy/generatedTestCases/devil_foot/', 2, SHERLOCK_HOLMES_REPORT_PATHS)
 
-runGeneratedTestOnMultipleModels(SHERLOCK_HOLMES__VARYING_SIZE_MODEL_PATHS,'accuracy/generatedTestCases/devil_foot/', 2, SHERLOCK_HOLMES_REPORT_PATHS)
+-----------------------------------------------
+-- NAIVE TESTING
+-----------------------------------------------
+-- local model = get_model_by_path('models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7')
+-- runGeneratedTestGroup('accuracy/generatedTestCases/harrypotter/', model, 100,   'accuracy/visualization/report-data/naive/harrypotter_3_128.csv', true)
 
--- CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_50000.t7'
--- local model = get_model_by_path(CHECKPOINT_PATH)
--- runGeneratedTestGroup('accuracy/generatedTestCases/harrypotter2/', model, 100, 'accuracy/visualization/report-data/changing-iteration-1-128-double-check/sherlock_holmes_1_128_ITER_50000.csv')
---
---
+-----------------------------------------------
+-- NORMAL RUN TEST GROUP
+-----------------------------------------------
 --   CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_10000.t7'
 --   local model = get_model_by_path(CHECKPOINT_PATH)
 --   runGeneratedTestGroup('accuracy/generatedTestCases/harrypotter2/', model, 100, 'accuracy/visualization/report-data/changing-iteration-1-128-double-check/sherlock_holmes_1_128_ITER_10000.csv')
 
--- function runTestGroup3(path_to_test_set_group, model, path_to_report_group1, path_to_report_group2)
---     local gap_char = find_char_to_represent_gap(model)
---     local test_files = scandir(path_to_test_set_group)
---     os.execute("mkdir " .. path_to_report_group1)
---     os.execute("mkdir " .. path_to_report_group2)
---     for i = 1,#test_files do
---       testCase = generateTestSet(path_to_test_set_group .. test_files[i], 'testset', gap_char)
---       generateSingleDetailReport(testCase, path_to_report_group1 .. test_files[i], model)
---       generateSingleDetailReport3(testCase, path_to_report_group2 .. test_files[i], model)
---       print ('report for ' .. path_to_test_set_group .. test_files[i] .. ' generated')
---     end
--- end
-
--- 2_256
--- CHECKPOINT_PATH = 'models/sherlock_holmes_cleaned_3_128/sherlock_holmes_cleaned_3_128_9965.t7'
--- local model = get_model_by_path(CHECKPOINT_PATH)
--- runTestGroup('accuracy/rawTestFiles/harrypotter_onefile/', model, 100, 'accuracy/reports/sherlock_holmes_cleaned_3_128_tested_with_harry_potter.csv')
-
 -- runTestGroup2('accuracy/rawTestFiles/harrypotter_onefile/', model, 'accuracy/reports/sherlock_holmes_2_256_tested_with_harry_potter_new_engine/')
 
--- runTestGroup3('accuracy/rawTestFiles/harrypotter2/', model, 'accuracy/reports/sherlock_holmes_2_256_naive_tested_with_harry_potter_slow/', 'accuracy/reports/sherlock_holmes_2_256_naive_tested_with_harry_potter_fast/')
-
+-----------------------------------------------
+-- CLEAN SHERLOCK HOLMES TESTING
+-----------------------------------------------
 -- CHECKPOINT_PATH = 'models/sherlock_holmes_cleaned_3_128/sherlock_holmes_cleaned_3_128_9965.t7'
 -- local model = get_model_by_path(CHECKPOINT_PATH)
 -- runTestGroup('accuracy/rawTestFiles/harrypotter_onefile_cleaned/', model, 100, 'accuracy/reports/sherlock_holmes_cleaned_3_128_tested_with_harry_potter.csv')
-
--- CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_10000.t7'
--- local model = get_model_by_path(CHECKPOINT_PATH)
--- runGeneratedTestGroup('accuracy/generatedTestCases/harrypotter/', model, 20, 'accuracyTestResult/sherlock_holmes_1_128_ITER_10000.csv')
 
 
 function iteration_testing(testrunno)
