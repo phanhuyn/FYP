@@ -60,6 +60,34 @@ def parallel_cordinates(path_to_file_list, output_file_name, x_axis_tick_labels,
     colors = ['r','b','g','c','m','y','k','w'] * 30
     parallel_coordinates(accuracy_by_test, style=colors).show()
 
+
+def runtime_plot(times, files_list_threshold, output_file_name, x_axis_tick_labels, x_label, graph_title):
+
+    accuracy = []
+    for path_to_file in files_list_threshold:
+        accuracy_list = get_accuracy_list(path_to_file)
+        accuracy.append(np.mean(accuracy_list))
+
+    fig, ax = plt.subplots()
+
+    # time plot
+    plt.plot(times, 'r')
+    plt.plot(times, 'ro')
+    plt.title(graph_title)
+    plt.xlabel(x_label)
+    plt.ylabel("Run time (seconds)", color='r')
+    ax.set_xticklabels(x_axis_tick_labels)
+    plt.tick_params('y',colors='r')
+
+    ax2 = ax.twinx()
+    ax2.plot(accuracy, 'b')
+    ax2.plot(accuracy, 'bo')
+    ax2.set_ylabel("Accuracy", color='b')
+    ax2.tick_params('y',colors='b')
+
+    plt.savefig(output_file_name)
+
+
 ###############################
 # ONE LAYER - DIFFERENT SIZE - OLD
 ###############################
@@ -94,12 +122,40 @@ x_axis_tick_labels = ['1-128', '1-256', '1-512', '2-128', '2-256', '2-512', '3-1
 
 # boxplot(files_list_devil_foot, 'accuracy/visualization/accuracy_vs_size_sherlock_holmes_devil_foot', x_axis_tick_labels, 'Approach', 'Accuracy vs. Size')
 
-files_list = \
-['accuracy/visualization/report-data/naive/harrypotter_3_128.csv', 'accuracy/visualization/report-data/varying-size-iter-100000/sherlock_holmes_3_128.csv']
 
-x_axis_tick_labels = ['Naive', 'With looking forward']
+#############################
+# CHANGING THRESHOLD PLOT
+#############################
 
-boxplot(files_list, 'accuracy/visualization/accuracy_naive_improved_harrypotter', x_axis_tick_labels, 'Approach', 'Improvement over naive approach')
+threshold_tails_1 = [0.01,0.02,0.03,0.04,0.05,0.06,0.07,0.08,0.09, 0.1]
+threshold_runtime_1 = [4640, 3646, 3069, 2612, 2272, 2015, 1826, 1666, 1544, 1427]
+threshold_runtime_2 = [1427, 989, 876, 839, 831, 453, 458, 484, 433, 442]
+
+# thresholds_accuracy_1 = [0.79, 0.77, 0.75, 0.74, 0.73, 0.72, 0.70, 0.69, 0.68, 0.67]
+
+threshold_tails_2 = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]
+
+files_list_threshold = ['accuracy/visualization/report-data/changing-threshold/thresholds_'+str(tail)+'_.csv' for tail in threshold_tails_2]
+
+print (files_list_threshold)
+
+x_axis_tick_labels_threshold = [str(tail) for tail in threshold_tails_2]
+
+# runtime_plot(threshold_runtime_2, files_list_threshold, 'accuracy/visualization/runtime_vs_threshold_3_128_sherlock_on_harrypotter_large', x_axis_tick_labels_threshold, 'Cut-off probability', 'Run time vs. Cut-off probability')
+
+boxplot(files_list_threshold, 'accuracy/visualization/accuracy_vs_threshold_3_128_sherlock_on_harry_large', x_axis_tick_labels_threshold, 'Cut off probability', 'Cut off probability vs. Accuracy')
+
+
+#############################
+# IMPROVEMENT OVER NAIVE ENGINE PLOT
+#############################
+
+# files_list_improvement = \
+# ['accuracy/visualization/report-data/naive/harrypotter_3_128.csv', 'accuracy/visualization/report-data/varying-size-iter-100000/sherlock_holmes_3_128.csv']
+#
+# x_axis_tick_labels_improvement = ['Naive', 'With looking forward']
+#
+# boxplot(files_list_improvement, 'accuracy/visualization/accuracy_naive_improved_harrypotter', x_axis_tick_labels_improvement, 'Approach', 'Improvement over naive approach')
 
 #############################
 # 1-128 CHANGING ITERATION

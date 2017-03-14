@@ -55,7 +55,7 @@ end
 --[[
  Run generated test set group on a model
 ]]
-function runGeneratedTestGroup(path_to_test_set_group, model, no_of_run_times, path_to_report_file, naive, opt)
+function runGeneratedTestGroup(path_to_test_set_group, model, no_of_run_times, path_to_report_file, naive, opt, lookforward_length, path_to_time_report)
 
     if (opt == nil) then
       opt = {}
@@ -80,9 +80,9 @@ function runGeneratedTestGroup(path_to_test_set_group, model, no_of_run_times, p
 
       local test_result
       if naive ~= nil then
-        test_result = runSingleTest(test_set, model, naive, opt)
+        test_result = runSingleTest(test_set, model, naive, opt, lookforward_length)
       else
-        test_result = runSingleTest(test_set, model, false, opt)
+        test_result = runSingleTest(test_set, model, false, opt, lookforward_length)
       end
 
       report:write(i .. "," .. test_result.trueCount .. "," .. test_result.wrongCount .. "\n")
@@ -90,9 +90,10 @@ function runGeneratedTestGroup(path_to_test_set_group, model, no_of_run_times, p
     report:close()
 
     local timeafter = os.time()
-    local time_report = io.open(path_to_report_file:sub(1, #path_to_report_file-4) .. 'run_time', "w")
+    local time_report = io.open(path_to_time_report, "a")
 
-    time_report:write((timeafter - timebefore) .. " seconds")
+    time_report:write("Run time for lookforward_len = " .. lookforward_length .. ", ")
+    time_report:write((timeafter - timebefore) .. " seconds\n")
     time_report:close()
 
     print ("Report for test group at: " .. path_to_test_set_group .. " generated.")
@@ -145,8 +146,22 @@ function testChangingThresholdWithGPU(model_path, test_cases_path, test_run_no, 
   end
 end
 
-thresholds = {0.1, 0.2, 0.3}
-testChangingThresholdWithGPU('models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7', 'accuracy/generatedTestCases/harrypotter/', 2, 'accuracy/visualization/report-data/changing-threshold/', thresholds)
+function testChangingLookForwardLength(model_path, test_cases_path, test_run_no, report_path, lookforward_lens, time_report_path)
+  local model = get_model_by_path(model_path)
+  for i=1,#lookforward_lens do
+    local report = report_path .. 'lookforward_len_' .. lookforward_lens[i] .. '_.csv'
+    runGeneratedTestGroup(test_cases_path, model, test_run_no, report, false, nil, lookforward_lens[i], time_report_path)
+  end
+end
+
+-----------------------------------------------
+-- THRESHOLD TESTING
+-----------------------------------------------
+-- thresholds = {0.6,0.7,0.8,0.9,1}
+-- testChangingThresholdWithGPU('models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7', 'accuracy/generatedTestCases/harrypotter/', 100, 'accuracy/visualization/report-data/changing-threshold/', thresholds)
+
+lookforward_lens = {0,1,100}
+testChangingLookForwardLength('models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7', 'accuracy/generatedTestCases/harrypotter/', 2, 'accuracy/visualization/report-data/changing-lookforwardlen/', lookforward_lens, 'accuracy/visualization/report-data/changing-lookforwardlen/timereport.txt')
 
 SHERLOCK_HOLMES__VARYING_SIZE_MODEL_PATHS = {
   'models/sherlock_holmes_1_128/sherlock_holmes_1_128_100000.t7',
