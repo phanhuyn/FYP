@@ -175,10 +175,10 @@ end
 -- METHOD OF ACCUMULATING PROBS
 -----------------------------------------------
 local model_path = 'models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7'
-local model = get_model_by_path(model_path)
-local path_to_report_file = 'accuracy/visualization/report-data/changing-method-of-accum-prob/sum.csv'
+local model = get_model_by_path_with_GPU(model_path)
+local path_to_report_file = 'accuracy/visualization/report-data/changing-method-of-accum-prob/product_decay.csv'
 local test_cases_path = 'accuracy/generatedTestCases/harrypotter/'
-runGeneratedTestGroup(test_cases_path, model, 2, path_to_report_file, false)
+runGeneratedTestGroup(test_cases_path, model, 100, path_to_report_file, false)
 
 SHERLOCK_HOLMES__VARYING_SIZE_MODEL_PATHS = {
   'models/sherlock_holmes_1_128/sherlock_holmes_1_128_100000.t7',

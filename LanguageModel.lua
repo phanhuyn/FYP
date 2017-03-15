@@ -472,6 +472,9 @@ function LM:checkSequenceLikelihood(LSTM_init_states, init_probs, encoded_sequen
   -- only loop if the encoded_sequence is of length greater than 1
   if (probs:dim() > 1) then
     -- TODO can improve this, search for dividing pairwise?
+
+    local cur_decay = 1
+
     for dim=1,probs:size(1)-1 do
       local current_char = encoded_sequence[dim+1]
       local next_char_prob = (probs[dim]:div(torch.sum(probs[dim])))[current_char]
@@ -479,10 +482,14 @@ function LM:checkSequenceLikelihood(LSTM_init_states, init_probs, encoded_sequen
       -- if (next_char_prob < CUT_OFF_PROBS) then
       --   return 0
       -- end
-
+      -- print (cur_decay)
+      
       if USE_SUM then
-        likelihood = likelihood + next_char_prob
+        cur_decay = cur_decay*PRODUCT_DECAY_FACTOR
+        likelihood = likelihood + next_char_prob*cur_decay
       else
+        cur_decay = cur_decay + PRODUCT_DECAY_FACTOR
+        next_char_prob = math.pow(next_char_prob, cur_decay)
         likelihood = likelihood*next_char_prob*MAGNIFIY_FACTOR
       end
 
