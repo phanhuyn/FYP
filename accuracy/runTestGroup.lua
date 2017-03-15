@@ -90,11 +90,12 @@ function runGeneratedTestGroup(path_to_test_set_group, model, no_of_run_times, p
     report:close()
 
     local timeafter = os.time()
-    local time_report = io.open(path_to_time_report, "a")
 
-    time_report:write("Run time for lookforward_len = " .. lookforward_length .. ", ")
-    time_report:write((timeafter - timebefore) .. " seconds\n")
-    time_report:close()
+    if (path_to_time_report ~= nil) then
+      local time_report = io.open(path_to_time_report, "a")
+      time_report:write((timeafter - timebefore) .. " seconds\n")
+      time_report:close()
+    end
 
     print ("Report for test group at: " .. path_to_test_set_group .. " generated.")
     print ("Total running time: " .. (timeafter - timebefore)/60 .. " minutes")
@@ -169,6 +170,15 @@ end
 
 -- lookforward_lens = {0,1,100}
 -- testChangingLookForwardLength('models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7', 'accuracy/generatedTestCases/harrypotter/', 2, 'accuracy/visualization/report-data/changing-lookforwardlen/', lookforward_lens, 'accuracy/visualization/report-data/changing-lookforwardlen/timereport.txt')
+
+-----------------------------------------------
+-- METHOD OF ACCUMULATING PROBS
+-----------------------------------------------
+local model_path = 'models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7'
+local model = get_model_by_path(model_path)
+local path_to_report_file = 'accuracy/visualization/report-data/changing-method-of-accum-prob/sum.csv'
+local test_cases_path = 'accuracy/generatedTestCases/harrypotter/'
+runGeneratedTestGroup(test_cases_path, model, 2, path_to_report_file, false)
 
 SHERLOCK_HOLMES__VARYING_SIZE_MODEL_PATHS = {
   'models/sherlock_holmes_1_128/sherlock_holmes_1_128_100000.t7',

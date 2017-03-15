@@ -3,7 +3,7 @@
 THRESHOLD = 0.01
 
 -- for fill gap to use sum of prob instead of product
-USE_SUM = false
+USE_SUM = true
 
 -- for fill gap to multiply the prob with this factor so the prob won't get too small
 MAGNIFIY_FACTOR = 20
