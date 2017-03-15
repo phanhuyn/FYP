@@ -115,11 +115,13 @@ function runTestGroup2(path_to_test_set_group, model, path_to_report_group)
     end
 end
 
+-----------------------------------------------
+-- GENERATE TEST AND STORE
+-----------------------------------------------
 
--- GENERATE TEST CASES
--- CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_10000.t7'
+-- CHECKPOINT_PATH = 'models/vietnamese_cleaned_3_128/vietnamese_cleaned_3_128_30300.t7'
 -- local model = get_model_by_path(CHECKPOINT_PATH)
--- generateTestSetAndStore('accuracy/rawTestFiles/devil_foot_matched.txt', 'accuracy/generatedTestCases/devil_foot/', model, 100)
+-- generateTestSetAndStore('accuracy/rawTestFiles/gonewiththewind_cleaned.txt', 'accuracy/generatedTestCases/gonewiththewind/', model, 1)
 
 function runGeneratedTestOnMultipleModels(model_paths, test_cases_path, test_run_no, report_paths, naive)
   for i=1, #model_paths  do
@@ -160,8 +162,13 @@ end
 -- thresholds = {0.6,0.7,0.8,0.9,1}
 -- testChangingThresholdWithGPU('models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7', 'accuracy/generatedTestCases/harrypotter/', 100, 'accuracy/visualization/report-data/changing-threshold/', thresholds)
 
-lookforward_lens = {0,1,100}
-testChangingLookForwardLength('models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7', 'accuracy/generatedTestCases/harrypotter/', 2, 'accuracy/visualization/report-data/changing-lookforwardlen/', lookforward_lens, 'accuracy/visualization/report-data/changing-lookforwardlen/timereport.txt')
+
+-----------------------------------------------
+-- LOOK FORWARD LENGTH TESTING
+-----------------------------------------------
+
+-- lookforward_lens = {0,1,100}
+-- testChangingLookForwardLength('models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7', 'accuracy/generatedTestCases/harrypotter/', 2, 'accuracy/visualization/report-data/changing-lookforwardlen/', lookforward_lens, 'accuracy/visualization/report-data/changing-lookforwardlen/timereport.txt')
 
 SHERLOCK_HOLMES__VARYING_SIZE_MODEL_PATHS = {
   'models/sherlock_holmes_1_128/sherlock_holmes_1_128_100000.t7',
@@ -203,13 +210,9 @@ SHERLOCK_HOLMES_REPORT_PATHS = {
 
 -- runTestGroup2('accuracy/rawTestFiles/harrypotter_onefile/', model, 'accuracy/reports/sherlock_holmes_2_256_tested_with_harry_potter_new_engine/')
 
------------------------------------------------
--- CLEAN SHERLOCK HOLMES TESTING
------------------------------------------------
--- CHECKPOINT_PATH = 'models/sherlock_holmes_cleaned_3_128/sherlock_holmes_cleaned_3_128_9965.t7'
+-- CHECKPOINT_PATH = 'models/vietnamese_cleaned_3_128/vietnamese_cleaned_3_128_30300.t7'
 -- local model = get_model_by_path(CHECKPOINT_PATH)
--- runTestGroup('accuracy/rawTestFiles/harrypotter_onefile_cleaned/', model, 100, 'accuracy/reports/sherlock_holmes_cleaned_3_128_tested_with_harry_potter.csv')
-
+-- runGeneratedTestGroup('accuracy/generatedTestCases/gonewiththewind/', model, 2, 'accuracy/visualization/report-data/different-sequence-type/vietnamese_cleaned_3_128.csv')
 
 function iteration_testing(testrunno)
   testrunno = testrunno or 100

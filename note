@@ -30,6 +30,10 @@ python scripts/preprocess.py --input_txt data/sherlock_holmes_cleaned.txt --outp
 
 python scripts/preprocess.py --input_txt data/Vietnamese_GoneWithTheWind.txt --output_h5 data/Vietnamese_GoneWithTheWind.h5 --output_json data/Vietnamese_GoneWithTheWind.json
 
+python scripts/preprocess.py --input_txt data/python_code_cleaned.txt --output_h5 data/python_code_cleaned.h5 --output_json data/python_code_cleaned.json
+
+python scripts/preprocess.py --input_txt data/indonesian_cleaned.txt --output_h5 data/indonesian_cleaned.h5 --output_json data/indonesian_cleaned.json
+
 # 2. Train the model
 
 th train.lua -input_h5 models/model_name/my_data.h5 -input_json models/model_name/my_data.json

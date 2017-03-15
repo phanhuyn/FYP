@@ -116,6 +116,9 @@ function generateTestSetAndStore(path_to_file, path_to_test_case, model, number_
 	end
 end
 
-CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_10000.t7'
-local model = get_model_by_path(CHECKPOINT_PATH)
-cleanTestSetToMatchModel('accuracy/rawTestFiles/ntu_news.txt', model, 'accuracy/rawTestFiles/ntu_news_matched.txt')
+-- NOTE this won't match, but more like delete letters which are not in the alphabets
+-- CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_10000.t7'
+-- CHECKPOINT_PATH = 'models/vietnamese_cleaned_3_128/vietnamese_cleaned_3_128_30300.t7'
+--
+-- local model = get_model_by_path(CHECKPOINT_PATH)
+-- cleanTestSetToMatchModel('accuracy/rawTestFiles/gonewiththewind_cleaned.txt', model, 'accuracy/rawTestFiles/gonewiththewind_matched.txt')

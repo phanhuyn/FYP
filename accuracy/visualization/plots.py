@@ -76,15 +76,15 @@ def runtime_plot(times, files_list_threshold, output_file_name, x_axis_tick_labe
     plt.title(graph_title)
     plt.xlabel(x_label)
     plt.ylabel("Run time (seconds)", color='r')
-    ax.set_xticklabels(x_axis_tick_labels)
     plt.tick_params('y',colors='r')
-
+    plt.xticks(range(0,len(x_axis_tick_labels)))
     ax2 = ax.twinx()
     ax2.plot(accuracy, 'b')
     ax2.plot(accuracy, 'bo')
     ax2.set_ylabel("Accuracy", color='b')
     ax2.tick_params('y',colors='b')
 
+    ax.set_xticklabels(x_axis_tick_labels)
     plt.savefig(output_file_name)
 
 
@@ -96,7 +96,7 @@ def runtime_plot(times, files_list_threshold, output_file_name, x_axis_tick_labe
 #x_axis_tick_labels = ['128', '256', '512']
 
 ###############################
-# ONE LAYER - DIFFERENT SIZE
+# ONE ITERATION - DIFFERENT SIZE
 ###############################
 files_list = \
 ['accuracy/visualization/report-data/varying-size-iter-100000/sherlock_holmes_1_128.csv',
@@ -120,7 +120,9 @@ x_axis_tick_labels = ['1-128', '1-256', '1-512', '2-128', '2-256', '2-512', '3-1
 # for i in range(1,10):
 #     boxplot(files_list, 'accuracy/visualization/accuracy_vs_size_sherlock_holmes_devil_foot' + str(i), x_axis_tick_labels, 'Number of layer - Layer size', 'Accuracy vs. Size', 40)
 
-# boxplot(files_list_devil_foot, 'accuracy/visualization/accuracy_vs_size_sherlock_holmes_devil_foot', x_axis_tick_labels, 'Approach', 'Accuracy vs. Size')
+# boxplot(files_list_devil_foot, 'accuracy/visualization/accuracy_vs_size_sherlock_holmes_devil_foot', x_axis_tick_labels, 'Number of layers - Layer size', 'Accuracy vs. Size')
+
+# boxplot(files_list, 'accuracy/visualization/accuracy_vs_size_sherlock_holmes', x_axis_tick_labels, 'Number of layers - Layer size', 'Accuracy vs. Size')
 
 
 #############################
@@ -137,13 +139,27 @@ threshold_tails_2 = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]
 
 files_list_threshold = ['accuracy/visualization/report-data/changing-threshold/thresholds_'+str(tail)+'_.csv' for tail in threshold_tails_2]
 
-print (files_list_threshold)
-
 x_axis_tick_labels_threshold = [str(tail) for tail in threshold_tails_2]
 
 # runtime_plot(threshold_runtime_2, files_list_threshold, 'accuracy/visualization/runtime_vs_threshold_3_128_sherlock_on_harrypotter_large', x_axis_tick_labels_threshold, 'Cut-off probability', 'Run time vs. Cut-off probability')
 
-boxplot(files_list_threshold, 'accuracy/visualization/accuracy_vs_threshold_3_128_sherlock_on_harry_large', x_axis_tick_labels_threshold, 'Cut off probability', 'Cut off probability vs. Accuracy')
+# boxplot(files_list_threshold, 'accuracy/visualization/accuracy_vs_threshold_3_128_sherlock_on_harry_large', x_axis_tick_labels_threshold, 'Cut off probability', 'Cut off probability vs. Accuracy')
+
+
+#############################
+# CHANGING LOOKFORWAR LEN
+#############################
+
+lookforward_tails = [0,1,2,3,4,5,6,7,8,9,10,100]
+lookforward_runtime = [1475, 1746, 2525, 2751, 3007, 3800, 4017, 4710, 4956, 5172, 5800, 9190]
+
+files_list_lookforward = ['accuracy/visualization/report-data/changing-lookforwardlen/lookforward_len_'+str(tail)+'_.csv' for tail in lookforward_tails]
+
+x_axis_tick_labels_lookforward = [str(tail) for tail in lookforward_tails]
+x_axis_tick_labels_lookforward[-1] = 'All'
+runtime_plot(lookforward_runtime, files_list_lookforward, 'accuracy/visualization/runtime_vs_lookforwardlen_3_128_sherlock_on_harrypotter', x_axis_tick_labels_lookforward, 'Number of symbols to look forward ', 'Run time vs. Number of symbols to look forward ')
+
+# boxplot(files_list_lookforward, 'accuracy/visualization/accuracy_vs_lookforwardlen_3_128_sherlock_on_harry', x_axis_tick_labels_lookforward, 'Number of symbols to look forward', 'Number of symbols to look forward vs. Accuracy')
 
 
 #############################
@@ -162,8 +178,8 @@ boxplot(files_list_threshold, 'accuracy/visualization/accuracy_vs_threshold_3_12
 #############################
 
 def plot_changing_iteration_1_128(containing_folder, graph_name):
-    files_list = ['accuracy/visualization/report-data/' + containing_folder + '/sherlock_holmes_1_128_ITER_' + str(i*1000) +'.csv' for i in range(1,11)]
-    x_axis_tick_labels = [str(i*1000) for i in range(1,11)]
-    boxplot(files_list, 'accuracy/visualization/' + graph_name, x_axis_tick_labels, 'Number of training iterations', 'Accuracy vs. Training Iterations', 40)
+    files_list = ['accuracy/visualization/report-data/' + containing_folder + '/sherlock_holmes_1_128_ITER_' + str(i*10000) +'.csv' for i in range(1,11)]
+    x_axis_tick_labels = [str(i*10000) for i in range(1,11)]
+    boxplot(files_list, 'accuracy/visualization/' + graph_name, x_axis_tick_labels, 'Number of training iterations', 'Accuracy vs. Training Iterations')
 
-# plot_changing_iteration_1_128('changing-iteration-1-128', 'accuracy_vs_training_iteration_sherlock_holmes_1_128_less.png')
+# plot_changing_iteration_1_128('changing-iteration-1-128', 'accuracy_vs_training_iteration_sherlock_holmes_1_128.png')

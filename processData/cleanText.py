@@ -11,6 +11,10 @@ ALPHABET = '\n !"\'(),.0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqr
 
 ALPHABET_MINIMIZE = ' \'!,.:?0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 
+ALPHABET_CHAR_AND_PUNCS = '\n !,.:?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+
+PYTHON_ALPHABET = "\n !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
+
 VIETNAMESE_ALPHABET_MINIMIZE = '\'",.:;?abcdefghijklmnopqrstuvwxyz àáâãèéêìíðòóôõùúýăđĩũơưạảấầẩẫậắằẳẵặẹẻẽếềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ\n'.decode('utf8')
 
 def cleantext(input_file_name, alphabet):
@@ -51,6 +55,20 @@ def cleantextLower(input_file_name, alphabet):
         with open(output_file_name, "w") as text_file:
             text_file.write(data.encode('utf8'))
 
+def cleantextPython(input_file_name, alphabet):
+
+    output_file_name = input_file_name[:-4] + '_cleaned.txt'
+
+    with open(input_file_name) as input_file:
+        data = input_file.read().decode('utf8')
+
+        for char in ''.join(set(data)):
+            if char not in alphabet:
+                data = data.replace(char, '')
+
+        with open(output_file_name, "w") as text_file:
+            text_file.write(data.encode('utf8'))
+
 def text_stats(input_file_name):
 
     with open(input_file_name, ) as input_file:
@@ -58,13 +76,16 @@ def text_stats(input_file_name):
         print ("Text size: ")
         print len(all_text)
         print ("No. unique symbols")
-        all_chars = ''.join(set(all_text)).lower()
-        all_chars = ''.join(set(all_chars))
+        all_chars = ''.join(set(all_text))
+        # all_chars = ''.join(set(all_chars))
         print (len(all_chars))
         print (''.join(sorted(all_chars)))
 
 
-# text_stats("data/Vietnamese_GoneWithTheWind.txt")
-# cleantextLower("data/Vietnamese_GoneWithTheWind.txt", VIETNAMESE_ALPHABET_MINIMIZE)
+text_stats("data/indonesian_cleaned.txt")
 # text_stats("accuracy/rawTestFiles/harrypotter_onefile/harrypotter2.txt")
-text_stats("accuracy/rawTestFiles/ntu_news_matched.txt")
+# text_stats("accuracy/rawTestFiles/ntu_news_matched.txt")
+# cleantextPython("data/python_code.txt", PYTHON_ALPHABET)
+# text_stats("data/python_code_cleaned.txt")
+
+# cleantext("data/indonesian.txt", ALPHABET_CHAR_AND_PUNCS)
