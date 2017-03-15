@@ -174,11 +174,30 @@ end
 -----------------------------------------------
 -- METHOD OF ACCUMULATING PROBS
 -----------------------------------------------
+-- local model_path = 'models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7'
+-- local model = get_model_by_path(model_path)
+-- local path_to_report_file = 'accuracy/visualization/report-data/changing-method-of-accum-prob/product_decay.csv'
+-- local test_cases_path = 'accuracy/generatedTestCases/harrypotter/'
+-- runGeneratedTestGroup(test_cases_path, model, 100, path_to_report_file, false)
+
+-----------------------------------------------
+-- METHOD OF ACCUMULATING PROBS
+-----------------------------------------------
+
 local model_path = 'models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7'
-local model = get_model_by_path_with_GPU(model_path)
-local path_to_report_file = 'accuracy/visualization/report-data/changing-method-of-accum-prob/product_decay.csv'
+local model = get_model_by_path(model_path)
+
+local path_to_report_folder = 'accuracy/visualization/report-data/changing-decay-factor/'
 local test_cases_path = 'accuracy/generatedTestCases/harrypotter/'
-runGeneratedTestGroup(test_cases_path, model, 100, path_to_report_file, false)
+
+product_decay_factors = {0.02,0.04,0.06,0.08,0.1,0.12,0.14,0.16,0.18,0.2}
+-- product_decay_factors = {0.02,0.1,0.3}
+
+for i=1,#product_decay_factors do
+  PRODUCT_DECAY_FACTOR = product_decay_factors[i]
+  path_to_report_file = path_to_report_folder .. 'decay_' .. PRODUCT_DECAY_FACTOR .. '.csv'
+  runGeneratedTestGroup(test_cases_path, model, 2, path_to_report_file, false,  nil, 6)
+end
 
 SHERLOCK_HOLMES__VARYING_SIZE_MODEL_PATHS = {
   'models/sherlock_holmes_1_128/sherlock_holmes_1_128_100000.t7',
