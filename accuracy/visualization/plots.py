@@ -150,17 +150,41 @@ x_axis_tick_labels_threshold = [str(tail) for tail in threshold_tails_2]
 # CHANGING LOOKFORWAR LEN
 #############################
 
-lookforward_tails = [0,1,2,3,4,5,6,7,8,9,10,100]
-lookforward_runtime = [1475, 1746, 2525, 2751, 3007, 3800, 4017, 4710, 4956, 5172, 5800, 9190]
-
-files_list_lookforward = ['accuracy/visualization/report-data/changing-lookforwardlen/lookforward_len_'+str(tail)+'_.csv' for tail in lookforward_tails]
-
-x_axis_tick_labels_lookforward = [str(tail) for tail in lookforward_tails]
-x_axis_tick_labels_lookforward[-1] = 'All'
-runtime_plot(lookforward_runtime, files_list_lookforward, 'accuracy/visualization/runtime_vs_lookforwardlen_3_128_sherlock_on_harrypotter', x_axis_tick_labels_lookforward, 'Number of symbols to look forward ', 'Run time vs. Number of symbols to look forward ')
+# lookforward_tails = [0,1,2,3,4,5,6,7,8,9,10,100]
+# lookforward_runtime = [1475, 1746, 2525, 2751, 3007, 3800, 4017, 4710, 4956, 5172, 5800, 9190]
+#
+# files_list_lookforward = ['accuracy/visualization/report-data/changing-lookforwardlen/lookforward_len_'+str(tail)+'_.csv' for tail in lookforward_tails]
+#
+# x_axis_tick_labels_lookforward = [str(tail) for tail in lookforward_tails]
+# x_axis_tick_labels_lookforward[-1] = 'All'
+# runtime_plot(lookforward_runtime, files_list_lookforward, 'accuracy/visualization/runtime_vs_lookforwardlen_3_128_sherlock_on_harrypotter', x_axis_tick_labels_lookforward, 'Number of symbols to look forward ', 'Run time vs. Number of symbols to look forward ')
 
 # boxplot(files_list_lookforward, 'accuracy/visualization/accuracy_vs_lookforwardlen_3_128_sherlock_on_harry', x_axis_tick_labels_lookforward, 'Number of symbols to look forward', 'Number of symbols to look forward vs. Accuracy')
 
+#############################
+# METHOD OF ACCUMULATING PROBS
+#############################
+
+method_tails_2 = ['sum','sum_decay','product','product_decay']
+
+files_list_method = ['accuracy/visualization/report-data/changing-method-of-accum-prob/'+str(tail)+'.csv' for tail in method_tails_2]
+
+x_axis_tick_labels_method = ['Sum', 'Sum with decay', 'Product', 'Product with decay']
+
+# boxplot(files_list_method, 'accuracy/visualization/accuracy_vs_method_of_accum_prob_harry_on_sherlock_3_128', x_axis_tick_labels_method, 'Method of accumulating probability', '')
+
+
+#############################
+# DECAY FACTORS
+#############################
+
+decay_tails = [0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2]
+
+files_list_decay = ['accuracy/visualization/report-data/changing-decay-factor/decay_'+str(tail)+'.csv' for tail in decay_tails]
+
+x_axis_tick_labels_decay = [str(tail) for tail in decay_tails]
+
+boxplot(files_list_decay, 'accuracy/visualization/accuracy_vs_decay_factor_harry_on_sherlock_3_128', x_axis_tick_labels_decay, 'Decay factor', 'Accuracy vs. Decay factor')
 
 #############################
 # IMPROVEMENT OVER NAIVE ENGINE PLOT

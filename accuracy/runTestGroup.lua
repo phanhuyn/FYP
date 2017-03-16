@@ -116,14 +116,6 @@ function runTestGroup2(path_to_test_set_group, model, path_to_report_group)
     end
 end
 
------------------------------------------------
--- GENERATE TEST AND STORE
------------------------------------------------
-
--- CHECKPOINT_PATH = 'models/vietnamese_cleaned_3_128/vietnamese_cleaned_3_128_30300.t7'
--- local model = get_model_by_path(CHECKPOINT_PATH)
--- generateTestSetAndStore('accuracy/rawTestFiles/gonewiththewind_cleaned.txt', 'accuracy/generatedTestCases/gonewiththewind/', model, 1)
-
 function runGeneratedTestOnMultipleModels(model_paths, test_cases_path, test_run_no, report_paths, naive)
   for i=1, #model_paths  do
     local model = get_model_by_path(model_paths[i])
@@ -158,6 +150,14 @@ function testChangingLookForwardLength(model_path, test_cases_path, test_run_no,
 end
 
 -----------------------------------------------
+-- GENERATE TEST AND STORE
+-----------------------------------------------
+
+-- CHECKPOINT_PATH = 'models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7'
+-- local model = get_model_by_path(CHECKPOINT_PATH)
+-- generateTestSetAndStore('accuracy/rawTestFiles/sherlock_holmes_extract.txt', 'accuracy/generatedTestCases/resubtitution/', model, 100)
+
+-----------------------------------------------
 -- THRESHOLD TESTING
 -----------------------------------------------
 -- thresholds = {0.6,0.7,0.8,0.9,1}
@@ -176,28 +176,45 @@ end
 -----------------------------------------------
 -- local model_path = 'models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7'
 -- local model = get_model_by_path(model_path)
--- local path_to_report_file = 'accuracy/visualization/report-data/changing-method-of-accum-prob/product_decay.csv'
+-- local path_to_report_file = 'accuracy/visualization/report-data/changing-method-of-accum-prob/sum_decay.csv'
 -- local test_cases_path = 'accuracy/generatedTestCases/harrypotter/'
--- runGeneratedTestGroup(test_cases_path, model, 100, path_to_report_file, false)
+-- runGeneratedTestGroup(test_cases_path, model, 2, path_to_report_file, false)
 
 -----------------------------------------------
--- METHOD OF ACCUMULATING PROBS
+-- DECAY FACTOR
 -----------------------------------------------
 
-local model_path = 'models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7'
+-- local model_path = 'models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7'
+-- local model = get_model_by_path(model_path)
+--
+-- local path_to_report_folder = 'accuracy/visualization/report-data/changing-decay-factor/'
+-- local test_cases_path = 'accuracy/generatedTestCases/harrypotter/'
+--
+-- product_decay_factors = {0.02,0.04,0.06,0.08,0.1,0.12,0.14,0.16,0.18,0.2}
+-- -- product_decay_factors = {0.02,0.1,0.3}
+--
+-- for i=1,#product_decay_factors do
+--   PRODUCT_DECAY_FACTOR = product_decay_factors[i]
+--   path_to_report_file = path_to_report_folder .. 'decay_' .. PRODUCT_DECAY_FACTOR .. '.csv'
+--   runGeneratedTestGroup(test_cases_path, model, 2, path_to_report_file, false,  nil, 6)
+-- end
+
+-----------------------------------------------
+-- RELEVANCE OF TESTSET
+-----------------------------------------------
+
+model_path = 'models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7'
 local model = get_model_by_path(model_path)
 
-local path_to_report_folder = 'accuracy/visualization/report-data/changing-decay-factor/'
-local test_cases_path = 'accuracy/generatedTestCases/harrypotter/'
+local path_to_report1 = 'accuracy/visualization/report-data/relevance-of-testsets/ntu_news.csv'
+local test_cases_path1 = 'accuracy/generatedTestCases/ntu_news/'
 
-product_decay_factors = {0.02,0.04,0.06,0.08,0.1,0.12,0.14,0.16,0.18,0.2}
--- product_decay_factors = {0.02,0.1,0.3}
+local path_to_report2 = 'accuracy/visualization/report-data/relevance-of-testsets/resubtitution.csv'
+local test_cases_path2 = 'accuracy/generatedTestCases/resubtitution/'
 
-for i=1,#product_decay_factors do
-  PRODUCT_DECAY_FACTOR = product_decay_factors[i]
-  path_to_report_file = path_to_report_folder .. 'decay_' .. PRODUCT_DECAY_FACTOR .. '.csv'
-  runGeneratedTestGroup(test_cases_path, model, 2, path_to_report_file, false,  nil, 6)
-end
+runGeneratedTestGroup(test_cases_path1, model, 2, path_to_report1, false,  nil, 6)
+runGeneratedTestGroup(test_cases_path2, model, 2, path_to_report2, false,  nil, 6)
+
 
 SHERLOCK_HOLMES__VARYING_SIZE_MODEL_PATHS = {
   'models/sherlock_holmes_1_128/sherlock_holmes_1_128_100000.t7',

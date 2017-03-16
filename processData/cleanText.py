@@ -21,9 +21,7 @@ PYTHON_ALPHABET = "\n !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXY
 
 VIETNAMESE_ALPHABET_MINIMIZE = '\'",.:;?abcdefghijklmnopqrstuvwxyz àáâãèéêìíðòóôõùúýăđĩũơưạảấầẩẫậắằẳẵặẹẻẽếềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ\n'.decode('utf8')
 
-def cleantext(input_file_name, alphabet):
-
-    output_file_name = input_file_name[:-4] + '_cleaned.txt'
+def cleantext(input_file_name, output_file_name, alphabet):
 
     with open(input_file_name) as input_file:
         data = input_file.read().decode('utf8')
@@ -86,10 +84,14 @@ def text_stats(input_file_name):
         print (''.join(sorted(all_chars)))
 
 
-text_stats("data/indonesian_cleaned.txt")
+# text_stats("data/indonesian_cleaned.txt")
 # text_stats("accuracy/rawTestFiles/harrypotter_onefile/harrypotter2.txt")
 # text_stats("accuracy/rawTestFiles/ntu_news_matched.txt")
 # cleantextPython("data/python_code.txt", PYTHON_ALPHABET)
 # text_stats("data/python_code_cleaned.txt")
 
-# cleantext("data/indonesian.txt", ALPHABET_CHAR_AND_PUNCS)
+cleantext("data/sherlock_holmes_cleaned.txt", "data/sherlock_holmes_alpha4.txt", ALPHABET_4)
+text_stats("data/sherlock_holmes_alpha4.txt")
+#
+# cleantext("data/sherlock_holmes_cleaned.txt", "data/sherlock_holmes_alpha5.txt", ALPHABET_5)
+# text_stats("data/sherlock_holmes_alpha5.txt")

@@ -485,7 +485,7 @@ function LM:checkSequenceLikelihood(LSTM_init_states, init_probs, encoded_sequen
       -- print (cur_decay)
 
       if USE_SUM then
-        cur_decay = cur_decay*PRODUCT_DECAY_FACTOR
+        cur_decay = cur_decay*SUM_DECAY_FACTOR
         likelihood = likelihood + next_char_prob*cur_decay
       else
         cur_decay = cur_decay + PRODUCT_DECAY_FACTOR
@@ -508,7 +508,7 @@ end
 ]]
 function LM:fillMultiGap(string_with_gap, gap_char, opt, lookforward_length)
 
-  print (PRODUCT_DECAY_FACTOR)
+  -- print (PRODUCT_DECAY_FACTOR)
 
   self:resetStates()
 
