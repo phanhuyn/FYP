@@ -153,9 +153,11 @@ end
 -- GENERATE TEST AND STORE
 -----------------------------------------------
 
--- CHECKPOINT_PATH = 'models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7'
+-- CHECKPOINT_PATH = 'models/python_code_3_128/python_code_3_128_20000.t7'
+-- CHECKPOINT_PATH = 'models/indonesian_3_128/indonesian_cleaned_11000.t7'
+--
 -- local model = get_model_by_path(CHECKPOINT_PATH)
--- generateTestSetAndStore('accuracy/rawTestFiles/sherlock_holmes_extract.txt', 'accuracy/generatedTestCases/resubtitution/', model, 100)
+-- generateTestSetAndStore('accuracy/rawTestFiles/indonesian_test_matched.txt', 'accuracy/generatedTestCases/indonesian_test/', model, 100)
 
 -----------------------------------------------
 -- THRESHOLD TESTING
@@ -203,17 +205,35 @@ end
 -- RELEVANCE OF TESTSET
 -----------------------------------------------
 
-model_path = 'models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7'
+-- model_path = 'models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7'
+-- local model = get_model_by_path(model_path)
+--
+-- local path_to_report1 = 'accuracy/visualization/report-data/relevance-of-testsets/ntu_news.csv'
+-- local test_cases_path1 = 'accuracy/generatedTestCases/ntu_news/'
+--
+-- local path_to_report2 = 'accuracy/visualization/report-data/relevance-of-testsets/resubtitution.csv'
+-- local test_cases_path2 = 'accuracy/generatedTestCases/resubtitution/'
+--
+-- runGeneratedTestGroup(test_cases_path1, model, 2, path_to_report1, false,  nil, 6)
+-- runGeneratedTestGroup(test_cases_path2, model, 2, path_to_report2, false,  nil, 6)
+
+-----------------------------------------------
+-- PYTHON & INDONESIAN
+-----------------------------------------------
+
+-- python
+model_path = 'models/python_code_3_128/python_code_3_128_20000.t7'
 local model = get_model_by_path(model_path)
+local path_to_report = 'accuracy/visualization/report-data/different-sequence-type/python.csv'
+local test_cases_path = 'accuracy/generatedTestCases/python_test_django/'
+runGeneratedTestGroup(test_cases_path, model, 2, path_to_report, false,  nil, 6)
 
-local path_to_report1 = 'accuracy/visualization/report-data/relevance-of-testsets/ntu_news.csv'
-local test_cases_path1 = 'accuracy/generatedTestCases/ntu_news/'
-
-local path_to_report2 = 'accuracy/visualization/report-data/relevance-of-testsets/resubtitution.csv'
-local test_cases_path2 = 'accuracy/generatedTestCases/resubtitution/'
-
-runGeneratedTestGroup(test_cases_path1, model, 2, path_to_report1, false,  nil, 6)
-runGeneratedTestGroup(test_cases_path2, model, 2, path_to_report2, false,  nil, 6)
+-- indonesian
+model_path = 'models/indonesian_3_128/indonesian_cleaned_11000.t7'
+local model = get_model_by_path(model_path)
+local path_to_report = 'accuracy/visualization/report-data/different-sequence-type/indonesian.csv'
+local test_cases_path = 'accuracy/generatedTestCases/indonesian_test/'
+runGeneratedTestGroup(test_cases_path, model, 2, path_to_report, false,  nil, 6)
 
 
 SHERLOCK_HOLMES__VARYING_SIZE_MODEL_PATHS = {

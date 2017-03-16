@@ -6,21 +6,32 @@ require 'gap/singlegap'
 require 'gap/multigap'
 
 --CHECKPOINT_PATH = 'models/cv/checkpoint_17000.t7'
-CHECKPOINT_PATH = 'models/vietnamese_cleaned_3_128/vietnamese_cleaned_3_128_30300.t7'
+-- CHECKPOINT_PATH = 'models/vietnamese_cleaned_3_128/vietnamese_cleaned_3_128_30300.t7'
 
-local model = get_model_by_path(CHECKPOINT_PATH)
+-- local model = get_model_by_path(CHECKPOINT_PATH)
 -- local gap_char = find_char_to_represent_gap(model)
-
-print (model:decode_string(torch.Tensor{4}))
 
 -- local string_with_gap = "Indeed i" .. gap_char .. gap_char .. gap_char .. "as submerge" .. gap_char .. gap_char .. gap_char .. "y the water"
 --local string_with_gap = "Nearly ten years had pass" .. gap_char .. gap_char .. " since the Dursleys " .. gap_char .. gap_char .. "d woken" .. gap_char .. gap_char .. "p to find the" .. gap_char ..gap_char .. " nephew on the f" .. gap_char .. gap_char .. "nt step" .. gap_char .. " but Privet Drive had hardly c" .. gap_char .. gap_char .."nged at a" .. gap_char .. gap_char
 
--- local viet_string_with_gap = "tất cả đều cuờng trá" .. gap_char .. gap_char .. ", vô tư, lành lặn duyên dáng và dũng cảm"
--- print(model:fillMultiGap(viet_string_with_gap, gap_char, nil))
-
 -- print(model:fillMultiGap(string_with_gap, gap_char, nil))
 --print(fill_multi_gaps(string_with_gap,gap_char,model))
+
+
+-----------------------------------------------------------
+-- PYTHON CODE MODEL TEST
+-----------------------------------------------------------
+PYTHON_CHECKPOINT_PATH = 'models/python_code_3_128/python_code_3_128_20000.t7'
+
+local model = get_model_by_path(PYTHON_CHECKPOINT_PATH)
+local gap_char = find_char_to_represent_gap(model)
+
+local string_with_gap = "temp = x".. gap_char .."x = y\ny = temp\nprin"..gap_char..gap_char.. "'The value of x after swapping: {" .. gap_char .. "'.format(x))\n"
+print(model:fillMultiGap(string_with_gap, gap_char, nil))
+
+print(fill_multi_gaps(string_with_gap,gap_char,model))
+
+
 --------------------------------------------
 -- TIME TEST
 --------------------------------------------

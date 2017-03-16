@@ -118,7 +118,7 @@ end
 
 -- NOTE this won't match, but more like delete letters which are not in the alphabets
 -- CHECKPOINT_PATH = 'models/sherlock_holmes_1_128/sherlock_holmes_1_128_10000.t7'
--- CHECKPOINT_PATH = 'models/vietnamese_cleaned_3_128/vietnamese_cleaned_3_128_30300.t7'
+-- CHECKPOINT_PATH = 'models/indonesian_3_128/indonesian_cleaned_11000.t7'
 --
 -- local model = get_model_by_path(CHECKPOINT_PATH)
--- cleanTestSetToMatchModel('accuracy/rawTestFiles/gonewiththewind_cleaned.txt', model, 'accuracy/rawTestFiles/gonewiththewind_matched.txt')
+-- cleanTestSetToMatchModel('accuracy/rawTestFiles/indonesian_test.txt', model, 'accuracy/rawTestFiles/indonesian_test_matched.txt')

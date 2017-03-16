@@ -90,8 +90,9 @@ def text_stats(input_file_name):
 # cleantextPython("data/python_code.txt", PYTHON_ALPHABET)
 # text_stats("data/python_code_cleaned.txt")
 
-cleantext("data/sherlock_holmes_cleaned.txt", "data/sherlock_holmes_alpha4.txt", ALPHABET_4)
-text_stats("data/sherlock_holmes_alpha4.txt")
+# cleantext("data/sherlock_holmes_cleaned.txt", "data/sherlock_holmes_alpha4.txt", ALPHABET_4)
+# text_stats("data/sherlock_holmes_alpha4.txt")
 #
 # cleantext("data/sherlock_holmes_cleaned.txt", "data/sherlock_holmes_alpha5.txt", ALPHABET_5)
 # text_stats("data/sherlock_holmes_alpha5.txt")
+# text_stats("accuracy/rawTestFiles/indonesian_test_matched.txt")
