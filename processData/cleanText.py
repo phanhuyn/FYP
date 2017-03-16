@@ -92,7 +92,14 @@ def text_stats(input_file_name):
 
 # cleantext("data/sherlock_holmes_cleaned.txt", "data/sherlock_holmes_alpha4.txt", ALPHABET_4)
 # text_stats("data/sherlock_holmes_alpha4.txt")
-#
+
 # cleantext("data/sherlock_holmes_cleaned.txt", "data/sherlock_holmes_alpha5.txt", ALPHABET_5)
 # text_stats("data/sherlock_holmes_alpha5.txt")
+
+# cleantext("accuracy/rawTestFiles/harrypotter2.txt", "accuracy/rawTestFiles/harrypotter_alpha4.txt", ALPHABET_4)
+# text_stats("accuracy/rawTestFiles/harrypotter_alpha4.txt")
+
+# cleantext("accuracy/rawTestFiles/harrypotter2.txt", "accuracy/rawTestFiles/harrypotter_alpha5.txt", ALPHABET_5)
+# text_stats("accuracy/rawTestFiles/harrypotter_alpha5.txt")
+
 # text_stats("accuracy/rawTestFiles/indonesian_test_matched.txt")

@@ -16,3 +16,6 @@ SUM_DECAY_FACTOR = 1
 
 -- product decay factor
 PRODUCT_DECAY_FACTOR = 0
+
+-- changing method of getting accuracy
+COUNT_PER_SYMBOLS = true

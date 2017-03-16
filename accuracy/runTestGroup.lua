@@ -153,11 +153,16 @@ end
 -- GENERATE TEST AND STORE
 -----------------------------------------------
 
--- CHECKPOINT_PATH = 'models/python_code_3_128/python_code_3_128_20000.t7'
--- CHECKPOINT_PATH = 'models/indonesian_3_128/indonesian_cleaned_11000.t7'
+-- CHECKPOINT_PATH = 'models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7'
 --
 -- local model = get_model_by_path(CHECKPOINT_PATH)
--- generateTestSetAndStore('accuracy/rawTestFiles/indonesian_test_matched.txt', 'accuracy/generatedTestCases/indonesian_test/', model, 100)
+-- generateTestSetAndStore('accuracy/rawTestFiles/harrypotter_alpha5.txt', 'accuracy/generatedTestCases/harrypotter_alpha5/', model, 100)
+
+-- CHECKPOINT_PATH = 'models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7'
+--
+-- local model = get_model_by_path(CHECKPOINT_PATH)
+-- generateTestSetAndStore('accuracy/rawTestFiles/harrypotter2.txt', 'accuracy/generatedTestCases/gapsize3/', model, 100)
+
 
 -----------------------------------------------
 -- THRESHOLD TESTING
@@ -222,18 +227,49 @@ end
 -----------------------------------------------
 
 -- python
-model_path = 'models/python_code_3_128/python_code_3_128_20000.t7'
-local model = get_model_by_path(model_path)
-local path_to_report = 'accuracy/visualization/report-data/different-sequence-type/python.csv'
-local test_cases_path = 'accuracy/generatedTestCases/python_test_django/'
-runGeneratedTestGroup(test_cases_path, model, 2, path_to_report, false,  nil, 6)
+-- model_path = 'models/python_code_3_128/python_code_3_128_20000.t7'
+-- local model = get_model_by_path(model_path)
+-- local path_to_report = 'accuracy/visualization/report-data/different-sequence-type/python.csv'
+-- local test_cases_path = 'accuracy/generatedTestCases/python_test_django/'
+-- runGeneratedTestGroup(test_cases_path, model, 2, path_to_report, false,  nil, 6)
+--
+-- -- indonesian
+-- model_path = 'models/indonesian_3_128/indonesian_cleaned_11000.t7'
+-- local model = get_model_by_path(model_path)
+-- local path_to_report = 'accuracy/visualization/report-data/different-sequence-type/indonesian.csv'
+-- local test_cases_path = 'accuracy/generatedTestCases/indonesian_test/'
+-- runGeneratedTestGroup(test_cases_path, model, 2, path_to_report, false,  nil, 6)
 
--- indonesian
-model_path = 'models/indonesian_3_128/indonesian_cleaned_11000.t7'
+
+-----------------------------------------------
+-- VOCAB SIZE
+-----------------------------------------------
+-- alphabet 4
+-- model_path = 'models/'
+-- local model = get_model_by_path(model_path)
+-- local path_to_report = 'accuracy/visualization/report-data/varying-vocab-size/alphabet4_53.csv'
+-- local test_cases_path = 'accuracy/generatedTestCases/harrypotter_alpha4/'
+-- runGeneratedTestGroup(test_cases_path, model, 2, path_to_report, false,  nil, 6)
+
+
+-----------------------------------------------
+-- GAP SIZE
+-----------------------------------------------
+
+model_path = 'models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7'
 local model = get_model_by_path(model_path)
-local path_to_report = 'accuracy/visualization/report-data/different-sequence-type/indonesian.csv'
-local test_cases_path = 'accuracy/generatedTestCases/indonesian_test/'
-runGeneratedTestGroup(test_cases_path, model, 2, path_to_report, false,  nil, 6)
+local path_to_time_report = 'accuracy/visualization/report-data/changing-gapsize/timereport.csv'
+local path_to_report = 'accuracy/visualization/report-data/changing-gapsize/gapsize_1.csv'
+local test_cases_path = 'accuracy/generatedTestCases/gapsize1/'
+runGeneratedTestGroup(test_cases_path, model, 1, path_to_report, false,  nil, 6, path_to_time_report)
+
+path_to_report = 'accuracy/visualization/report-data/changing-gapsize/gapsize_2.csv'
+test_cases_path = 'accuracy/generatedTestCases/gapsize2/'
+runGeneratedTestGroup(test_cases_path, model, 1, path_to_report, false,  nil, 6, path_to_time_report)
+
+path_to_report = 'accuracy/visualization/report-data/changing-gapsize/gapsize_3.csv'
+test_cases_path = 'accuracy/generatedTestCases/gapsize3/'
+runGeneratedTestGroup(test_cases_path, model, 1, path_to_report, false,  nil, 6, path_to_time_report)
 
 
 SHERLOCK_HOLMES__VARYING_SIZE_MODEL_PATHS = {

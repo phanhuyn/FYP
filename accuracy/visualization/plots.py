@@ -165,11 +165,11 @@ x_axis_tick_labels_threshold = [str(tail) for tail in threshold_tails_2]
 # METHOD OF ACCUMULATING PROBS
 #############################
 
-method_tails_2 = ['sum','sum_decay','product','product_decay']
-
-files_list_method = ['accuracy/visualization/report-data/changing-method-of-accum-prob/'+str(tail)+'.csv' for tail in method_tails_2]
-
-x_axis_tick_labels_method = ['Sum', 'Sum with decay', 'Product', 'Product with decay']
+# method_tails_2 = ['sum','sum_decay','product','product_decay']
+#
+# files_list_method = ['accuracy/visualization/report-data/changing-method-of-accum-prob/'+str(tail)+'.csv' for tail in method_tails_2]
+#
+# x_axis_tick_labels_method = ['Sum', 'Sum with decay', 'Product', 'Product with decay']
 
 # boxplot(files_list_method, 'accuracy/visualization/accuracy_vs_method_of_accum_prob_harry_on_sherlock_3_128', x_axis_tick_labels_method, 'Method of accumulating probability', '')
 
@@ -178,13 +178,38 @@ x_axis_tick_labels_method = ['Sum', 'Sum with decay', 'Product', 'Product with d
 # DECAY FACTORS
 #############################
 
-decay_tails = [0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2]
+# decay_tails = [0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2]
+#
+# files_list_decay = ['accuracy/visualization/report-data/changing-decay-factor/decay_'+str(tail)+'.csv' for tail in decay_tails]
+#
+# x_axis_tick_labels_decay = [str(tail) for tail in decay_tails]
+#
+# boxplot(files_list_decay, 'accuracy/visualization/accuracy_vs_decay_factor_harry_on_sherlock_3_128', x_axis_tick_labels_decay, 'Decay factor', 'Accuracy vs. Decay factor')
 
-files_list_decay = ['accuracy/visualization/report-data/changing-decay-factor/decay_'+str(tail)+'.csv' for tail in decay_tails]
+#############################
+# RELEVANCE OF TESTSET
+#############################
 
-x_axis_tick_labels_decay = [str(tail) for tail in decay_tails]
+# relevance_tails = ['ntu_news', 'harrypotter', 'devilfoot', 'resubtitution']
+#
+# files_list_relevance = ['accuracy/visualization/report-data/relevance-of-testsets/'+str(tail)+'.csv' for tail in relevance_tails]
+#
+# x_axis_tick_labels_relevance = ['NTU News', 'Harry Potter', 'Devil\'s Foot', 'Resubstitution']
+#
+# boxplot(files_list_relevance, 'accuracy/visualization/accuracy_vs_relevance_of_testset_sherlock_3_128', x_axis_tick_labels_relevance, 'Testset', 'Accuracy vs. Relevance of testset')
 
-boxplot(files_list_decay, 'accuracy/visualization/accuracy_vs_decay_factor_harry_on_sherlock_3_128', x_axis_tick_labels_decay, 'Decay factor', 'Accuracy vs. Decay factor')
+#############################
+# VOCAB SIZE
+#############################
+
+size_tails = ['alphabet1_93','alphabet2_69']
+
+files_list_size = ['accuracy/visualization/report-data/varying-vocab-size/'+str(tail)+'.csv' for tail in size_tails]
+
+x_axis_tick_labels_size = ['93', '69']
+
+boxplot(files_list_size, 'accuracy/visualization/accuracy_vs_vocab_size_sherlock_3_128', x_axis_tick_labels_size, 'Vocabulary size', 'Accuracy vs. Vocabulary size')
+
 
 #############################
 # IMPROVEMENT OVER NAIVE ENGINE PLOT

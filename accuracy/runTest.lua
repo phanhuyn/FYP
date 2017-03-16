@@ -33,12 +33,22 @@ function runSingleTest (test_set, model, naive, opt, lookforward_length)
 	local wrongCount = 0
 
 	for count = 1, #answer do
-		if (answer[count] == solution[count]) then
-		do
-			trueCount = trueCount + 1
-		end
+		if (COUNT_PER_SYMBOLS) then
+			for symbols_i=1,#answer[count] do
+				if (answer[count]:sub(symbols_i,symbols_i) == solution[count]:sub(symbols_i,symbols_i)) then
+					trueCount = trueCount + 1
+				else
+					wrongCount = wrongCount + 1
+				end
+			end
 		else
-			wrongCount = wrongCount + 1
+			if (answer[count] == solution[count]) then
+			do
+				trueCount = trueCount + 1
+			end
+			else
+				wrongCount = wrongCount + 1
+			end
 		end
 	end
 
