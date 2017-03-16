@@ -245,31 +245,37 @@ end
 -- VOCAB SIZE
 -----------------------------------------------
 -- alphabet 4
--- model_path = 'models/'
--- local model = get_model_by_path(model_path)
--- local path_to_report = 'accuracy/visualization/report-data/varying-vocab-size/alphabet4_53.csv'
--- local test_cases_path = 'accuracy/generatedTestCases/harrypotter_alpha4/'
--- runGeneratedTestGroup(test_cases_path, model, 2, path_to_report, false,  nil, 6)
+model_path = 'models/sherlock_holmes_alpha4/sherlock_holmes_alpha4_38000.t7'
+local model = get_model_by_path(model_path)
+local path_to_report = 'accuracy/visualization/report-data/varying-vocab-size/alphabet4_53.csv'
+local test_cases_path = 'accuracy/generatedTestCases/harrypotter_alpha4/'
+runGeneratedTestGroup(test_cases_path, model, 2, path_to_report, false,  nil, 6)
 
+-- alphabet 4
+model_path = 'models/sherlock_holmes_alpha4/sherlock_holmes_alpha4_38000.t7'
+local model = get_model_by_path(model_path)
+local path_to_report = 'accuracy/visualization/report-data/varying-vocab-size/alphabet5_27.csv'
+local test_cases_path = 'accuracy/generatedTestCases/harrypotter_alpha5/'
+runGeneratedTestGroup(test_cases_path, model, 2, path_to_report, false,  nil, 6)
 
 -----------------------------------------------
 -- GAP SIZE
 -----------------------------------------------
 
-model_path = 'models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7'
-local model = get_model_by_path(model_path)
-local path_to_time_report = 'accuracy/visualization/report-data/changing-gapsize/timereport.csv'
-local path_to_report = 'accuracy/visualization/report-data/changing-gapsize/gapsize_1.csv'
-local test_cases_path = 'accuracy/generatedTestCases/gapsize1/'
-runGeneratedTestGroup(test_cases_path, model, 1, path_to_report, false,  nil, 6, path_to_time_report)
-
-path_to_report = 'accuracy/visualization/report-data/changing-gapsize/gapsize_2.csv'
-test_cases_path = 'accuracy/generatedTestCases/gapsize2/'
-runGeneratedTestGroup(test_cases_path, model, 1, path_to_report, false,  nil, 6, path_to_time_report)
-
-path_to_report = 'accuracy/visualization/report-data/changing-gapsize/gapsize_3.csv'
-test_cases_path = 'accuracy/generatedTestCases/gapsize3/'
-runGeneratedTestGroup(test_cases_path, model, 1, path_to_report, false,  nil, 6, path_to_time_report)
+-- model_path = 'models/sherlock_holmes_3_128/sherlock_holmes_3_128_103800.t7'
+-- local model = get_model_by_path(model_path)
+-- local path_to_time_report = 'accuracy/visualization/report-data/changing-gapsize/timereport.csv'
+-- local path_to_report = 'accuracy/visualization/report-data/changing-gapsize/gapsize_1.csv'
+-- local test_cases_path = 'accuracy/generatedTestCases/gapsize1/'
+-- runGeneratedTestGroup(test_cases_path, model, 1, path_to_report, false,  nil, 6, path_to_time_report)
+--
+-- path_to_report = 'accuracy/visualization/report-data/changing-gapsize/gapsize_2.csv'
+-- test_cases_path = 'accuracy/generatedTestCases/gapsize2/'
+-- runGeneratedTestGroup(test_cases_path, model, 1, path_to_report, false,  nil, 6, path_to_time_report)
+--
+-- path_to_report = 'accuracy/visualization/report-data/changing-gapsize/gapsize_3.csv'
+-- test_cases_path = 'accuracy/generatedTestCases/gapsize3/'
+-- runGeneratedTestGroup(test_cases_path, model, 1, path_to_report, false,  nil, 6, path_to_time_report)
 
 
 SHERLOCK_HOLMES__VARYING_SIZE_MODEL_PATHS = {

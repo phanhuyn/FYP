@@ -18,4 +18,4 @@ SUM_DECAY_FACTOR = 1
 PRODUCT_DECAY_FACTOR = 0
 
 -- changing method of getting accuracy
-COUNT_PER_SYMBOLS = true
+COUNT_PER_SYMBOLS = false

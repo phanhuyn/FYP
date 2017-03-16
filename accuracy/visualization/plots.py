@@ -201,14 +201,14 @@ x_axis_tick_labels_threshold = [str(tail) for tail in threshold_tails_2]
 #############################
 # VOCAB SIZE
 #############################
-
-size_tails = ['alphabet1_93','alphabet2_69']
-
-files_list_size = ['accuracy/visualization/report-data/varying-vocab-size/'+str(tail)+'.csv' for tail in size_tails]
-
-x_axis_tick_labels_size = ['93', '69']
-
-boxplot(files_list_size, 'accuracy/visualization/accuracy_vs_vocab_size_sherlock_3_128', x_axis_tick_labels_size, 'Vocabulary size', 'Accuracy vs. Vocabulary size')
+#
+# size_tails = ['alphabet1_93','alphabet2_69']
+#
+# files_list_size = ['accuracy/visualization/report-data/varying-vocab-size/'+str(tail)+'.csv' for tail in size_tails]
+#
+# x_axis_tick_labels_size = ['93', '69']
+#
+# boxplot(files_list_size, 'accuracy/visualization/accuracy_vs_vocab_size_sherlock_3_128', x_axis_tick_labels_size, 'Vocabulary size', 'Accuracy vs. Vocabulary size')
 
 
 #############################
@@ -221,6 +221,20 @@ boxplot(files_list_size, 'accuracy/visualization/accuracy_vs_vocab_size_sherlock
 # x_axis_tick_labels_improvement = ['Naive', 'With looking forward']
 #
 # boxplot(files_list_improvement, 'accuracy/visualization/accuracy_naive_improved_harrypotter', x_axis_tick_labels_improvement, 'Approach', 'Improvement over naive approach')
+
+
+#############################
+# DIFFERENT SEQUENCE TYPE
+#############################
+
+type_tails = ['english','indonesian', 'python']
+
+files_list_type = ['accuracy/visualization/report-data/different-sequence-type/'+str(tail)+'.csv' for tail in type_tails]
+
+x_axis_tick_labels_type = ['English Text', 'Indonesian Text', 'Python Code']
+
+boxplot(files_list_type, 'accuracy/visualization/accuracy_vs_sequence_type', x_axis_tick_labels_type, 'Sequence type', 'Accuracy vs. Sequence type')
+
 
 #############################
 # 1-128 CHANGING ITERATION
